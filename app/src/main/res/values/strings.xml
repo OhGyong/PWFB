@@ -2,4 +2,8 @@
     <string name="app_name">pwfb</string>
 
     <string name="splash_title">PEAK WEEK FOR BODYBUILDING</string>
+    <string name="home">Home</string>
+    <string name="nutrition">Nutrition</string>
+    <string name="training">Training</string>
+    <string name="profile">Profile</string>
 </resources>

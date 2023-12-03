@@ -1,12 +1,41 @@
 package com.pwfb.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.pwfb.R
+import com.pwfb.base.BaseActivity
+import com.pwfb.databinding.ActivityMainBinding
+import com.pwfb.ui.home.HomeFragment
+import com.pwfb.ui.nutrition.NutritionFragment
+import com.pwfb.ui.profile.ProfileFragment
+import com.pwfb.ui.training.TrainingFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d(PWFB, "MainActivity onCreate")
+
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.mainBnv.setOnItemSelectedListener {
+            when(it.itemId) {
+                R.id.item_navi_home -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.main_fcv, HomeFragment()).commit()
+                }
+                R.id.item_navi_nutrition -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.main_fcv, NutritionFragment()).commit()
+                }
+                R.id.item_navi_training -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.main_fcv, TrainingFragment()).commit()
+                }
+                R.id.item_navi_profile -> {
+                    supportFragmentManager.beginTransaction().replace(R.id.main_fcv, ProfileFragment()).commit()
+                }
+            }
+            true
+        }
     }
 }

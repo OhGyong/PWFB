@@ -5,23 +5,26 @@ import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
 import android.view.animation.AnticipateInterpolator
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.pwfb.R
+import com.pwfb.base.BaseActivity
 import com.pwfb.ui.MainActivity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 
 @SuppressLint("CustomSplashScreen")
-class SplashActivity: AppCompatActivity() {
+class SplashActivity: BaseActivity() {
     private val mViewModel: SplashViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d(PWFB, "SplashActivity onCreate")
+
         installSplashScreen()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
