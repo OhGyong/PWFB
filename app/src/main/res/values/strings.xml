@@ -6,4 +6,25 @@
     <string name="nutrition">Nutrition</string>
     <string name="training">Training</string>
     <string name="profile">Profile</string>
+
+    <string name="kr_home">홈</string>
+    <string name="kr_nutrition">영양</string>
+    <string name="kr_training">훈련</string>
+    <string name="kr_profile">프로필</string>
+    
+    <string name="peak_week_strategy">⭐ Peak Week 전략 ⭐</string>
+    <string name="empty_stomach_weight">EMPTY STOMACH WEIGHT</string>
+    <string name="d_day">D-DAY</string>
+    <string name="nutrition_upper">NUTRITION</string>
+    <string name="training_upper">TRAINING</string>
+
+    <string name="carbohydrate_upper">CARBOHYDRATE</string>
+    <string name="protein_upper">PROTEIN</string>
+    <string name="fat_upper">FAT</string>
+    <string name="water_upper">WATER</string>
+    <string name="sodium_upper">SODIUM</string>
+    <string name="potassium_upper">POTASSIUM</string>
+    <string name="creatine_upper">CREATINE</string>
+    <string name="dietary_fiber_upper">DIETARY FIBER</string>
+
 </resources>
