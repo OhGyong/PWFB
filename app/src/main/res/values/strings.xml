@@ -27,4 +27,12 @@
     <string name="creatine_upper">CREATINE</string>
     <string name="dietary_fiber_upper">DIETARY FIBER</string>
 
+    <string name="custom_training_program_upper">CUSTOM TRAINING PROGRAM</string>
+    <string name="pwfb_information">PWFB 정보</string>
+    <string name="the_day_strategy">당일 전략</string>
+
+    <string name="welcome">환영합니다!</string>
+    <string name="input_name">What\'s Your Name?</string>
+    <string name="next">Next</string>
+
 </resources>
