@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.activity.viewModels
 import com.pwfb.R
 import com.pwfb.base.BaseActivity
+import com.pwfb.common.DataStoreResult
 import com.pwfb.databinding.ActivityMainBinding
 import com.pwfb.ui.home.HomeFragment
 import com.pwfb.ui.nutrition.NutritionFragment
@@ -42,10 +43,10 @@ class MainActivity : BaseActivity() {
             }
             true
         }
-        viewModel.setName("ttt")
+        viewModel.setName("오기용")
 
         viewModel.nameObserve.observe(this) {
-            if(it == "SET NAME SUCCESS") {
+            if(it == DataStoreResult.SET_NAME) {
                 viewModel.getName()
             }
             else {

@@ -5,7 +5,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.pwfb.PwfbApplication.DataModule.dataStore
-import com.pwfb.common.DataStoreResult.SET_NAME
+import com.pwfb.common.DataStoreResult
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
@@ -15,23 +15,23 @@ import javax.inject.Inject
 
 class PwfbPreferencesRepository @Inject constructor(private val context: Context) {
     private val nameKey = stringPreferencesKey("name")
-    private val firstInit = stringPreferencesKey("firstInit")
-    private val dDay = stringPreferencesKey("dDay")
-    private val trainingProgram = stringPreferencesKey("trainingProgram")
-    private val carbohydrate = stringPreferencesKey("carbohydrate")
-    private val protein = stringPreferencesKey("protein")
-    private val fat = stringPreferencesKey("fat")
-    private val water = stringPreferencesKey("water")
-    private val sodium = stringPreferencesKey("sodium")
-    private val potassium = stringPreferencesKey("potassium")
-    private val creatine = stringPreferencesKey("creatine")
-    private val dietaryFiber = stringPreferencesKey("dietaryFiber")
+    private val firstInitKey = stringPreferencesKey("firstInit")
+    private val dDayKey = stringPreferencesKey("dDay")
+    private val trainingProgramKey = stringPreferencesKey("trainingProgram")
+    private val carbohydrateKey = stringPreferencesKey("carbohydrate")
+    private val proteinKey = stringPreferencesKey("protein")
+    private val fatKey = stringPreferencesKey("fat")
+    private val waterKey = stringPreferencesKey("water")
+    private val sodiumKey = stringPreferencesKey("sodium")
+    private val potassiumKey = stringPreferencesKey("potassium")
+    private val creatineKey = stringPreferencesKey("creatine")
+    private val dietaryFiberKey = stringPreferencesKey("dietaryFiber")
 
     suspend fun setName(name: String): String {
         context.dataStore.edit {
             it[nameKey] = name
         }
-        return SET_NAME
+        return DataStoreResult.SET_NAME
     }
 
     suspend fun getName(): Flow<Unit> {
