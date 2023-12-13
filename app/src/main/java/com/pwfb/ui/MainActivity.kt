@@ -2,6 +2,7 @@ package com.pwfb.ui
 
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import com.pwfb.R
 import com.pwfb.base.BaseActivity
 import com.pwfb.databinding.ActivityMainBinding
@@ -9,9 +10,13 @@ import com.pwfb.ui.home.HomeFragment
 import com.pwfb.ui.nutrition.NutritionFragment
 import com.pwfb.ui.profile.ProfileFragment
 import com.pwfb.ui.training.TrainingFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
+    private val viewModel: MainViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(PWFB, "MainActivity onCreate")
 
@@ -36,6 +41,16 @@ class MainActivity : BaseActivity() {
                 }
             }
             true
+        }
+        viewModel.setName("ttt")
+
+        viewModel.nameObserve.observe(this) {
+            if(it == "SET NAME SUCCESS") {
+                viewModel.getName()
+            }
+            else {
+                println("MainActivity $it")
+            }
         }
     }
 }
