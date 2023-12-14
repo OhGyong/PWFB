@@ -16,12 +16,15 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.pwfb.R
 import com.pwfb.base.BaseActivity
 import com.pwfb.ui.MainActivity
+import com.pwfb.ui.setting.NameActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 
 @SuppressLint("CustomSplashScreen")
+@AndroidEntryPoint
 class SplashActivity: BaseActivity() {
-    private val mViewModel: SplashViewModel by viewModels()
+    private val viewModel: SplashViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(PWFB, "SplashActivity onCreate")
 
@@ -39,7 +42,7 @@ class SplashActivity: BaseActivity() {
         content.viewTreeObserver.addOnPreDrawListener(
             object : ViewTreeObserver.OnPreDrawListener {
                 override fun onPreDraw(): Boolean {
-                    return if (!mViewModel.isLoading.value) {
+                    return if (!viewModel.isLoading.value) {
                         content.viewTreeObserver.removeOnPreDrawListener(this)
                         true
                     } else {
@@ -69,10 +72,7 @@ class SplashActivity: BaseActivity() {
                     override fun onAnimationEnd(p0: Animator) {
                         runBlocking {
                             delay(2000L)
-                            val intent = Intent(applicationContext, MainActivity::class.java)
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                            startActivity(intent)
-                            finish()
+                            viewModel.getFirstInit()
                         }
                     }
                     override fun onAnimationCancel(p0: Animator) {
@@ -81,6 +81,19 @@ class SplashActivity: BaseActivity() {
                     }
                 })
             }
+        }
+
+        viewModel.firstInitObserve.observe(this) {
+            // 앱 첫 진입으로 판단 -> 설정 화면 이동
+            val intent = if(it == true) {
+                Intent(applicationContext, NameActivity::class.java)
+            }
+            else {
+                Intent(applicationContext, MainActivity::class.java)
+            }
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            startActivity(intent)
+            finish()
         }
     }
 }

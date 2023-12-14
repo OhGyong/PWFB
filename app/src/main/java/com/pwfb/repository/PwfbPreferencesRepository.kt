@@ -61,7 +61,7 @@ class PwfbPreferencesRepository @Inject constructor(private val context: Context
         return DataStoreResult.SET_FIRST_INIT
     }
 
-    suspend fun getFirstInit(): Flow<Unit>  {
+    suspend fun getFirstInit(): Flow<Boolean>  {
         return context.dataStore.data.catch { e ->
             if (e is IOException) {
                 emit(emptyPreferences())
