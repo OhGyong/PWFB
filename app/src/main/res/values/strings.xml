@@ -35,4 +35,6 @@
     <string name="input_name">What\'s Your Name?</string>
     <string name="next">Next</string>
 
+    <string name="kr_empty_stomach_weight">공복 체중</string>
+
 </resources>

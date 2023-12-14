@@ -24,7 +24,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.MainActivity"/>
-        <activity android:name=".ui.setting.NameActivity"/>
+        <activity
+            android:name=".ui.setting.NameActivity"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.setting.WeightActivity"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

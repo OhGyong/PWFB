@@ -43,15 +43,5 @@ class MainActivity : BaseActivity() {
             }
             true
         }
-        viewModel.setName("오기용")
-
-        viewModel.nameObserve.observe(this) {
-            if(it == DataStoreResult.SET_NAME) {
-                viewModel.getName()
-            }
-            else {
-                println("MainActivity $it")
-            }
-        }
     }
 }
