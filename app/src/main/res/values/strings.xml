@@ -36,5 +36,6 @@
     <string name="next">Next</string>
 
     <string name="kr_empty_stomach_weight">공복 체중</string>
+    <string name="kg">Kg</string>
 
 </resources>

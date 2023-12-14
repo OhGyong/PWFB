@@ -30,6 +30,8 @@
         <activity
             android:name=".ui.setting.WeightActivity"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.setting.DayActivity" />
     </application>
 
 </manifest>

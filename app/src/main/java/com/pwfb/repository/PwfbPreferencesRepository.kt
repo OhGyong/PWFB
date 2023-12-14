@@ -15,18 +15,19 @@ import javax.inject.Inject
 
 
 class PwfbPreferencesRepository @Inject constructor(private val context: Context) {
-    private val nameKey = stringPreferencesKey("name")
-    private val firstInitKey = booleanPreferencesKey("firstInit")
-    private val dDayKey = stringPreferencesKey("dDay")
-    private val trainingProgramKey = stringPreferencesKey("trainingProgram")
-    private val carbohydrateKey = stringPreferencesKey("carbohydrate")
-    private val proteinKey = stringPreferencesKey("protein")
-    private val fatKey = stringPreferencesKey("fat")
-    private val waterKey = stringPreferencesKey("water")
-    private val sodiumKey = stringPreferencesKey("sodium")
-    private val potassiumKey = stringPreferencesKey("potassium")
-    private val creatineKey = stringPreferencesKey("creatine")
-    private val dietaryFiberKey = stringPreferencesKey("dietaryFiber")
+    private val nameKey = stringPreferencesKey("name") // 이름
+    private val firstInitKey = booleanPreferencesKey("firstInit") // 앱 최초 진입 여부
+    private val weightKey = stringPreferencesKey("weight") // 체중(공복 체중)
+    private val dDayKey = stringPreferencesKey("dDay") // d-day
+    private val trainingProgramKey = stringPreferencesKey("trainingProgram") // 트레이닝 기록
+    private val carbohydrateKey = stringPreferencesKey("carbohydrate") // 탄수화물
+    private val proteinKey = stringPreferencesKey("protein") // 단백질
+    private val fatKey = stringPreferencesKey("fat") // 지방
+    private val waterKey = stringPreferencesKey("water") // 수분량
+    private val sodiumKey = stringPreferencesKey("sodium") // 나트륨
+    private val potassiumKey = stringPreferencesKey("potassium") // 칼륨
+    private val creatineKey = stringPreferencesKey("creatine") // 크레아틴
+    private val dietaryFiberKey = stringPreferencesKey("dietaryFiber") // 식이 섬유
 
 
     /**
@@ -71,6 +72,29 @@ class PwfbPreferencesRepository @Inject constructor(private val context: Context
         }.map {
             // firstInitKey 값이 없을 경우 앱 최초 진입으로 판단
             it[firstInitKey] ?: true
+        }
+    }
+
+    /**
+     * 몸무게 설정
+     */
+    suspend fun setWeight(weight: String): String {
+        context.dataStore.edit {
+            it[weightKey] = weight
+        }
+        return DataStoreResult.SET_WEIGHT
+    }
+
+    suspend fun getWeight(): Flow<String>  {
+        return context.dataStore.data.catch { e ->
+            if (e is IOException) {
+                emit(emptyPreferences())
+            } else {
+                throw e
+            }
+        }.map {
+            // firstInitKey 값이 없을 경우 앱 최초 진입으로 판단
+            it[weightKey] ?: "WeightNull"
         }
     }
 

@@ -32,6 +32,7 @@
             android:hint="@string/input_name"
             android:textColorHint="@color/c_949292"
             android:textCursorDrawable="@drawable/shape_et_name_cursor"
+            android:textAlignment="center"
             android:importantForAutofill="no"
             android:inputType="text"
             android:background="@null"
