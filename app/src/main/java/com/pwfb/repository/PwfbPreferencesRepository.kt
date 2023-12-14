@@ -39,7 +39,7 @@ class PwfbPreferencesRepository @Inject constructor(private val context: Context
         return DataStoreResult.SET_NAME
     }
 
-    suspend fun getName(): Flow<Unit> {
+    suspend fun getName(): Flow<String> {
         return context.dataStore.data.catch { e ->
             if (e is IOException) {
                 emit(emptyPreferences())
