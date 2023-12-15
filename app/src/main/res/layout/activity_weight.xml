@@ -33,7 +33,7 @@
             android:textCursorDrawable="@drawable/shape_et_name_cursor"
             android:textAlignment="center"
             android:importantForAutofill="no"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:background="@null"
             android:focusableInTouchMode="true"
             app:layout_constraintBottom_toTopOf="@id/bt_next"
