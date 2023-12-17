@@ -68,6 +68,12 @@ dependencies {
     implementation ("com.google.dagger:hilt-android:$hiltVersion")
     kapt ("com.google.dagger:hilt-android-compiler:$hiltVersion")
 
+    // CalendarView
+    implementation ("com.github.prolificinteractive:material-calendarview:2.0.1")
+
+    // CalendarView 년 월 표시
+    implementation ("com.jakewharton.threetenabp:threetenabp:1.2.0")
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
