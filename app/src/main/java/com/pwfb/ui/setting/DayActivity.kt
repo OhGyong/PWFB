@@ -1,21 +1,21 @@
 package com.pwfb.ui.setting
 
-import android.graphics.Color
 import android.os.Bundle
-import android.text.style.ForegroundColorSpan
 import android.util.Log
 import androidx.activity.viewModels
 import com.prolificinteractive.materialcalendarview.CalendarDay
-import com.prolificinteractive.materialcalendarview.DayViewDecorator
-import com.prolificinteractive.materialcalendarview.DayViewFacade
 import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter
 import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter
 import com.pwfb.R
 import com.pwfb.base.BaseActivity
 import com.pwfb.databinding.ActivityDayBinding
-import com.pwfb.util.CalendarDecorator
+import com.pwfb.util.ClearDecorator
+import com.pwfb.util.DayDisableDecorator
+import com.pwfb.util.SelectDecorator
+import com.pwfb.util.TodayDecorator
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.Calendar
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 @AndroidEntryPoint
@@ -32,16 +32,10 @@ class DayActivity : BaseActivity() {
         setContentView(binding.root)
 
         setCalendarView()
+        getLocalTime()
     }
 
     private fun setCalendarView() {
-        var startTimeCalendar = Calendar.getInstance()
-        var endTimeCalendar = Calendar.getInstance()
-
-        val currentYear = startTimeCalendar.get(Calendar.YEAR)
-        val currentMonth = startTimeCalendar.get(Calendar.MONTH)
-        val currentDate = startTimeCalendar.get(Calendar.DATE)
-
         // 연, 월 헤더 스타일
         binding.cvCalendar.setHeaderTextAppearance(R.style.CalendarWidgetHeader)
 
@@ -65,25 +59,34 @@ class DayActivity : BaseActivity() {
 
         val today = CalendarDay.today()
         val disabledDates = hashSetOf<CalendarDay>()
-        disabledDates.add(CalendarDay.from(2022, 7, 12))
 
-        binding.cvCalendar.addDecorator(DayDisableDecorator(disabledDates, today))
-    }
+        val dayDisableDecorator = DayDisableDecorator(disabledDates, today, getColor(R.color.c_949292))
+        val todayDecorator = TodayDecorator(getColor(R.color.c_caab3f))
 
-    inner class DayDisableDecorator(
-        private var dates: HashSet<CalendarDay>,
-        private var today: CalendarDay
-    ) : DayViewDecorator {
+        binding.cvCalendar.addDecorators(dayDisableDecorator, todayDecorator)
 
-        override fun shouldDecorate(day: CalendarDay): Boolean {
-            // 휴무일 || 이전 날짜
-            return dates.contains(day) || day.isBefore(today)
-        }
-
-        override fun decorate(view: DayViewFacade?) {
-            view?.addSpan(object: ForegroundColorSpan(getColor(R.color.c_949292)){})
-            view?.setDaysDisabled(true)
+        // 날짜 선택 시 처리
+        binding.cvCalendar.setOnDateChangedListener { _, date, _ ->
+            binding.cvCalendar.addDecorators(
+                ClearDecorator(getColor(R.color.white), date),
+                dayDisableDecorator, todayDecorator,
+                SelectDecorator(getColor(R.color.c_caab3f), date)
+            )
         }
     }
 
+    private fun getLocalTime() {
+        var timeText = ""
+        val localTime = LocalDateTime.now().toLocalTime()
+
+        timeText += if(localTime.hour < 12) {
+            "오전" + " " + localTime.hour + ":" + localTime.minute
+
+        }else {
+            "오후" + " " + (localTime.hour-12) + ":" + localTime.minute
+        }
+
+        binding.btTime.text = timeText
+
+    }
 }

@@ -39,6 +39,7 @@
     <string name="kg">Kg</string>
 
     <string name="go">Go</string>
+    <string name="time">시간</string>
 
     <string-array name="calendar_week">
         <item>월</item>
@@ -64,5 +65,8 @@
         <item>11월</item>
         <item>12월</item>
     </string-array>
+
+    <!-- Description -->
+    <string name="bt_time_description">d-day 시간 설정</string>
 
 </resources>

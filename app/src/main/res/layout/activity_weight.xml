@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/kg"
-            android:textColor="@color/c_d6b54a"
+            android:textColor="@color/c_caab3f"
             android:textSize="25sp"
             android:layout_marginStart="10dp"
             app:layout_constraintBottom_toBottomOf="@+id/et_weight"

@@ -3,8 +3,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="c_7a7878">#7A7878</color>
-    <color name="c_d6b54a">#D6B54A</color>
-    <color name="c_edd893">#F3D98C</color>
+    <color name="c_caab3f">#CAAB3F</color>
+    <color name="c_40caab3f">#31CAAB3F</color>
     <color name="c_242323">#242323</color>
     <color name="c_949292">#949292</color>
+    <color name="c_46949292">#46949292</color>
 </resources>

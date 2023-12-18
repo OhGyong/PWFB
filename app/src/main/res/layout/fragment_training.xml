@@ -40,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:text="@string/peak_week_strategy"
-                    android:textColor="@color/c_d6b54a"
+                    android:textColor="@color/c_caab3f"
                     android:textSize="25sp"
                     android:layout_marginTop="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
