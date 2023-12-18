@@ -1,5 +1,7 @@
 package com.pwfb.ui.setting
 
+import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
@@ -8,14 +10,16 @@ import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter
 import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter
 import com.pwfb.R
 import com.pwfb.base.BaseActivity
+import com.pwfb.common.DataStoreResult
 import com.pwfb.databinding.ActivityDayBinding
+import com.pwfb.ui.MainActivity
 import com.pwfb.util.ClearDecorator
 import com.pwfb.util.DayDisableDecorator
 import com.pwfb.util.SelectDecorator
 import com.pwfb.util.TodayDecorator
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import java.util.Calendar
 
 
 @AndroidEntryPoint
@@ -33,6 +37,19 @@ class DayActivity : BaseActivity() {
 
         setCalendarView()
         getLocalTime()
+
+        binding.btGo.setOnClickListener {
+            viewModel.setDDay(binding.btTime.text.toString())
+        }
+
+        viewModel.dDayObserve.observe(this) {
+            if(it == DataStoreResult.SET_D_DAY) {
+                val intent = Intent(applicationContext, MainActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                startActivity(intent)
+                finish()
+            }
+        }
     }
 
     private fun setCalendarView() {
@@ -72,6 +89,9 @@ class DayActivity : BaseActivity() {
                 dayDisableDecorator, todayDecorator,
                 SelectDecorator(getColor(R.color.c_caab3f), date)
             )
+
+            binding.btGo.isEnabled = true
+            binding.btGo.setTextColor(getColor(R.color.white))
         }
     }
 
@@ -81,12 +101,42 @@ class DayActivity : BaseActivity() {
 
         timeText += if(localTime.hour < 12) {
             "오전" + " " + localTime.hour + ":" + localTime.minute
-
         }else {
             "오후" + " " + (localTime.hour-12) + ":" + localTime.minute
         }
 
         binding.btTime.text = timeText
 
+        binding.btTime.setOnClickListener {
+            setTimeSpinner()
+        }
+    }
+
+    private fun setTimeSpinner() {
+        val cal = Calendar.getInstance()
+
+        val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
+            cal.set(Calendar.HOUR_OF_DAY, hour)
+            cal.set(Calendar.MINUTE, minute)
+
+
+            binding.btTime.text = if(hour < 12) {
+                "오전 $hour:$minute"
+            }else {
+                "오후" + " " + (hour-12) + ":" + minute
+            }
+        }
+
+        val timePickerDialog = TimePickerDialog(
+            this,
+            R.style.TimePickerTheme,
+            timeSetListener,
+            cal.get(Calendar.HOUR_OF_DAY),
+            cal.get(Calendar.MINUTE),
+            false
+        )
+        timePickerDialog.setButton(TimePickerDialog.BUTTON_POSITIVE, getString(R.string.confirm), timePickerDialog)
+        timePickerDialog.setButton(TimePickerDialog.BUTTON_NEGATIVE, getString(R.string.cancel), timePickerDialog)
+        timePickerDialog.show()
     }
 }

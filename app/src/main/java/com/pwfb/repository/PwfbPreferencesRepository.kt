@@ -101,9 +101,9 @@ class PwfbPreferencesRepository @Inject constructor(private val context: Context
     /**
      * D-Day 설정
      */
-    suspend fun setDDay(): String {
+    suspend fun setDDay(dDay: String): String {
         context.dataStore.edit {
-            // todo : DateTime 사용
+            it[dDayKey] = dDay
         }
         return DataStoreResult.SET_D_DAY
     }

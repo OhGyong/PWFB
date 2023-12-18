@@ -13,12 +13,12 @@ class DayViewModel @Inject constructor(
     private val pwfbPreferencesRepository: PwfbPreferencesRepository
 ): ViewModel() {
 
-    private val _weightObserve: MutableLiveData<String> = MutableLiveData()
-    val weightObserve = _weightObserve
+    private val _dDayObserve: MutableLiveData<String> = MutableLiveData()
+    val dDayObserve = _dDayObserve
 
-    fun setWeight(weight: String) {
+    fun setDDay(weight: String) {
         viewModelScope.launch {
-            weightObserve.value = pwfbPreferencesRepository.setWeight(weight)
+            dDayObserve.value = pwfbPreferencesRepository.setDDay(weight)
 
         }
     }
