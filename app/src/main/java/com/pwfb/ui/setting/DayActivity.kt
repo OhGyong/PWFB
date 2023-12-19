@@ -119,7 +119,6 @@ class DayActivity : BaseActivity() {
             cal.set(Calendar.HOUR_OF_DAY, hour)
             cal.set(Calendar.MINUTE, minute)
 
-
             binding.btTime.text = if(hour < 12) {
                 "오전 $hour:$minute"
             }else {

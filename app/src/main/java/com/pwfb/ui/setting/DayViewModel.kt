@@ -19,7 +19,6 @@ class DayViewModel @Inject constructor(
     fun setDDay(weight: String) {
         viewModelScope.launch {
             dDayObserve.value = pwfbPreferencesRepository.setDDay(weight)
-
         }
     }
 }
