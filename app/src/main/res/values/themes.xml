@@ -40,7 +40,7 @@
 
     <!-- CalenderView-->
     <style name="CalenderViewCustom" parent="Theme.AppCompat">
-        <item name="colorAccent">@color/c_40caab3f</item>
+        <item name="colorAccent">@color/c_31caab3f</item>
         <item name="android:textStyle">bold</item>
     </style>
     <!-- CalenderView 요일-->

@@ -44,6 +44,12 @@ class DayActivity : BaseActivity() {
 
         viewModel.dDayObserve.observe(this) {
             if(it == DataStoreResult.SET_D_DAY) {
+                viewModel.setFirstInit()
+            }
+        }
+
+        viewModel.firstInitObserve.observe(this) {
+            if(it == DataStoreResult.SET_FIRST_INIT) {
                 val intent = Intent(applicationContext, MainActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                 startActivity(intent)
