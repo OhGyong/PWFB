@@ -13,6 +13,7 @@
     <string name="kr_profile">프로필</string>
     
     <string name="peak_week_strategy">⭐ Peak Week 전략 ⭐</string>
+    <string name="gonna_be_alright">Everything gonna be alright</string>
     <string name="empty_stomach_weight">EMPTY STOMACH WEIGHT</string>
     <string name="d_day">D-DAY</string>
     <string name="nutrition_upper">NUTRITION</string>
@@ -42,6 +43,10 @@
     <string name="time">시간</string>
     <string name="confirm">확인</string>
     <string name="cancel">취소</string>
+
+    <string name="empty_stomach_weight_tip">
+        글리코겐 및 수분 보유량에 따라 크게 달라지므로,\n자주 측정해주세요.
+    </string>
 
     <string-array name="calendar_week">
         <item>월</item>

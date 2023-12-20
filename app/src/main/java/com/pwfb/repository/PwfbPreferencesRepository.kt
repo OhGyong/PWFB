@@ -108,7 +108,7 @@ class PwfbPreferencesRepository @Inject constructor(private val context: Context
         return DataStoreResult.SET_D_DAY
     }
 
-    suspend fun getDDay(): Flow<Unit> {
+    suspend fun getDDay(): Flow<String> {
         return context.dataStore.data.catch { e ->
             if (e is IOException) {
                 emit(emptyPreferences())

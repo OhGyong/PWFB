@@ -16,16 +16,28 @@ class MainViewModel @Inject constructor(
 
     private val _nameObserve: MutableLiveData<String> = MutableLiveData()
     val nameObserve = _nameObserve
-    fun setName(name: String) {
-        viewModelScope.launch {
-            nameObserve.value = pwfbPreferencesRepository.setName(name)
 
-        }
-    }
+    private val _weightObserve: MutableLiveData<String> = MutableLiveData()
+    val weightObserve = _weightObserve
+
+    private val _dDayObserve: MutableLiveData<String> = MutableLiveData()
+    val dDayObserve = _dDayObserve
 
     fun getName() {
         viewModelScope.launch {
             nameObserve.value = pwfbPreferencesRepository.getName().first()
+        }
+    }
+
+    fun getWeight() {
+        viewModelScope.launch {
+            weightObserve.value = pwfbPreferencesRepository.getWeight().first()
+        }
+    }
+
+    fun getDDay() {
+        viewModelScope.launch {
+            dDayObserve.value = pwfbPreferencesRepository.getDDay().first()
         }
     }
 }
