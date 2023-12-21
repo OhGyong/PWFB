@@ -18,6 +18,7 @@ import com.pwfb.util.DayDisableDecorator
 import com.pwfb.util.SelectDecorator
 import com.pwfb.util.TodayDecorator
 import dagger.hilt.android.AndroidEntryPoint
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.Calendar
 
@@ -27,6 +28,9 @@ class DayActivity : BaseActivity() {
 
     private lateinit var binding: ActivityDayBinding
     private val viewModel: DayViewModel by viewModels()
+
+    private var datePref = ""
+    private var timePref = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(PWFB, "WeightActivity onCreate")
@@ -38,8 +42,12 @@ class DayActivity : BaseActivity() {
         setCalendarView()
         getLocalTime()
 
+        binding.btTime.setOnClickListener {
+            setTimeSpinner()
+        }
+
         binding.btGo.setOnClickListener {
-            viewModel.setDDay(binding.btTime.text.toString())
+            viewModel.setDDay("$datePref $timePref")
         }
 
         viewModel.dDayObserve.observe(this) {
@@ -98,6 +106,8 @@ class DayActivity : BaseActivity() {
 
             binding.btGo.isEnabled = true
             binding.btGo.setTextColor(getColor(R.color.white))
+
+            datePref = "${date.year}.${date.month}.${date.day}${getWeek(date)}"
         }
     }
 
@@ -112,10 +122,7 @@ class DayActivity : BaseActivity() {
         }
 
         binding.btTime.text = timeText
-
-        binding.btTime.setOnClickListener {
-            setTimeSpinner()
-        }
+        timePref = "${localTime.hour}:${localTime.minute}⏳"
     }
 
     private fun setTimeSpinner() {
@@ -130,6 +137,8 @@ class DayActivity : BaseActivity() {
             }else {
                 "오후" + " " + (hour-12) + ":" + minute
             }
+
+            timePref = "$hour:$minute⏳"
         }
 
         val timePickerDialog = TimePickerDialog(
@@ -143,5 +152,18 @@ class DayActivity : BaseActivity() {
         timePickerDialog.setButton(TimePickerDialog.BUTTON_POSITIVE, getString(R.string.confirm), timePickerDialog)
         timePickerDialog.setButton(TimePickerDialog.BUTTON_NEGATIVE, getString(R.string.cancel), timePickerDialog)
         timePickerDialog.show()
+    }
+
+    private fun getWeek(date: CalendarDay):String {
+        return when(LocalDate.of(date.year, date.month, date.day).dayOfWeek.value) {
+            1 -> "(월)"
+            2 -> "(화)"
+            3 -> "(수)"
+            4 -> "(목)"
+            5 -> "(금)"
+            6 -> "(토)"
+            7 -> "(일)"
+            else -> ""
+        }
     }
 }
