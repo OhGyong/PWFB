@@ -1,12 +1,9 @@
 package com.pwfb.util
 
-import android.content.Context
 import android.text.style.ForegroundColorSpan
-import androidx.core.content.ContextCompat
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
-import com.pwfb.R
 
 
 /**
@@ -41,6 +38,9 @@ class TodayDecorator(private var color: Int) :DayViewDecorator {
     }
 }
 
+/**
+ * 날짜 선택 시 캘린더 데코
+ */
 class SelectDecorator(private var color: Int, private var date: CalendarDay) : DayViewDecorator {
     override fun shouldDecorate(day: CalendarDay): Boolean {
         return day == date
@@ -51,6 +51,10 @@ class SelectDecorator(private var color: Int, private var date: CalendarDay) : D
     }
 }
 
+
+/**
+ * 날짜 선택 전에 캘린더 데코 초기화
+ */
 class ClearDecorator(private var color: Int, private var date: CalendarDay) : DayViewDecorator {
     override fun shouldDecorate(day: CalendarDay): Boolean {
         return day!=date
