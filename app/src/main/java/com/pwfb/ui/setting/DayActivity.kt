@@ -1,5 +1,6 @@
 package com.pwfb.ui.setting
 
+import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
@@ -107,37 +108,51 @@ class DayActivity : BaseActivity() {
             binding.btGo.isEnabled = true
             binding.btGo.setTextColor(getColor(R.color.white))
 
-            datePref = "${date.year}.${date.month}.${date.day}${getWeek(date)}"
+            val month = if(date.month<10) "0${date.month}" else "${date.month}"
+            val day = if(date.day<10) "0${date.day}" else "${date.day}"
+
+            datePref = "${date.year}.$month.$day${getWeek(date)}"
         }
     }
 
     private fun getLocalTime() {
-        var timeText = ""
         val localTime = LocalDateTime.now().toLocalTime()
 
-        timeText += if(localTime.hour < 12) {
-            "오전" + " " + localTime.hour + ":" + localTime.minute
-        }else {
-            "오후" + " " + (localTime.hour-12) + ":" + localTime.minute
+        val amPm = if(localTime.hour < 12) "오전" else "오후"
+
+        val hour = if(amPm == "오후") {
+            if((localTime.hour-12)<10) "0${(localTime.hour-12)}" else "${(localTime.hour-12)}"
+        } else {
+            if(localTime.hour<10) "0${localTime.hour}" else "${localTime.hour}"
         }
 
-        binding.btTime.text = timeText
-        timePref = "${localTime.hour}:${localTime.minute}⏳"
+        val minute = if(localTime.minute<10) "0${localTime.minute}" else "${localTime.minute}"
+
+        @SuppressLint("SetTextI18n")
+        binding.btTime.text = "$amPm $hour:$minute"
+        timePref = "$hour:$minute⏳"
     }
+
 
     private fun setTimeSpinner() {
         val cal = Calendar.getInstance()
 
-        val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
-            cal.set(Calendar.HOUR_OF_DAY, hour)
-            cal.set(Calendar.MINUTE, minute)
+        val timeSetListener = TimePickerDialog.OnTimeSetListener { _, pHour, pMinute ->
+            cal.set(Calendar.HOUR_OF_DAY, pHour)
+            cal.set(Calendar.MINUTE, pMinute)
 
-            binding.btTime.text = if(hour < 12) {
-                "오전 $hour:$minute"
-            }else {
-                "오후" + " " + (hour-12) + ":" + minute
+            val amPm = if(pHour < 12) "오전" else "오후"
+
+            val hour = if(amPm == "오후") {
+                if((pHour-12)<10) "0${(pHour-12)}" else "${(pHour-12)}"
+            } else {
+                if(pHour<10) "0$pHour" else "$pHour"
             }
 
+            val minute = if(pMinute<10) "0$pMinute" else "$pMinute"
+
+            @SuppressLint("SetTextI18n")
+            binding.btTime.text = "$amPm $hour:$minute"
             timePref = "$hour:$minute⏳"
         }
 
