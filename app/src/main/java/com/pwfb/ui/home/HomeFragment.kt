@@ -33,14 +33,14 @@ class HomeFragment : BaseFragment() {
         return binding.root
     }
 
-    @SuppressLint("SetTextI18n")
     private fun viewModelObserve() {
         viewModel.weightObserve.observe(viewLifecycleOwner) {
+            @SuppressLint("SetTextI18n")
             binding.tvWeight.text = it + getString(R.string.kg)
         }
 
         viewModel.dDayObserve.observe(viewLifecycleOwner) {
-            println(it)
+            binding.tvDate.text = it
         }
     }
 }
