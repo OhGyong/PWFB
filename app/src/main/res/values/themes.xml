@@ -14,7 +14,10 @@
     </style>
 
     <style name="style_function_layout">
-        <item name="background">@color/c_242323</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingVertical">15dp</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
     </style>
     
     <style name="style_function_text">
@@ -26,7 +29,6 @@
     <style name="style_function_color_text">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/c_caab3f</item>
-        <item name="android:layout_marginTop">10dp</item>
         <item name="layout_constraintStart_toStartOf">parent</item>
         <item name="layout_constraintEnd_toEndOf">parent</item>
     </style>
