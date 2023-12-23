@@ -1,14 +1,11 @@
 package com.pwfb.ui.home
 
 import android.annotation.SuppressLint
-import android.icu.lang.UCharacter.VerticalOrientation
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.pwfb.R
 import com.pwfb.base.BaseFragment
 import com.pwfb.common.NutritionObject.nutritionList

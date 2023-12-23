@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.activity.viewModels
 import com.pwfb.R
 import com.pwfb.base.BaseActivity
-import com.pwfb.common.DataStoreResult
 import com.pwfb.databinding.ActivityMainBinding
 import com.pwfb.ui.home.HomeFragment
 import com.pwfb.ui.nutrition.NutritionFragment
