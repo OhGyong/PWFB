@@ -1,8 +1,10 @@
 package com.pwfb.ui.home
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.pwfb.common.NutritionObject.DIETARY_FIBER
 import com.pwfb.data.Nutrition
 import com.pwfb.databinding.ListNutritionBinding
 import javax.inject.Inject
@@ -16,6 +18,10 @@ class ListAdapter @Inject constructor(
         fun bind(nutrition: Nutrition) {
             binding.tvExplain.text = nutrition.explain
             binding.tvIntake.text = nutrition.intake
+
+            if(nutrition.type == DIETARY_FIBER) {
+                binding.vDivider.visibility = View.GONE
+            }
         }
     }
 
