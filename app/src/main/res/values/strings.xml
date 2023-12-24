@@ -46,7 +46,7 @@
 
     <string name="carbohydrate_day_7">평소보다 150g 이내로 추가 섭취하세요</string>
     <string name="carbohydrate_day_654">50~100g 내외 섭취하세요</string>
-    <string name="carbohydrate_day_32">최대 %dg 섭취하세요</string>
+    <string name="carbohydrate_day_32">%dg 섭취하세요</string>
     <string name="carbohydrate_day_1">몸 상태 보면서 %dg 섭취하세요</string>
 
     <string name="protein_day_654">%dg~%dg 사이로 섭취하세요</string>
@@ -72,6 +72,12 @@
 
     <string name="dietary_fiber_day_654">충분히 섭취하세요</string>
     <string name="dietary_fiber_day_321">충분히 섭취하세요</string>
+
+    <string name="training_day_6">마지막 하체 훈련을 하세요</string>
+    <string name="training_day_54">상체 고볼륨 훈련을 하세요\n다음날 과한 근육통은 피하세요</string>
+    <string name="training_day_3">이른 아침 운동 이후 로딩을 하세요</string>
+    <string name="training_day_2">전신 펌핑 및 포징 연습을 하세요</string>
+    <string name="training_day_1">충분한 휴식을 하세요</string>
 
     <string name="nutrition_usually_intake">평소대로 진행하세요</string>
 

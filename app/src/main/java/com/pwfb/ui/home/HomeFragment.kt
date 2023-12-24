@@ -58,7 +58,26 @@ class HomeFragment : BaseFragment() {
 
             binding.lvNutrition.adapter = ListAdapter(requireContext(), nutritionList, kg, dDay.toInt())
 
-
+            binding.tvTraining.text = when(dDay.toInt()) {
+                -6 -> {
+                    getString(R.string.training_day_6)
+                }
+                -5, -4 -> {
+                    getString(R.string.training_day_54)
+                }
+                -3 -> {
+                    getString(R.string.training_day_3)
+                }
+                -2 -> {
+                    getString(R.string.training_day_2)
+                }
+                -1 -> {
+                    getString(R.string.training_day_1)
+                }
+                else -> {
+                    getString(R.string.nutrition_usually_intake)
+                }
+            }
         }
     }
 }
