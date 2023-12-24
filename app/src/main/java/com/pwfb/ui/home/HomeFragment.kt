@@ -21,6 +21,7 @@ class HomeFragment : BaseFragment() {
 
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: MainViewModel by viewModels()
+    private var kg = 0.0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,9 +32,7 @@ class HomeFragment : BaseFragment() {
 
         viewModelObserve()
         viewModel.getWeight()
-        viewModel.getDDay()
 
-        binding.lvNutrition.adapter = ListAdapter(nutritionList)
 
         return binding.root
     }
@@ -43,6 +42,8 @@ class HomeFragment : BaseFragment() {
         viewModel.weightObserve.observe(viewLifecycleOwner) {
             @SuppressLint("SetTextI18n")
             binding.tvWeight.text = it + getString(R.string.kg)
+            kg = it.toDouble()
+            viewModel.getDDay()
         }
 
         viewModel.dDayObserve.observe(viewLifecycleOwner) {
@@ -54,6 +55,10 @@ class HomeFragment : BaseFragment() {
 
             binding.tvDDay.text = "D$dDay"
             binding.tvDate.text = it
+
+            binding.lvNutrition.adapter = ListAdapter(requireContext(), nutritionList, kg, dDay.toInt())
+
+
         }
     }
 }

@@ -44,6 +44,37 @@
     <string name="confirm">확인</string>
     <string name="cancel">취소</string>
 
+    <string name="carbohydrate_day_7">평소보다 150g 이내로 추가 섭취하세요</string>
+    <string name="carbohydrate_day_654">50~100g 내외 섭취하세요</string>
+    <string name="carbohydrate_day_32">최대 %dg 섭취하세요</string>
+    <string name="carbohydrate_day_1">몸 상태 보면서 %dg 섭취하세요</string>
+
+    <string name="protein_day_654">%dg~%dg 사이로 섭취하세요</string>
+    <string name="protein_day_32">%dg 이하로 섭취하세요</string>
+    <string name="protein_day_1">%dg 이하로 섭취하세요</string>
+
+    <string name="fat_day_7654">%dg~%dg 사이로 섭취하세요</string>
+    <string name="fat_day_32">%dg 이하로 섭취하세요</string>
+    <string name="fat_day_1">%dg~%dg 사이로 섭취하세요</string>
+
+    <string name="water_day_3">충분히 섭취하세요</string>
+    <string name="water_day_2">2000ml까지 섭취하세요</string>
+    <string name="water_day_1">500ml까지 섭취하세요</string>
+
+    <string name="sodium_day_3">2500mg~3000mg 섭취하세요</string>
+    <string name="sodium_day_2">로딩 종료 후 줄이세요</string>
+    <string name="sodium_day_1">섭취하지 마세요</string>
+
+    <string name="potassium_day_3">평소의 1.2배를 섭취하세요</string>
+
+    <string name="creatine_day_7654">3g~5g 사이로 섭취하세요</string>
+    <string name="creatine_day_321">섭취하지 마세요</string>
+
+    <string name="dietary_fiber_day_654">충분히 섭취하세요</string>
+    <string name="dietary_fiber_day_321">충분히 섭취하세요</string>
+
+    <string name="nutrition_usually_intake">평소대로 진행하세요</string>
+
     <string name="empty_stomach_weight_tip">
         글리코겐 및 수분 보유량에 따라 크게 달라지므로,\n자주 측정해주세요.
     </string>

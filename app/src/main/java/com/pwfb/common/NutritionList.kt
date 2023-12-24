@@ -16,7 +16,7 @@ object NutritionObject {
         Nutrition(
             CARBOHYDRATE,
             "권장 탄수화물 섭취량(g)",
-            "50g 내외 섭취"
+            ""
         ),
         Nutrition(
             PROTEIN,
