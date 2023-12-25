@@ -1,7 +1,11 @@
 package com.pwfb.ui
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.activity.viewModels
 import com.pwfb.R
 import com.pwfb.base.BaseActivity
@@ -42,5 +46,19 @@ class MainActivity : BaseActivity() {
             }
             true
         }
+    }
+
+    /**
+     * 키보드 내리기
+     */
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        val imm: InputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+
+        if(currentFocus is EditText) {
+            currentFocus!!.clearFocus()
+        }
+
+        return super.dispatchTouchEvent(ev)
     }
 }
