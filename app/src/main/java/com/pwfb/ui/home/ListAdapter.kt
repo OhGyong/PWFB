@@ -41,19 +41,19 @@ class ListAdapter @Inject constructor(
             NutritionObject.CARBOHYDRATE -> {
                 when(dDay) {
                     -6, -5, -4 -> {
-                        context.getString(R.string.carbohydrate_day_654)
+                        context.getString(R.string.home_carbohydrate_day_654)
                     }
                     -3 -> {
-                        context.getString(R.string.carbohydrate_day_32, (kg*10).toInt())
+                        context.getString(R.string.home_carbohydrate_day_32, (kg*10).toInt())
                     }
                     -2 -> {
-                        context.getString(R.string.carbohydrate_day_32, (kg*2*10/3).toInt())
+                        context.getString(R.string.home_carbohydrate_day_32, (kg*2*10/3).toInt())
                     }
                     -1 -> {
-                        context.getString(R.string.carbohydrate_day_1, kg.toInt() - (kg*3).toInt())
+                        context.getString(R.string.home_carbohydrate_day_1, kg.toInt() - (kg*3).toInt())
                     }
                     else -> {
-                        context.getString(R.string.carbohydrate_day_7)
+                        context.getString(R.string.home_carbohydrate_day_7)
                     }
                 }
             }
@@ -61,13 +61,13 @@ class ListAdapter @Inject constructor(
             NutritionObject.PROTEIN -> {
                 when(dDay) {
                     -6, -5, -4 -> {
-                        context.getString(R.string.protein_day_654, (kg*2.4).toInt(), (kg*3).toInt())
+                        context.getString(R.string.home_protein_day_654, (kg*2.4).toInt(), (kg*3).toInt())
                     }
                     -3, -2 -> {
-                        context.getString(R.string.protein_day_32, (kg*1.6).toInt())
+                        context.getString(R.string.home_protein_day_32, (kg*1.6).toInt())
                     }
                     -1 -> {
-                        context.getString(R.string.protein_day_1, (kg*3).toInt())
+                        context.getString(R.string.home_protein_day_1, (kg*3).toInt())
                     }
                     else -> {
                       context.getString(R.string.nutrition_usually_intake)
@@ -78,13 +78,13 @@ class ListAdapter @Inject constructor(
             NutritionObject.FAT -> {
                 when(dDay) {
                     -7, -6, -5, -4 -> {
-                        context.getString(R.string.fat_day_7654, (kg*0.7).toInt(), (kg*1.2).toInt())
+                        context.getString(R.string.home_fat_day_7654, (kg*0.7).toInt(), (kg*1.2).toInt())
                     }
                     -3, -2 -> {
-                        context.getString(R.string.fat_day_32, (kg*0.5).toInt())
+                        context.getString(R.string.home_fat_day_32, (kg*0.5).toInt())
                     }
                     -1 -> {
-                        context.getString(R.string.fat_day_1, (kg*0.7).toInt(), (kg*1.0).toInt())
+                        context.getString(R.string.home_fat_day_1, (kg*0.7).toInt(), (kg*1.0).toInt())
                     }
                     else -> {
                         context.getString(R.string.nutrition_usually_intake)
@@ -95,10 +95,10 @@ class ListAdapter @Inject constructor(
             NutritionObject.WATER -> {
                 when(dDay) {
                     -3, -2 -> {
-                        context.getString(R.string.water_day_3)
+                        context.getString(R.string.home_water_day_3)
                     }
                     -1 -> {
-                        context.getString(R.string.water_day_1)
+                        context.getString(R.string.home_water_day_1)
                     }
                     else -> {
                         context.getString(R.string.nutrition_usually_intake)
@@ -109,13 +109,13 @@ class ListAdapter @Inject constructor(
             NutritionObject.SODIUM -> {
                 when(dDay) {
                     -3 -> {
-                        context.getString(R.string.sodium_day_3)
+                        context.getString(R.string.home_sodium_day_3)
                     }
                     -2 -> {
-                        context.getString(R.string.sodium_day_2)
+                        context.getString(R.string.home_sodium_day_2)
                     }
                     -1 -> {
-                        context.getString(R.string.sodium_day_1)
+                        context.getString(R.string.home_sodium_day_1)
                     }
                     else -> {
                         context.getString(R.string.nutrition_usually_intake)
@@ -126,7 +126,7 @@ class ListAdapter @Inject constructor(
             NutritionObject.POTASSIUM -> {
                 when(dDay) {
                     -3 -> {
-                        context.getString(R.string.potassium_day_3)
+                        context.getString(R.string.home_potassium_day_3)
                     }
                     else -> {
                         context.getString(R.string.nutrition_usually_intake)
@@ -137,10 +137,10 @@ class ListAdapter @Inject constructor(
             NutritionObject.CREATINE -> {
                 when(dDay) {
                     -7, -6, -5, -4 -> {
-                        context.getString(R.string.creatine_day_7654)
+                        context.getString(R.string.home_creatine_day_7654)
                     }
                     -3, -2, -1 -> {
-                        context.getString(R.string.creatine_day_321)
+                        context.getString(R.string.home_creatine_day_321)
                     }
                     else -> {
                         context.getString(R.string.nutrition_usually_intake)
@@ -151,10 +151,10 @@ class ListAdapter @Inject constructor(
             NutritionObject.DIETARY_FIBER -> {
                 when(dDay) {
                     -6, -5, -4 -> {
-                        context.getString(R.string.dietary_fiber_day_654)
+                        context.getString(R.string.home_dietary_fiber_day_654)
                     }
                     -3, -2, -1 -> {
-                        context.getString(R.string.dietary_fiber_day_321)
+                        context.getString(R.string.home_dietary_fiber_day_321)
                     }
                     else -> {
                         context.getString(R.string.nutrition_usually_intake)

@@ -53,40 +53,40 @@
     <string name="hint_nutrition_creatine">섭취할 크레아틴을 자유롭게 입력해주세요</string>
     <string name="hint_nutrition_dietary_fiber">섭취할 식이섬유를 자유롭게 입력해주세요</string>
 
-    <string name="carbohydrate_day_7">평소보다 150g 이내로 추가 섭취하세요</string>
-    <string name="carbohydrate_day_654">50~100g 내외 섭취하세요</string>
-    <string name="carbohydrate_day_32">%dg 섭취하세요</string>
-    <string name="carbohydrate_day_1">몸 상태 보면서 %dg 섭취하세요</string>
+    <string name="home_carbohydrate_day_7">평소보다 150g 이내로 추가 섭취하세요</string>
+    <string name="home_carbohydrate_day_654">50~100g 내외 섭취하세요</string>
+    <string name="home_carbohydrate_day_32">%dg 섭취하세요</string>
+    <string name="home_carbohydrate_day_1">몸 상태 보면서 %dg 섭취하세요</string>
 
-    <string name="protein_day_654">%dg~%dg 사이로 섭취하세요</string>
-    <string name="protein_day_32">%dg 이하로 섭취하세요</string>
-    <string name="protein_day_1">%dg 이하로 섭취하세요</string>
+    <string name="home_protein_day_654">%dg~%dg 사이로 섭취하세요</string>
+    <string name="home_protein_day_32">%dg 이하로 섭취하세요</string>
+    <string name="home_protein_day_1">%dg 이하로 섭취하세요</string>
 
-    <string name="fat_day_7654">%dg~%dg 사이로 섭취하세요</string>
-    <string name="fat_day_32">%dg 이하로 섭취하세요</string>
-    <string name="fat_day_1">%dg~%dg 사이로 섭취하세요</string>
+    <string name="home_fat_day_7654">%dg~%dg 사이로 섭취하세요</string>
+    <string name="home_fat_day_32">%dg 이하로 섭취하세요</string>
+    <string name="home_fat_day_1">%dg~%dg 사이로 섭취하세요</string>
 
-    <string name="water_day_3">충분히 섭취하세요</string>
-    <string name="water_day_2">2000ml까지 섭취하세요</string>
-    <string name="water_day_1">500ml까지 섭취하세요</string>
+    <string name="home_water_day_3">충분히 섭취하세요</string>
+    <string name="home_water_day_2">2000ml까지 섭취하세요</string>
+    <string name="home_water_day_1">500ml까지 섭취하세요</string>
 
-    <string name="sodium_day_3">2500mg~3000mg 섭취하세요</string>
-    <string name="sodium_day_2">로딩 종료 후 줄이세요</string>
-    <string name="sodium_day_1">섭취하지 마세요</string>
+    <string name="home_sodium_day_3">2500mg~3000mg 섭취하세요</string>
+    <string name="home_sodium_day_2">로딩 종료 후 줄이세요</string>
+    <string name="home_sodium_day_1">섭취하지 마세요</string>
 
-    <string name="potassium_day_3">평소의 1.2배를 섭취하세요</string>
+    <string name="home_potassium_day_3">평소의 1.2배를 섭취하세요</string>
 
-    <string name="creatine_day_7654">3g~5g 사이로 섭취하세요</string>
-    <string name="creatine_day_321">섭취하지 마세요</string>
+    <string name="home_creatine_day_7654">3g~5g 사이로 섭취하세요</string>
+    <string name="home_creatine_day_321">섭취하지 마세요</string>
 
-    <string name="dietary_fiber_day_654">충분히 섭취하세요</string>
-    <string name="dietary_fiber_day_321">충분히 섭취하세요</string>
+    <string name="home_dietary_fiber_day_654">충분히 섭취하세요</string>
+    <string name="home_dietary_fiber_day_321">섭취하지 마세요</string>
 
-    <string name="training_day_6">마지막 하체 훈련을 하세요</string>
-    <string name="training_day_54">상체 고볼륨 훈련을 하세요\n다음날 과한 근육통은 피하세요</string>
-    <string name="training_day_3">이른 아침 운동 이후 로딩을 하세요</string>
-    <string name="training_day_2">전신 펌핑 및 포징 연습을 하세요</string>
-    <string name="training_day_1">충분한 휴식을 하세요</string>
+    <string name="home_training_day_6">마지막 하체 훈련을 하세요</string>
+    <string name="home_training_day_54">상체 고볼륨 훈련을 하세요\n다음날 과한 근육통은 피하세요</string>
+    <string name="home_training_day_3">이른 아침 운동 이후 로딩을 하세요</string>
+    <string name="home_training_day_2">전신 펌핑 및 포징 연습을 하세요</string>
+    <string name="home_training_day_1">충분한 휴식을 하세요</string>
 
     <string name="nutrition_usually_intake">평소대로 진행하세요</string>
 

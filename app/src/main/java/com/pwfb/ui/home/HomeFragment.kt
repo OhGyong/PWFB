@@ -60,19 +60,19 @@ class HomeFragment : BaseFragment() {
 
             binding.tvTraining.text = when(dDay.toInt()) {
                 -6 -> {
-                    getString(R.string.training_day_6)
+                    getString(R.string.home_training_day_6)
                 }
                 -5, -4 -> {
-                    getString(R.string.training_day_54)
+                    getString(R.string.home_training_day_54)
                 }
                 -3 -> {
-                    getString(R.string.training_day_3)
+                    getString(R.string.home_training_day_3)
                 }
                 -2 -> {
-                    getString(R.string.training_day_2)
+                    getString(R.string.home_training_day_2)
                 }
                 -1 -> {
-                    getString(R.string.training_day_1)
+                    getString(R.string.home_training_day_1)
                 }
                 else -> {
                     getString(R.string.nutrition_usually_intake)
