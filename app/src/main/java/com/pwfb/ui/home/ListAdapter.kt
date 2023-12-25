@@ -50,7 +50,7 @@ class ListAdapter @Inject constructor(
                         context.getString(R.string.home_carbohydrate_day_32, (kg*2*10/3).toInt())
                     }
                     -1 -> {
-                        context.getString(R.string.home_carbohydrate_day_1, kg.toInt() - (kg*3).toInt())
+                        context.getString(R.string.home_carbohydrate_day_1, kg.toInt(), (kg*3).toInt())
                     }
                     else -> {
                         context.getString(R.string.home_carbohydrate_day_7)
