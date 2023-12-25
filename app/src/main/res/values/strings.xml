@@ -44,6 +44,15 @@
     <string name="confirm">확인</string>
     <string name="cancel">취소</string>
 
+    <string name="hint_nutrition_carbohydrate">섭취할 탄수화물을 자유롭게 입력해주세요</string>
+    <string name="hint_nutrition_protein">섭취할 단백질을 자유롭게 입력해주세요</string>
+    <string name="hint_nutrition_fat">섭취할 지방을 자유롭게 입력해주세요</string>
+    <string name="hint_nutrition_water">섭취할 물의 양을 자유롭게 입력해주세요</string>
+    <string name="hint_nutrition_sodium">섭취할 염분을 자유롭게 입력해주세요</string>
+    <string name="hint_nutrition_potassium">섭취할 칼륨을 자유롭게 입력해주세요</string>
+    <string name="hint_nutrition_creatine">섭취할 크레아틴을 자유롭게 입력해주세요</string>
+    <string name="hint_nutrition_dietary_fiber">섭취할 식이섬유를 자유롭게 입력해주세요</string>
+
     <string name="carbohydrate_day_7">평소보다 150g 이내로 추가 섭취하세요</string>
     <string name="carbohydrate_day_654">50~100g 내외 섭취하세요</string>
     <string name="carbohydrate_day_32">%dg 섭취하세요</string>
