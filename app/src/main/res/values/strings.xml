@@ -88,6 +88,36 @@
     <string name="home_training_day_2">전신 펌핑 및 포징 연습을 하세요</string>
     <string name="home_training_day_1">충분한 휴식을 하세요</string>
 
+    <string name="nutrition_carbohydrate_day_7">평소 섭취량(g) + 150g 🌾</string>
+    <string name="nutrition_carbohydrate_day_654">탄수화물 고갈:50g~100g 내외 섭취 🌾</string>
+    <string name="nutrition_carbohydrate_day_3">최대량: ~(체중x10)g 🌾</string>
+    <string name="nutrition_carbohydrate_day_2">최대량: ~(체중x20/3)g 🌾</string>
+    <string name="nutrition_carbohydrate_day_1">몸 상태 확인 후, (체중)~(체중*3)g 🌾</string>
+
+    <string name="nutrition_protein_day_654">섭취량 증가: (체중x2.4)g~(체중x3)g 🥩</string>
+    <string name="nutrition_protein_day_32">섭취량 감소: (체중x1.6)g 🥩</string>
+    <string name="nutrition_protein_day_1">(체중x3)g 🥩</string>
+
+    <string name="nutrition_fat_day_7654">불포화 지방산 위주로 섭취: (체중x0.7g)~(체중x1.2g) 🥜</string>
+    <string name="nutrition_fat_day_32">(체중x0.5)g 🥜</string>
+    <string name="nutrition_fat_day_1">섭취량 증가: (체중x0.7)g~(체중x1.0)g</string>
+
+    <string name="nutrition_water_day_3">부족함 없이! 💧</string>
+    <string name="nutrition_water_day_2">2000ml 💧</string>
+    <string name="nutrition_water_day_1">500ml 💧</string>
+
+    <string name="nutrition_sodium_day_3">(평소 섭취량x1.2)mg 🧂</string>
+    <string name="nutrition_sodium_day_2">(평소 섭취량x2)mg 🧂</string>
+    <string name="nutrition_sodium_day_1">무염 ❌</string>
+
+    <string name="nutrition_potassium_day_3">(평소 섭취량x1.2)mg 🍌</string>
+
+    <string name="nutrition_creatine_day_7654">3g~5g 🔥</string>
+    <string name="nutrition_creatine_day_321">중단 ❌</string>
+
+    <string name="nutrition_dietary_fiber_day_654">부족함 없이! 🥦</string>
+    <string name="nutrition_dietary_fiber_day_321">중단 ❌</string>
+
     <string name="nutrition_usually_intake">평소대로 진행하세요</string>
 
     <string name="empty_stomach_weight_tip">
