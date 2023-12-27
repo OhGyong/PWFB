@@ -51,6 +51,7 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:textColorHint">@color/c_949292</item>
         <item name="android:textAlignment">center</item>
+        <item name="android:imeOptions">actionDone</item>
     </style>
 
     <style name="style_calendar_time">

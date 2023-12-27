@@ -145,14 +145,14 @@ class PwfbPreferencesRepository @Inject constructor(private val context: Context
     /**
      * 탄수화물 설정
      */
-    suspend fun setCarbohydrate(name: String): String {
+    suspend fun setCarbohydrate(carbohydrate: String): String {
         context.dataStore.edit {
-            it[nameKey] = name
+            it[carbohydrateKey] = carbohydrate
         }
-        return DataStoreResult.SET_NAME
+        return DataStoreResult.SET_CARBOHYDRATE
     }
 
-    suspend fun getCarbohydrate(): Flow<Unit> {
+    suspend fun getCarbohydrate(): Flow<String> {
         return context.dataStore.data.catch { e ->
             if (e is IOException) {
                 emit(emptyPreferences())
@@ -160,21 +160,21 @@ class PwfbPreferencesRepository @Inject constructor(private val context: Context
                 throw e
             }
         }.map {
-            it[nameKey] ?: "NameNull"
+            it[carbohydrateKey] ?: ""
         }
     }
 
     /**
      * 단백질 설정
      */
-    suspend fun setProtein(name: String): String {
+    suspend fun setProtein(protein: String): String {
         context.dataStore.edit {
-            it[nameKey] = name
+            it[proteinKey] = protein
         }
-        return DataStoreResult.SET_NAME
+        return DataStoreResult.SET_PROTEIN
     }
 
-    suspend fun getProtein(): Flow<Unit> {
+    suspend fun getProtein(): Flow<String> {
         return context.dataStore.data.catch { e ->
             if (e is IOException) {
                 emit(emptyPreferences())
@@ -182,21 +182,21 @@ class PwfbPreferencesRepository @Inject constructor(private val context: Context
                 throw e
             }
         }.map {
-            it[nameKey] ?: "NameNull"
+            it[proteinKey] ?: ""
         }
     }
 
     /**
      * 지방 설정
      */
-    suspend fun setFat(name: String): String {
+    suspend fun setFat(fat: String): String {
         context.dataStore.edit {
-            it[nameKey] = name
+            it[fatKey] = fat
         }
-        return DataStoreResult.SET_NAME
+        return DataStoreResult.SET_FAT
     }
 
-    suspend fun getFat(): Flow<Unit> {
+    suspend fun getFat(): Flow<String> {
         return context.dataStore.data.catch { e ->
             if (e is IOException) {
                 emit(emptyPreferences())
@@ -204,21 +204,21 @@ class PwfbPreferencesRepository @Inject constructor(private val context: Context
                 throw e
             }
         }.map {
-            it[nameKey] ?: "NameNull"
+            it[fatKey] ?: ""
         }
     }
 
     /**
      * 수분 설정
      */
-    suspend fun setWater(name: String): String {
+    suspend fun setWater(water: String): String {
         context.dataStore.edit {
-            it[nameKey] = name
+            it[waterKey] = water
         }
-        return DataStoreResult.SET_NAME
+        return DataStoreResult.SET_WATER
     }
 
-    suspend fun getWater(): Flow<Unit> {
+    suspend fun getWater(): Flow<String> {
         return context.dataStore.data.catch { e ->
             if (e is IOException) {
                 emit(emptyPreferences())
@@ -226,21 +226,21 @@ class PwfbPreferencesRepository @Inject constructor(private val context: Context
                 throw e
             }
         }.map {
-            it[nameKey] ?: "NameNull"
+            it[waterKey] ?: ""
         }
     }
 
     /**
      * 나트륨 설정
      */
-    suspend fun setSodium(name: String): String {
+    suspend fun setSodium(sodium: String): String {
         context.dataStore.edit {
-            it[nameKey] = name
+            it[sodiumKey] = sodium
         }
-        return DataStoreResult.SET_NAME
+        return DataStoreResult.SET_SODIUM
     }
 
-    suspend fun getSodium(): Flow<Unit> {
+    suspend fun getSodium(): Flow<String> {
         return context.dataStore.data.catch { e ->
             if (e is IOException) {
                 emit(emptyPreferences())
@@ -248,21 +248,21 @@ class PwfbPreferencesRepository @Inject constructor(private val context: Context
                 throw e
             }
         }.map {
-            it[nameKey] ?: "NameNull"
+            it[sodiumKey] ?: ""
         }
     }
 
     /**
      * 칼륨 설정
      */
-    suspend fun setPotassium(name: String): String {
+    suspend fun setPotassium(potassium: String): String {
         context.dataStore.edit {
-            it[nameKey] = name
+            it[potassiumKey] = potassium
         }
-        return DataStoreResult.SET_NAME
+        return DataStoreResult.SET_POTASSIUM
     }
 
-    suspend fun getPotassium(): Flow<Unit> {
+    suspend fun getPotassium(): Flow<String> {
         return context.dataStore.data.catch { e ->
             if (e is IOException) {
                 emit(emptyPreferences())
@@ -270,21 +270,21 @@ class PwfbPreferencesRepository @Inject constructor(private val context: Context
                 throw e
             }
         }.map {
-            it[nameKey] ?: "NameNull"
+            it[potassiumKey] ?: ""
         }
     }
 
     /**
      * 크레아틴 설정
      */
-    suspend fun setCreatine(name: String): String {
+    suspend fun setCreatine(creatine: String): String {
         context.dataStore.edit {
-            it[nameKey] = name
+            it[creatineKey] = creatine
         }
-        return DataStoreResult.SET_NAME
+        return DataStoreResult.SET_CREATINE
     }
 
-    suspend fun getCreatine(): Flow<Unit> {
+    suspend fun getCreatine(): Flow<String> {
         return context.dataStore.data.catch { e ->
             if (e is IOException) {
                 emit(emptyPreferences())
@@ -292,8 +292,7 @@ class PwfbPreferencesRepository @Inject constructor(private val context: Context
                 throw e
             }
         }.map {
-            it[nameKey] ?: "NameNull"
+            it[creatineKey] ?: ""
         }
     }
-
 }

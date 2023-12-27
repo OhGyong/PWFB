@@ -98,7 +98,7 @@
     <string name="nutrition_protein_day_32">섭취량 감소: (체중x1.6)g 🥩</string>
     <string name="nutrition_protein_day_1">(체중x3)g 🥩</string>
 
-    <string name="nutrition_fat_day_7654">불포화 지방산 위주로 섭취: (체중x0.7g)~(체중x1.2g) 🥜</string>
+    <string name="nutrition_fat_day_7654">불포화 지방산 위주로 섭취:\n(체중x0.7g)~(체중x1.2g) 🥜</string>
     <string name="nutrition_fat_day_32">(체중x0.5)g 🥜</string>
     <string name="nutrition_fat_day_1">섭취량 증가: (체중x0.7)g~(체중x1.0)g</string>
 
