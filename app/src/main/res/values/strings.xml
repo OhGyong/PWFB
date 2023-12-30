@@ -119,6 +119,13 @@
     <string name="nutrition_dietary_fiber_day_321">중단 ❌</string>
 
     <string name="nutrition_usually_intake">평소대로 진행하세요</string>
+    
+    <string name="write_training_plan">운동 계획을 작성해보세요</string>
+    <string name="training_day_6">마지막 하체 훈련! 🏋️</string>
+    <string name="training_day_54">상체 고볼륨 훈련, 다음날 과한 근육통은 금물! 🔥</string>
+    <string name="training_day_3">이른 아침 운동 후, 로딩 시작 🧨</string>
+    <string name="training_day_2">전신 펌핑 및 포징 연습 💥</string>
+    <string name="training_day_1">휴식 🧘</string>
 
     <string name="empty_stomach_weight_tip">
         글리코겐 및 수분 보유량에 따라 크게 달라지므로,\n자주 측정해주세요.

@@ -17,11 +17,14 @@ class MainViewModel @Inject constructor(
     private val _nameObserve: MutableLiveData<String> = MutableLiveData()
     val nameObserve = _nameObserve
 
+    private val _weightObserve: MutableLiveData<String> = MutableLiveData()
+    val weightObserve = _weightObserve
+
     private val _dDayObserve: MutableLiveData<String> = MutableLiveData()
     val dDayObserve = _dDayObserve
 
-    private val _weightObserve: MutableLiveData<String> = MutableLiveData()
-    val weightObserve = _weightObserve
+    private val _trainingProgramObserve: MutableLiveData<String> = MutableLiveData()
+    val trainingProgramObserve = _trainingProgramObserve
 
     private val _carbohydrateObserve: MutableLiveData<String> = MutableLiveData()
     val carbohydrateObserve = _carbohydrateObserve
@@ -67,6 +70,20 @@ class MainViewModel @Inject constructor(
     fun getDDay() {
         viewModelScope.launch {
             dDayObserve.value = pwfbPreferencesRepository.getDDay().first()
+        }
+    }
+
+    /**
+     * 트레이닝
+     */
+    fun getTrainingProgram() {
+        viewModelScope.launch {
+            trainingProgramObserve.value = pwfbPreferencesRepository.getTrainingProgram().first()
+        }
+    }
+    fun setTrainingProgram(trainingProgram: String) {
+        viewModelScope.launch {
+            trainingProgramObserve.value = pwfbPreferencesRepository.setTrainingProgram(trainingProgram)
         }
     }
 

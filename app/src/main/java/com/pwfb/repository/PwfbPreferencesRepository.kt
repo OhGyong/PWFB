@@ -123,14 +123,14 @@ class PwfbPreferencesRepository @Inject constructor(private val context: Context
     /**
      * 운동 계획 설정
      */
-    suspend fun setTrainingProgram(name: String): String {
+    suspend fun setTrainingProgram(trainingProgram: String): String {
         context.dataStore.edit {
-            it[trainingProgramKey] = name
+            it[trainingProgramKey] = trainingProgram
         }
-        return DataStoreResult.SET_NAME
+        return DataStoreResult.SET_TRAINING_PROGRAM
     }
 
-    suspend fun getTrainingProgram(): Flow<Unit> {
+    suspend fun getTrainingProgram(): Flow<String> {
         return context.dataStore.data.catch { e ->
             if (e is IOException) {
                 emit(emptyPreferences())
