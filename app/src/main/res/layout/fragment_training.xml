@@ -121,6 +121,9 @@
                     android:background="@drawable/shape_et_nutrition"
                     android:autofillHints="no"
                     android:inputType="text"
+                    android:textAlignment="textStart"
+                    android:gravity="top"
+                    android:padding="10dp"
                     android:layout_marginHorizontal="10dp"
                     app:layout_constraintTop_toBottomOf="@id/tv_training_program"
                     tools:ignore="MissingConstraints" />
