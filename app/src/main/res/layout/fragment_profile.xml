@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -14,7 +15,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:paddingVertical="20dp"
             android:layout_marginHorizontal="20dp">
 
             <TextView
@@ -27,46 +28,78 @@
                 app:layout_constraintStart_toStartOf="parent"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                style="@style/style_function_layout"
                 android:id="@+id/cl_purpose"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
                 android:layout_marginTop="20dp"
+                android:paddingVertical="30dp"
                 android:background="@drawable/shape_function_layout"
                 app:layout_constraintTop_toBottomOf="@id/tv_title"
-                app:layout_constraintStart_toStartOf="parent">
+                tools:ignore="MissingConstraints" >
 
                 <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:textColor="@color/white"
+                    android:background="@android:color/transparent"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="오기용" />
+
+                <TextView
+                    android:id="@+id/tv_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:text="@string/peak_week_strategy"
                     android:textColor="@color/c_caab3f"
-                    android:textSize="25sp"
-                    android:layout_marginTop="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="@+id/tv_name"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_name"
+                    tools:text="이상적인 공복 체중 : 80.8~81.6Kg" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                style="@style/style_function_layout"
                 android:id="@+id/cl_weight"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
                 android:layout_marginTop="25dp"
                 android:background="@drawable/shape_function_layout"
                 app:layout_constraintTop_toBottomOf="@id/cl_purpose"
-                app:layout_constraintStart_toStartOf="parent">
+                tools:ignore="MissingConstraints" >
+
+                <TextView
+                    style="@style/style_function_color_text"
+                    android:id="@+id/tv_kg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    tools:text="81.6kg"
+                    tools:ignore="MissingConstraints" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                style="@style/style_function_layout"
                 android:id="@+id/cl_calendar"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
                 android:layout_marginTop="25dp"
                 android:background="@drawable/shape_function_layout"
                 app:layout_constraintTop_toBottomOf="@id/cl_weight"
-                app:layout_constraintStart_toStartOf="parent">
+                tools:ignore="MissingConstraints" >
+
+                <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+                    android:id="@+id/cv_calendar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/c_242323"
+                    android:theme="@style/CalenderViewCustom"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:mcv_dateTextAppearance="@style/CalenderViewDateCustomText"
+                    app:mcv_weekDayTextAppearance="@style/CalenderViewWeekCustomText" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
