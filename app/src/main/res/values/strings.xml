@@ -131,6 +131,8 @@
         글리코겐 및 수분 보유량에 따라 크게 달라지므로,\n자주 측정해주세요.
     </string>
 
+    <string name="profile_weight">이상적인 공복 체중 : %s~%sKg</string>
+
     <string-array name="calendar_week">
         <item>월</item>
         <item>화</item>

@@ -1,5 +1,6 @@
 package com.pwfb.ui.profile
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter
 import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter
 import com.pwfb.R
 import com.pwfb.base.BaseFragment
+import com.pwfb.common.DataStoreResult
 import com.pwfb.databinding.FragmentProfileBinding
 import com.pwfb.ui.MainViewModel
 import com.pwfb.util.ClearDecorator
@@ -17,7 +19,9 @@ import com.pwfb.util.DayDisableDecorator
 import com.pwfb.util.SelectDecorator
 import com.pwfb.util.TodayDecorator
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
 import java.time.LocalDate
+import java.util.Calendar
 
 
 @AndroidEntryPoint
@@ -37,12 +41,47 @@ class ProfileFragment : BaseFragment() {
         binding = FragmentProfileBinding.inflate(layoutInflater)
 
         setCalendarView()
+
         viewModelObserve()
+        viewModel.getName()
+        viewModel.getWeight()
+        viewModel.getDDay()
+
         return binding.root
     }
 
+    @SuppressLint("SimpleDateFormat", "SetTextI18n")
     private fun viewModelObserve() {
+        viewModel.nameObserve.observe(viewLifecycleOwner) {
+            binding.tvName.text = it
+        }
 
+        viewModel.weightObserve.observe(viewLifecycleOwner) {
+            val weight = it.toDouble()
+
+            binding.tvIdealWeight.text = getString(
+                R.string.profile_weight,
+                (weight*0.99).toString(),
+                weight.toString()
+            )
+
+            binding.tvWeight.text = weight.toString()+"Kg"
+        }
+
+        viewModel.dDayObserve.observe(viewLifecycleOwner) {
+            if(it == DataStoreResult.SET_D_DAY) {
+                // todo :
+            } else {
+                val datePref = it.substring(0..9)
+                val targetDate = SimpleDateFormat("yyyy.MM.dd").parse(datePref)!!.time
+                val today = Calendar.getInstance().time.time
+
+                val dDay = (today - targetDate) / (60*60*24*1000)
+                binding.tvDDay.text = "D$dDay"
+
+                setTime(it.substring(14..18))
+            }
+        }
     }
 
     private fun setCalendarView() {
@@ -101,5 +140,17 @@ class ProfileFragment : BaseFragment() {
             7 -> "(일)"
             else -> ""
         }
+    }
+
+    private fun setTime(time: String) {
+        val hourPref = time.substring(0..1)
+        val minutePref = time.substring(3..4)
+
+        val amPm = if(hourPref[0]=='1' && hourPref[1].code>2) "오후" else "오전"
+        val hour = if(amPm == "오후") (hourPref.toInt()-12).toString() else hourPref
+
+        @SuppressLint("SetTextI18n")
+        binding.btTime.text = "$amPm $hour:$minutePref"
+        timePref = "$hourPref:$minutePref⏳"
     }
 }
