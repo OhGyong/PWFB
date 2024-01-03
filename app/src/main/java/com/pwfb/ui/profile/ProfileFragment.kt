@@ -19,6 +19,7 @@ import com.pwfb.util.DayDisableDecorator
 import com.pwfb.util.SelectDecorator
 import com.pwfb.util.TodayDecorator
 import dagger.hilt.android.AndroidEntryPoint
+import org.threeten.bp.format.DateTimeFormatter
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.Calendar
@@ -72,7 +73,7 @@ class ProfileFragment : BaseFragment() {
             if(it == DataStoreResult.SET_D_DAY) {
                 // todo :
             } else {
-                val datePref = it.substring(0..9)
+                datePref = it.substring(0..9)
                 val targetDate = SimpleDateFormat("yyyy.MM.dd").parse(datePref)!!.time
                 val today = Calendar.getInstance().time.time
 
@@ -80,6 +81,17 @@ class ProfileFragment : BaseFragment() {
                 binding.tvDDay.text = "D$dDay"
 
                 setTime(it.substring(14..18))
+
+                val targetCalendarDay = CalendarDay.from(org.threeten.bp.LocalDate.parse(
+                    datePref,
+                    DateTimeFormatter.ofPattern("yyyy.MM.dd"))
+                )
+                val targetDecorator = SelectDecorator(
+                    requireContext().getColor(R.color.c_caab3f),
+                    targetCalendarDay
+                )
+                binding.cvCalendar.selectedDate = targetCalendarDay
+                binding.cvCalendar.addDecorator(targetDecorator)
             }
         }
     }
@@ -108,11 +120,14 @@ class ProfileFragment : BaseFragment() {
 
         val today = CalendarDay.today()
         val disabledDates = hashSetOf<CalendarDay>()
+//        val targetDate = CalendarDay.from(org.threeten.bp.LocalDate.parse(datePref, DateTimeFormatter.ofPattern("yyyy.MM.dd")))
 
         val dayDisableDecorator = DayDisableDecorator(disabledDates, today, requireContext().getColor(R.color.c_949292))
         val todayDecorator = TodayDecorator(requireContext().getColor(R.color.c_caab3f))
+//        val targetDecorator = SelectDecorator(requireContext().getColor(R.color.c_caab3f), targetDate)
 
         binding.cvCalendar.addDecorators(dayDisableDecorator, todayDecorator)
+//        binding.cvCalendar.selectedDate = targetDate
 
         // 날짜 선택 시 처리
         binding.cvCalendar.setOnDateChangedListener { _, date, _ ->
