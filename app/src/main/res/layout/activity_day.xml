@@ -39,7 +39,7 @@
             app:mcv_weekDayTextAppearance="@style/CalenderViewWeekCustomText" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tv_time"
             style="@style/style_calendar_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -57,9 +57,9 @@
             android:background="@drawable/shape_time_layout"
             android:theme="@style/style_calendar_time"
             android:contentDescription="@string/bt_time_description"
-            app:layout_constraintBottom_toBottomOf="@+id/textView"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_time"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView" />
+            app:layout_constraintTop_toTopOf="@+id/tv_time" />
 
         <Button
             android:id="@+id/bt_go"
