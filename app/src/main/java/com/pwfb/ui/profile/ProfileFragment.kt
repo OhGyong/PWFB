@@ -80,7 +80,7 @@ class ProfileFragment : BaseFragment() {
 
         viewModel.dDayObserve.observe(viewLifecycleOwner) {
             if(it == DataStoreResult.SET_D_DAY) {
-                // todo :
+                binding.btTimeModify.isEnabled = false
             } else {
                 datePref = it.substring(0..9)
                 setDDay()
