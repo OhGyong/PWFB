@@ -1,6 +1,7 @@
 package com.pwfb.ui.profile
 
 import android.annotation.SuppressLint
+import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,7 @@ import java.util.Calendar
 
 
 @AndroidEntryPoint
+@SuppressLint("SimpleDateFormat", "SetTextI18n")
 class ProfileFragment : BaseFragment() {
 
     private lateinit var binding: FragmentProfileBinding
@@ -48,10 +50,17 @@ class ProfileFragment : BaseFragment() {
         viewModel.getWeight()
         viewModel.getDDay()
 
+        binding.btTimeModify.setOnClickListener {
+            viewModel.setDDay("$datePref $timePref")
+        }
+
+        binding.btTime.setOnClickListener {
+            setTimeSpinner()
+        }
+
         return binding.root
     }
 
-    @SuppressLint("SimpleDateFormat", "SetTextI18n")
     private fun viewModelObserve() {
         viewModel.nameObserve.observe(viewLifecycleOwner) {
             binding.tvName.text = it
@@ -74,11 +83,7 @@ class ProfileFragment : BaseFragment() {
                 // todo :
             } else {
                 datePref = it.substring(0..9)
-                val targetDate = SimpleDateFormat("yyyy.MM.dd").parse(datePref)!!.time
-                val today = Calendar.getInstance().time.time
-
-                val dDay = (today - targetDate) / (60*60*24*1000)
-                binding.tvDDay.text = "D$dDay"
+                setDDay()
 
                 setTime(it.substring(14..18))
 
@@ -112,7 +117,8 @@ class ProfileFragment : BaseFragment() {
             val calendarHeaderElements = inputText.toString().split("-")
             val calendarHeaderBuilder = StringBuilder()
 
-            calendarHeaderBuilder.append(calendarHeaderElements[0]).append("년 ")
+            calendarHeaderBuilder
+                .append(calendarHeaderElements[0]).append("년 ")
                 .append(calendarHeaderElements[1]).append("월")
 
             calendarHeaderBuilder.toString()
@@ -120,14 +126,11 @@ class ProfileFragment : BaseFragment() {
 
         val today = CalendarDay.today()
         val disabledDates = hashSetOf<CalendarDay>()
-//        val targetDate = CalendarDay.from(org.threeten.bp.LocalDate.parse(datePref, DateTimeFormatter.ofPattern("yyyy.MM.dd")))
 
         val dayDisableDecorator = DayDisableDecorator(disabledDates, today, requireContext().getColor(R.color.c_949292))
         val todayDecorator = TodayDecorator(requireContext().getColor(R.color.c_caab3f))
-//        val targetDecorator = SelectDecorator(requireContext().getColor(R.color.c_caab3f), targetDate)
 
         binding.cvCalendar.addDecorators(dayDisableDecorator, todayDecorator)
-//        binding.cvCalendar.selectedDate = targetDate
 
         // 날짜 선택 시 처리
         binding.cvCalendar.setOnDateChangedListener { _, date, _ ->
@@ -137,10 +140,15 @@ class ProfileFragment : BaseFragment() {
                 SelectDecorator(requireContext().getColor(R.color.c_caab3f), date)
             )
 
+            binding.btTimeModify.isEnabled = true
+            binding.btTimeModify.setTextColor(requireContext().getColor(R.color.white))
+
             val month = if(date.month<10) "0${date.month}" else "${date.month}"
             val day = if(date.day<10) "0${date.day}" else "${date.day}"
 
             datePref = "${date.year}.$month.$day${getWeek(date)}"
+
+            setDDay()
         }
     }
 
@@ -164,8 +172,49 @@ class ProfileFragment : BaseFragment() {
         val amPm = if(hourPref[0]=='1' && hourPref[1].code>2) "오후" else "오전"
         val hour = if(amPm == "오후") (hourPref.toInt()-12).toString() else hourPref
 
-        @SuppressLint("SetTextI18n")
         binding.btTime.text = "$amPm $hour:$minutePref"
         timePref = "$hourPref:$minutePref⏳"
+    }
+
+    private fun setDDay() {
+        val targetDate = SimpleDateFormat("yyyy.MM.dd").parse(datePref)!!.time
+        val today = Calendar.getInstance().time.time
+
+        val dDay = (today - targetDate) / (60*60*24*1000)
+        binding.tvDDay.text = "D$dDay"
+    }
+
+    private fun setTimeSpinner() {
+        val cal = Calendar.getInstance()
+
+        val timeSetListener = TimePickerDialog.OnTimeSetListener { _, pHour, pMinute ->
+            cal.set(Calendar.HOUR_OF_DAY, pHour)
+            cal.set(Calendar.MINUTE, pMinute)
+
+            val amPm = if(pHour < 12) "오전" else "오후"
+
+            val hour = if(amPm == "오후") {
+                if((pHour-12)<10) "0${(pHour-12)}" else "${(pHour-12)}"
+            } else {
+                if(pHour<10) "0$pHour" else "$pHour"
+            }
+
+            val minute = if(pMinute<10) "0$pMinute" else "$pMinute"
+
+            binding.btTime.text = "$amPm $hour:$minute"
+            timePref = "$hour:$minute⏳"
+        }
+
+        val timePickerDialog = TimePickerDialog(
+            requireContext(),
+            R.style.TimePickerTheme,
+            timeSetListener,
+            cal.get(Calendar.HOUR_OF_DAY),
+            cal.get(Calendar.MINUTE),
+            false
+        )
+        timePickerDialog.setButton(TimePickerDialog.BUTTON_POSITIVE, getString(R.string.confirm), timePickerDialog)
+        timePickerDialog.setButton(TimePickerDialog.BUTTON_NEGATIVE, getString(R.string.cancel), timePickerDialog)
+        timePickerDialog.show()
     }
 }

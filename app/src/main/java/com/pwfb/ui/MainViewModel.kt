@@ -73,6 +73,12 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun setDDay(weight: String) {
+        viewModelScope.launch {
+            dDayObserve.value = pwfbPreferencesRepository.setDDay(weight)
+        }
+    }
+
     /**
      * 트레이닝
      */

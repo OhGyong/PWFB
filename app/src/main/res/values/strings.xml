@@ -132,6 +132,7 @@
     </string>
 
     <string name="profile_weight">이상적인 공복 체중 : %s~%sKg</string>
+    <string name="modify">변경</string>
 
     <string-array name="calendar_week">
         <item>월</item>
