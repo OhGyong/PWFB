@@ -33,8 +33,11 @@ class ProfileFragment : BaseFragment() {
     private lateinit var binding: FragmentProfileBinding
     private val viewModel: MainViewModel by viewModels()
 
+    private var dDayPref = ""
     private var datePref = ""
     private var timePref = ""
+    private var weightPref = 0.0
+    private var weight = 0.0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,22 +46,37 @@ class ProfileFragment : BaseFragment() {
     ): View {
         binding = FragmentProfileBinding.inflate(layoutInflater)
 
+        setOnClickListener()
         setCalendarView()
-
         viewModelObserve()
         viewModel.getName()
         viewModel.getWeight()
         viewModel.getDDay()
 
-        binding.btTimeModify.setOnClickListener {
-            viewModel.setDDay("$datePref $timePref")
+        return binding.root
+    }
+
+    private fun setOnClickListener() {
+        binding.btModify.setOnClickListener {
+            viewModel.setDDay("$dDayPref $timePref")
+            viewModel.setWeight(weight.toString())
         }
 
         binding.btTime.setOnClickListener {
             setTimeSpinner()
         }
 
-        return binding.root
+        binding.ivMinus.setOnClickListener {
+            weight = (weight*10 - 1).toInt() / 10.0
+            binding.tvWeight.text = weight.toString()+"Kg"
+            setWeightBtn()
+        }
+
+        binding.ivPlus.setOnClickListener {
+            weight = (weight*10 + 1).toInt() / 10.0
+            binding.tvWeight.text = weight.toString()+"Kg"
+            setWeightBtn()
+        }
     }
 
     private fun viewModelObserve() {
@@ -67,7 +85,15 @@ class ProfileFragment : BaseFragment() {
         }
 
         viewModel.weightObserve.observe(viewLifecycleOwner) {
-            val weight = it.toDouble()
+            if(it == DataStoreResult.SET_WEIGHT) {
+                binding.btModify.isEnabled = false
+                binding.btModify.setTextColor(requireContext().getColor(R.color.c_949292))
+                viewModel.getWeight()
+                return@observe
+            }
+
+            weightPref = it.toDouble()
+            weight = it.toDouble()
 
             binding.tvIdealWeight.text = getString(
                 R.string.profile_weight,
@@ -80,8 +106,11 @@ class ProfileFragment : BaseFragment() {
 
         viewModel.dDayObserve.observe(viewLifecycleOwner) {
             if(it == DataStoreResult.SET_D_DAY) {
-                binding.btTimeModify.isEnabled = false
+                binding.btModify.isEnabled = false
+                binding.btModify.setTextColor(requireContext().getColor(R.color.c_949292))
+                return@observe
             } else {
+                dDayPref = it
                 datePref = it.substring(0..9)
                 setDDay()
 
@@ -140,13 +169,13 @@ class ProfileFragment : BaseFragment() {
                 SelectDecorator(requireContext().getColor(R.color.c_caab3f), date)
             )
 
-            binding.btTimeModify.isEnabled = true
-            binding.btTimeModify.setTextColor(requireContext().getColor(R.color.white))
+            binding.btModify.isEnabled = true
+            binding.btModify.setTextColor(requireContext().getColor(R.color.white))
 
             val month = if(date.month<10) "0${date.month}" else "${date.month}"
             val day = if(date.day<10) "0${date.day}" else "${date.day}"
 
-            datePref = "${date.year}.$month.$day${getWeek(date)}"
+            dDayPref = "${date.year}.$month.$day${getWeek(date)}"
 
             setDDay()
         }
@@ -216,5 +245,15 @@ class ProfileFragment : BaseFragment() {
         timePickerDialog.setButton(TimePickerDialog.BUTTON_POSITIVE, getString(R.string.confirm), timePickerDialog)
         timePickerDialog.setButton(TimePickerDialog.BUTTON_NEGATIVE, getString(R.string.cancel), timePickerDialog)
         timePickerDialog.show()
+    }
+
+    private fun setWeightBtn() {
+        if(weightPref != weight) {
+            binding.btModify.isEnabled = true
+            binding.btModify.setTextColor(requireContext().getColor(R.color.white))
+        } else {
+            binding.btModify.isEnabled = false
+            binding.btModify.setTextColor(requireContext().getColor(R.color.c_949292))
+        }
     }
 }

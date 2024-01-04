@@ -64,6 +64,12 @@ class MainViewModel @Inject constructor(
         }
     }
 
+    fun setWeight(weight: String) {
+        viewModelScope.launch {
+            weightObserve.value = pwfbPreferencesRepository.setWeight(weight)
+        }
+    }
+
     /**
      * D-Day
      */
@@ -73,9 +79,9 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun setDDay(weight: String) {
+    fun setDDay(dDay: String) {
         viewModelScope.launch {
-            dDayObserve.value = pwfbPreferencesRepository.setDDay(weight)
+            dDayObserve.value = pwfbPreferencesRepository.setDDay(dDay)
         }
     }
 
