@@ -161,5 +161,7 @@
 
     <!-- Description -->
     <string name="bt_time_description">d-day 시간 설정</string>
+    <string name="iv_plus_description">+ 아이콘</string>
+    <string name="iv_minus_description">- 아이콘</string>
 
 </resources>
