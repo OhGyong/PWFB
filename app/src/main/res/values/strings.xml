@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">pwfb</string>
+    <string name="app_name_upper">PWFB</string>
+
+    <string name="app_version">App Version : 1.0</string>
 
     <string name="splash_title">PEAK WEEK FOR BODYBUILDING</string>
     <string name="home">Home</string>

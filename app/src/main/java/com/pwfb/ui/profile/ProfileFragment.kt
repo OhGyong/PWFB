@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter
 import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter
@@ -27,7 +28,7 @@ import java.util.Calendar
 
 
 @AndroidEntryPoint
-@SuppressLint("SimpleDateFormat", "SetTextI18n")
+@SuppressLint("SimpleDateFormat", "SetTextI18n", "InflateParams")
 class ProfileFragment : BaseFragment() {
 
     private lateinit var binding: FragmentProfileBinding
@@ -38,6 +39,9 @@ class ProfileFragment : BaseFragment() {
     private var timePref = ""
     private var weightPref = 0.0
     private var weight = 0.0
+
+    private var bottomSheetView: View? = null
+    private lateinit var bottomSheetDialog: BottomSheetDialog
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,6 +56,8 @@ class ProfileFragment : BaseFragment() {
         viewModel.getName()
         viewModel.getWeight()
         viewModel.getDDay()
+
+        bottomSheetDialog = BottomSheetDialog(requireContext())
 
         return binding.root
     }
@@ -76,6 +82,12 @@ class ProfileFragment : BaseFragment() {
             weight = (weight*10 + 1).toInt() / 10.0
             binding.tvWeight.text = weight.toString()+"Kg"
             setWeightBtn()
+        }
+
+        binding.clPwfbInformation.setOnClickListener {
+            bottomSheetView = layoutInflater.inflate(R.layout.dialog_info, null)
+            bottomSheetDialog.setContentView(bottomSheetView!!)
+            bottomSheetDialog.show()
         }
     }
 
