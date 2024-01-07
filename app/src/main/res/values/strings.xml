@@ -33,7 +33,12 @@
 
     <string name="custom_training_program_upper">CUSTOM TRAINING PROGRAM</string>
     <string name="pwfb_information">PWFB 정보</string>
-    <string name="the_day_strategy">당일 전략</string>
+    <string name="the_day_strategy_1">당일 전략 💥</string>
+    <string name="the_day_strategy_2">✨ 당일 전략 ✨</string>
+
+    <string name="full_upper">FULL</string>
+    <string name="dry_upper">DRY</string>
+    <string name="choice">choice</string>
 
     <string name="welcome">환영합니다!</string>
     <string name="input_name">What\'s Your Name?</string>

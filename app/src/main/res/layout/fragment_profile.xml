@@ -13,6 +13,7 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingVertical="20dp"
@@ -186,7 +187,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/the_day_strategy"
+                    android:text="@string/the_day_strategy_1"
                     android:textColor="@color/c_caab3f"
                     android:textSize="20sp"
                     android:paddingVertical="15dp"
