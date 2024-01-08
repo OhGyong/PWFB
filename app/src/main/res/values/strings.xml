@@ -38,7 +38,18 @@
 
     <string name="full_upper">FULL</string>
     <string name="dry_upper">DRY</string>
-    <string name="choice">choice</string>
+    <string name="choose_upper">CHOOSE</string>
+
+    <string name="am_i_full">Am I Full?</string>
+    <string name="am_i_dry">Am I Dry?</string>
+    <string name="am_i_flat">Am I Flat?</string>
+
+    <string name="yes_upper">YES</string>
+    <string name="no_upper">NO</string>
+
+    <string name="stabilize_condition">Stabilize Condition</string>
+    <string name="consider_flat">물, 나트륨, 탄수화물 추가 섭취</string>
+    <string name="continue_dehydration_strategy">Continue Dehydration Strategy</string>
 
     <string name="welcome">환영합니다!</string>
     <string name="input_name">What\'s Your Name?</string>

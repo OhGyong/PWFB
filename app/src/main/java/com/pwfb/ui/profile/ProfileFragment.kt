@@ -3,7 +3,6 @@ package com.pwfb.ui.profile
 import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -92,17 +91,9 @@ class ProfileFragment : BaseFragment() {
         }
 
         binding.clTheDayStrategy.setOnClickListener {
-            bottomSheetView = layoutInflater.inflate(R.layout.dialog_strategy, null)
-            bottomSheetDialog.setContentView(bottomSheetView!!)
+            val bottomSheet = StrategyDialogFragment()
 
-            val layoutParams = bottomSheetView?.layoutParams
-            layoutParams?.height = TypedValue.applyDimension(
-                TypedValue.COMPLEX_UNIT_DIP,
-                getWindowHeight(),
-                resources.displayMetrics
-            ).toInt()
-            bottomSheetView?.layoutParams = layoutParams
-            bottomSheetDialog.show()
+            bottomSheet.show(activity?.supportFragmentManager!!, bottomSheet.tag)
         }
     }
 
@@ -282,12 +273,5 @@ class ProfileFragment : BaseFragment() {
             binding.btModify.isEnabled = false
             binding.btModify.setTextColor(requireContext().getColor(R.color.c_949292))
         }
-    }
-
-    private fun getWindowHeight(): Float {
-        // Calculate window height for fullscreen use
-        val display = requireContext().resources?.displayMetrics
-        val deviceHeight = display?.density?.let { display.heightPixels.div(it) }
-        return deviceHeight!!
     }
 }
