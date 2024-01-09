@@ -224,7 +224,7 @@ class ProfileFragment : BaseFragment() {
     }
 
     private fun setDDay() {
-        val targetDate = SimpleDateFormat("yyyy.MM.dd").parse(datePref)!!.time
+        val targetDate = SimpleDateFormat("yyyy.MM.dd").parse(dDayPref)!!.time
         val today = Calendar.getInstance().time.time
 
         val dDay = (today - targetDate) / (60*60*24*1000)
@@ -249,7 +249,7 @@ class ProfileFragment : BaseFragment() {
             val minute = if(pMinute<10) "0$pMinute" else "$pMinute"
 
             binding.btTime.text = "$amPm $hour:$minute"
-            timePref = "$hour:$minute⏳"
+            timePref = if(amPm == "오후") "$pHour:$minute⏳" else "$hour:$minute⏳"
         }
 
         val timePickerDialog = TimePickerDialog(
