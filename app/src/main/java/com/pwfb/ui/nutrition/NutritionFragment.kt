@@ -202,21 +202,21 @@ class NutritionFragment : BaseFragment() {
         when(dDay) {
             -7 -> {
                 binding.tvCarbohydrate.text = getString(R.string.nutrition_carbohydrate_day_7)
-                binding.tvProtein.text = getString(R.string.nutrition_carbohydrate_day_7)
+                binding.tvProtein.text = getString(R.string.nutrition_usually_intake, "🥩")
                 binding.tvFat.text = getString(R.string.nutrition_fat_day_7654)
-                binding.tvWater.text = getString(R.string.nutrition_usually_intake)
-                binding.tvSodium.text = getString(R.string.nutrition_usually_intake)
-                binding.tvPotassium.text = getString(R.string.nutrition_usually_intake)
+                binding.tvWater.text = getString(R.string.nutrition_usually_intake_2, "💧")
+                binding.tvSodium.text = getString(R.string.nutrition_usually_intake_2, "🧂")
+                binding.tvPotassium.text = getString(R.string.nutrition_usually_intake_2, "🍌")
                 binding.tvCreatine.text = getString(R.string.nutrition_creatine_day_7654)
-                binding.tvDietaryFiber.text = getString(R.string.nutrition_usually_intake)
+                binding.tvDietaryFiber.text = getString(R.string.nutrition_usually_intake_2, "🥦")
             }
             -6 -> {
                 binding.tvCarbohydrate.text = getString(R.string.nutrition_carbohydrate_day_654)
                 binding.tvProtein.text = getString(R.string.nutrition_protein_day_654)
                 binding.tvFat.text = getString(R.string.nutrition_fat_day_7654)
-                binding.tvWater.text = getString(R.string.nutrition_usually_intake)
-                binding.tvSodium.text = getString(R.string.nutrition_usually_intake)
-                binding.tvPotassium.text = getString(R.string.nutrition_usually_intake)
+                binding.tvWater.text = getString(R.string.nutrition_usually_intake_2, "💧")
+                binding.tvSodium.text = getString(R.string.nutrition_usually_intake_2, "🧂")
+                binding.tvPotassium.text = getString(R.string.nutrition_usually_intake_2, "🍌")
                 binding.tvCreatine.text = getString(R.string.nutrition_creatine_day_7654)
                 binding.tvDietaryFiber.text = getString(R.string.nutrition_dietary_fiber_day_654)
             }
@@ -224,9 +224,9 @@ class NutritionFragment : BaseFragment() {
                 binding.tvCarbohydrate.text = getString(R.string.nutrition_carbohydrate_day_654)
                 binding.tvProtein.text = getString(R.string.nutrition_protein_day_654)
                 binding.tvFat.text = getString(R.string.nutrition_fat_day_7654)
-                binding.tvWater.text = getString(R.string.nutrition_usually_intake)
-                binding.tvSodium.text = getString(R.string.nutrition_usually_intake)
-                binding.tvPotassium.text = getString(R.string.nutrition_usually_intake)
+                binding.tvWater.text = getString(R.string.nutrition_usually_intake_2, "💧")
+                binding.tvSodium.text = getString(R.string.nutrition_usually_intake_2, "🧂")
+                binding.tvPotassium.text = getString(R.string.nutrition_usually_intake_2, "🍌")
                 binding.tvCreatine.text = getString(R.string.nutrition_creatine_day_7654)
                 binding.tvDietaryFiber.text = getString(R.string.nutrition_dietary_fiber_day_654)
             }
@@ -234,9 +234,9 @@ class NutritionFragment : BaseFragment() {
                 binding.tvCarbohydrate.text = getString(R.string.nutrition_carbohydrate_day_654)
                 binding.tvProtein.text = getString(R.string.nutrition_protein_day_654)
                 binding.tvFat.text = getString(R.string.nutrition_fat_day_7654)
-                binding.tvWater.text = getString(R.string.nutrition_usually_intake)
-                binding.tvSodium.text = getString(R.string.nutrition_usually_intake)
-                binding.tvPotassium.text = getString(R.string.nutrition_usually_intake)
+                binding.tvWater.text = getString(R.string.nutrition_usually_intake_2, "💧")
+                binding.tvSodium.text = getString(R.string.nutrition_usually_intake_2, "🧂")
+                binding.tvPotassium.text = getString(R.string.nutrition_usually_intake_2, "🍌")
                 binding.tvCreatine.text = getString(R.string.nutrition_creatine_day_7654)
                 binding.tvDietaryFiber.text = getString(R.string.nutrition_dietary_fiber_day_654)
             }
@@ -256,7 +256,7 @@ class NutritionFragment : BaseFragment() {
                 binding.tvFat.text = getString(R.string.nutrition_fat_day_32)
                 binding.tvWater.text = getString(R.string.nutrition_water_day_2)
                 binding.tvSodium.text = getString(R.string.nutrition_sodium_day_2)
-                binding.tvPotassium.text = getString(R.string.nutrition_usually_intake)
+                binding.tvPotassium.text = getString(R.string.nutrition_usually_intake_2, "🍌")
                 binding.tvCreatine.text = getString(R.string.nutrition_creatine_day_321)
                 binding.tvDietaryFiber.text = getString(R.string.nutrition_dietary_fiber_day_321)
             }
@@ -266,7 +266,7 @@ class NutritionFragment : BaseFragment() {
                 binding.tvFat.text = getString(R.string.nutrition_fat_day_1)
                 binding.tvWater.text = getString(R.string.nutrition_water_day_1)
                 binding.tvSodium.text = getString(R.string.nutrition_sodium_day_1)
-                binding.tvPotassium.text = getString(R.string.nutrition_usually_intake)
+                binding.tvPotassium.text = getString(R.string.nutrition_usually_intake_2, "🍌")
                 binding.tvCreatine.text = getString(R.string.nutrition_creatine_day_321)
                 binding.tvDietaryFiber.text = getString(R.string.nutrition_dietary_fiber_day_321)
             }
