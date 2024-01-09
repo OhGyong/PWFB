@@ -134,13 +134,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_am_i_full" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginHorizontal="20dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_title">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 style="@style/style_function_layout"
@@ -175,13 +168,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_am_i_dry" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginHorizontal="20dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_title">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 style="@style/style_function_layout"
@@ -216,6 +202,33 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_am_i_flat" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                style="@style/style_function_layout"
+                android:id="@+id/cl_continue_dehydration"
+                android:background="@drawable/shape_strategy_layout"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:ignore="MissingConstraints" >
+
+                <TextView
+                    style="@style/style_function_color_text"
+                    android:id="@+id/tv_continue_dehydration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/continue_dehydration_strategy"
+                    tools:ignore="MissingConstraints" />
+
+                <TextView
+                    style="@style/style_strategy_yes_no"
+                    android:id="@+id/tv_continue"
+                    android:layout_width="wrap_content"
+                    android:text="@string/continue_upper"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_continue_dehydration" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
@@ -228,8 +241,5 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
             tools:text="@string/stabilize_condition"/>
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

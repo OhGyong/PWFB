@@ -84,7 +84,7 @@ class StrategyDialogFragment: BottomSheetDialogFragment() {
         binding.tvDryNo.setOnClickListener {
             isDry = false
             binding.clAmIDry.visibility = View.GONE
-            binding.tvResult.text = getString(R.string.continue_dehydration_strategy)
+            binding.clContinueDehydration.visibility = View.VISIBLE
         }
 
         binding.tvFlatYes.setOnClickListener {
@@ -95,6 +95,12 @@ class StrategyDialogFragment: BottomSheetDialogFragment() {
         binding.tvFlatNo.setOnClickListener {
             binding.clAmIFlat.visibility = View.GONE
             binding.tvResult.text = getString(R.string.stabilize_condition)
+        }
+
+        binding.tvContinue.setOnClickListener {
+            isDehydration = true
+            binding.clContinueDehydration.visibility = View.GONE
+            binding.clAmIDry.visibility = View.VISIBLE
         }
     }
 
