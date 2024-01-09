@@ -15,7 +15,7 @@
     <string name="kr_training">훈련</string>
     <string name="kr_profile">프로필</string>
     
-    <string name="peak_week_strategy">⭐ Peak Week 전략 ⭐</string>
+    <string name="peak_week_strategy">✨ Peak Week 전략 ✨</string>
     <string name="gonna_be_alright">Everything gonna be alright</string>
     <string name="empty_stomach_weight">EMPTY STOMACH WEIGHT</string>
     <string name="d_day">D-DAY</string>
@@ -52,7 +52,7 @@
     <string name="continue_dehydration_strategy">Continue Dehydration Strategy</string>
     <string name="continue_upper">CONTINUE</string>
 
-    <string name="welcome">환영합니다!</string>
+    <string name="welcome">환영합니다! 👋</string>
     <string name="input_name">What\'s Your Name?</string>
     <string name="next">Next</string>
 
@@ -73,36 +73,36 @@
     <string name="hint_nutrition_creatine">섭취할 크레아틴을 자유롭게 입력해주세요</string>
     <string name="hint_nutrition_dietary_fiber">섭취할 식이섬유를 자유롭게 입력해주세요</string>
 
-    <string name="home_carbohydrate_day_7">평소보다 150g 이내로 추가 섭취하세요</string>
-    <string name="home_carbohydrate_day_654">50~100g 내외 섭취하세요</string>
-    <string name="home_carbohydrate_day_32">%dg 섭취하세요</string>
-    <string name="home_carbohydrate_day_1">%dg~%dg 사이로 섭취하세요</string>
+    <string name="home_carbohydrate_day_7">평소보다 150g 이내로 추가 섭취하세요 🌾</string>
+    <string name="home_carbohydrate_day_654">50~100g 내외 섭취하세요 🌾</string>
+    <string name="home_carbohydrate_day_32">%dg 섭취하세요 🌾</string>
+    <string name="home_carbohydrate_day_1">%dg~%dg 사이로 섭취하세요 🌾</string>
 
     <string name="home_protein_day_654">%dg~%dg 사이로 섭취하세요</string>
     <string name="home_protein_day_32">%dg 이하로 섭취하세요</string>
     <string name="home_protein_day_1">%dg 이하로 섭취하세요</string>
 
-    <string name="home_fat_day_7654">%dg~%dg 사이로 섭취하세요</string>
-    <string name="home_fat_day_32">%dg 이하로 섭취하세요</string>
-    <string name="home_fat_day_1">%dg~%dg 사이로 섭취하세요</string>
+    <string name="home_fat_day_7654">%dg~%dg 사이로 섭취하세요 🥜</string>
+    <string name="home_fat_day_32">%dg 이하로 섭취하세요 🥜</string>
+    <string name="home_fat_day_1">%dg~%dg 사이로 섭취하세요 🥜</string>
 
-    <string name="home_water_day_3">충분히 섭취하세요</string>
-    <string name="home_water_day_2">2000ml까지 섭취하세요</string>
-    <string name="home_water_day_1">500ml까지 섭취하세요</string>
+    <string name="home_water_day_3">충분히 섭취하세요 💧</string>
+    <string name="home_water_day_2">2000ml까지 섭취하세요 💧</string>
+    <string name="home_water_day_1">500ml까지 섭취하세요 💧</string>
 
-    <string name="home_sodium_day_3">2500mg~3000mg 섭취하세요</string>
-    <string name="home_sodium_day_2">로딩 종료 후 줄이세요</string>
-    <string name="home_sodium_day_1">섭취하지 마세요</string>
+    <string name="home_sodium_day_3">2500mg~3000mg 섭취하세요 🧂</string>
+    <string name="home_sodium_day_2">로딩 종료 후 줄이세요 🧂</string>
+    <string name="home_sodium_day_1">섭취하지 마세요 🧂</string>
 
-    <string name="home_potassium_day_3">평소의 1.2배를 섭취하세요</string>
+    <string name="home_potassium_day_3">평소의 1.2배를 섭취하세요 🍌</string>
 
-    <string name="home_creatine_day_7654">3g~5g 사이로 섭취하세요</string>
-    <string name="home_creatine_day_321">섭취하지 마세요</string>
+    <string name="home_creatine_day_7654">3g~5g 사이로 섭취하세요 🔥</string>
+    <string name="home_creatine_day_321">섭취하지 마세요 ❌</string>
 
-    <string name="home_dietary_fiber_day_654">충분히 섭취하세요</string>
-    <string name="home_dietary_fiber_day_321">섭취하지 마세요</string>
+    <string name="home_dietary_fiber_day_654">충분히 섭취하세요 🥦</string>
+    <string name="home_dietary_fiber_day_321">섭취하지 마세요 ❌</string>
 
-    <string name="home_training_day_6">마지막 하체 훈련을 하세요</string>
+    <string name="home_training_day_6">마지막 하체 훈련! 🏋️</string>
     <string name="home_training_day_54">상체 고볼륨 훈련을 하세요\n다음날 과한 근육통은 피하세요</string>
     <string name="home_training_day_3">이른 아침 운동 이후 로딩을 하세요</string>
     <string name="home_training_day_2">전신 펌핑 및 포징 연습을 하세요</string>
@@ -120,7 +120,7 @@
 
     <string name="nutrition_fat_day_7654">불포화 지방산 위주로 섭취:\n(체중x0.7g)~(체중x1.2g) 🥜</string>
     <string name="nutrition_fat_day_32">(체중x0.5)g 🥜</string>
-    <string name="nutrition_fat_day_1">섭취량 증가: (체중x0.7)g~(체중x1.0)g</string>
+    <string name="nutrition_fat_day_1">섭취량 증가: (체중x0.7)g~(체중x1.0)g 🥜</string>
 
     <string name="nutrition_water_day_3">부족함 없이! 💧</string>
     <string name="nutrition_water_day_2">2000ml 💧</string>
@@ -138,7 +138,7 @@
     <string name="nutrition_dietary_fiber_day_654">부족함 없이! 🥦</string>
     <string name="nutrition_dietary_fiber_day_321">중단 ❌</string>
 
-    <string name="nutrition_usually_intake">평소대로 진행하세요</string>
+    <string name="nutrition_usually_intake">평소대로 진행하세요 %s</string>
     
     <string name="write_training_plan">운동 계획을 작성해보세요</string>
     <string name="training_day_6">마지막 하체 훈련! 🏋️</string>

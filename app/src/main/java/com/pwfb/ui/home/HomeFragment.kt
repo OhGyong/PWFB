@@ -75,7 +75,7 @@ class HomeFragment : BaseFragment() {
                     getString(R.string.home_training_day_1)
                 }
                 else -> {
-                    getString(R.string.nutrition_usually_intake)
+                    getString(R.string.nutrition_usually_intake, "💪")
                 }
             }
         }

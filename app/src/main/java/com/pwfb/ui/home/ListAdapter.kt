@@ -70,7 +70,7 @@ class ListAdapter @Inject constructor(
                         context.getString(R.string.home_protein_day_1, (kg*3).toInt())
                     }
                     else -> {
-                      context.getString(R.string.nutrition_usually_intake)
+                      context.getString(R.string.nutrition_usually_intake, "🥩")
                     }
                 }
             }
@@ -87,7 +87,7 @@ class ListAdapter @Inject constructor(
                         context.getString(R.string.home_fat_day_1, (kg*0.7).toInt(), (kg*1.0).toInt())
                     }
                     else -> {
-                        context.getString(R.string.nutrition_usually_intake)
+                        context.getString(R.string.nutrition_usually_intake, "🥜")
                     }
                 }
             }
@@ -101,7 +101,7 @@ class ListAdapter @Inject constructor(
                         context.getString(R.string.home_water_day_1)
                     }
                     else -> {
-                        context.getString(R.string.nutrition_usually_intake)
+                        context.getString(R.string.nutrition_usually_intake, "💧")
                     }
                 }
             }
@@ -118,7 +118,7 @@ class ListAdapter @Inject constructor(
                         context.getString(R.string.home_sodium_day_1)
                     }
                     else -> {
-                        context.getString(R.string.nutrition_usually_intake)
+                        context.getString(R.string.nutrition_usually_intake, "🧂")
                     }
                 }
             }
@@ -129,7 +129,7 @@ class ListAdapter @Inject constructor(
                         context.getString(R.string.home_potassium_day_3)
                     }
                     else -> {
-                        context.getString(R.string.nutrition_usually_intake)
+                        context.getString(R.string.nutrition_usually_intake, "🍌")
                     }
                 }
             }
@@ -143,7 +143,7 @@ class ListAdapter @Inject constructor(
                         context.getString(R.string.home_creatine_day_321)
                     }
                     else -> {
-                        context.getString(R.string.nutrition_usually_intake)
+                        context.getString(R.string.nutrition_usually_intake, "🔥")
                     }
                 }
             }
@@ -157,7 +157,7 @@ class ListAdapter @Inject constructor(
                         context.getString(R.string.home_dietary_fiber_day_321)
                     }
                     else -> {
-                        context.getString(R.string.nutrition_usually_intake)
+                        context.getString(R.string.nutrition_usually_intake, "🥦")
                     }
                 }
             }
