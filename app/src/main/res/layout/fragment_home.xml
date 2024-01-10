@@ -37,7 +37,7 @@
                 tools:ignore="MissingConstraints">
 
                 <TextView
-                    android:id="@+id/tv_peek_week_strategy"
+                    android:id="@+id/tv_title_peak_week_strategy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
@@ -50,11 +50,12 @@
 
                 <TextView
                     style="@style/style_function_white_text"
+                    android:id="@+id/tv_peak_week_strategy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:text="@string/gonna_be_alright"
-                    app:layout_constraintTop_toBottomOf="@id/tv_peek_week_strategy"
+                    app:layout_constraintTop_toBottomOf="@id/tv_title_peak_week_strategy"
                     tools:ignore="MissingConstraints" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

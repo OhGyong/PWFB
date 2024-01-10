@@ -78,6 +78,29 @@ class HomeFragment : BaseFragment() {
                     getString(R.string.nutrition_usually_intake, "💪")
                 }
             }
+
+            binding.tvPeakWeekStrategy.text = when(dDay.toInt()) {
+                -7 -> {
+                    getString(R.string.re_feed_day)
+                }
+                -6, -5, -4 -> {
+                    getString(R.string.low_carbohydrate_day)
+                }
+                -3, -2 -> {
+                    getString(R.string.high_carbohydrate_day)
+                }
+                -1 -> {
+                     getString(R.string.correction_day)
+                }
+                0 -> {
+                    getString(R.string.man_of_the_hour)
+                }
+                else -> {
+                    getString(R.string.gonna_be_alright)
+                }
+            }
+
+
         }
     }
 }

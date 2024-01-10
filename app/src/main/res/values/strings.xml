@@ -17,6 +17,11 @@
     
     <string name="peak_week_strategy">✨ Peak Week 전략 ✨</string>
     <string name="gonna_be_alright">Everything gonna be alright</string>
+    <string name="man_of_the_hour">👍 오늘 주인공은 당신입니다!</string>
+    <string name="correction_day">🤘 Correction Day!</string>
+    <string name="high_carbohydrate_day">🤙 High Carb(고탄수) Day!</string>
+    <string name="low_carbohydrate_day">🤙 Low Carb(저탄수) Day!</string>
+    <string name="re_feed_day">😋 ReFeed Day!</string>
     <string name="empty_stomach_weight">EMPTY STOMACH WEIGHT</string>
     <string name="d_day">D-DAY</string>
     <string name="nutrition_upper">NUTRITION</string>
