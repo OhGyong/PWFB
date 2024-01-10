@@ -40,8 +40,9 @@ class ProfileFragment : BaseFragment() {
     private var weightPref = 0.0
     private var weight = 0.0
 
-    private var bottomSheetView: View? = null
-    private lateinit var bottomSheetDialog: BottomSheetDialog
+    private var infoDialogView: View? = null
+    private lateinit var infoDialog: BottomSheetDialog
+    private val strategyDialog = StrategyDialogFragment()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,7 +58,9 @@ class ProfileFragment : BaseFragment() {
         viewModel.getWeight()
         viewModel.getDDay()
 
-        bottomSheetDialog = BottomSheetDialog(requireContext())
+        infoDialogView = layoutInflater.inflate(R.layout.dialog_info, null)
+        infoDialog = BottomSheetDialog(requireContext())
+        infoDialog.setContentView(infoDialogView!!)
 
         return binding.root
     }
@@ -85,15 +88,11 @@ class ProfileFragment : BaseFragment() {
         }
 
         binding.clPwfbInformation.setOnClickListener {
-            bottomSheetView = layoutInflater.inflate(R.layout.dialog_info, null)
-            bottomSheetDialog.setContentView(bottomSheetView!!)
-            bottomSheetDialog.show()
+            infoDialog.show()
         }
 
         binding.clTheDayStrategy.setOnClickListener {
-            val bottomSheet = StrategyDialogFragment()
-
-            bottomSheet.show(activity?.supportFragmentManager!!, bottomSheet.tag)
+            strategyDialog.show(activity?.supportFragmentManager!!, strategyDialog.tag)
         }
     }
 

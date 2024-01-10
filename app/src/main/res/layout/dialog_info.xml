@@ -10,7 +10,7 @@
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
@@ -22,6 +22,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/iv_info"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/ic_app"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        android:contentDescription="@string/iv_app" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,10 +39,10 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
+        android:paddingBottom="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginBottom="200dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/iv_info" />
 </androidx.constraintlayout.widget.ConstraintLayout>
