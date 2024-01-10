@@ -130,7 +130,7 @@ class DayActivity : BaseActivity() {
 
         @SuppressLint("SetTextI18n")
         binding.btTime.text = "$amPm $hour:$minute"
-        timePref = "$hour:$minute⏳"
+        timePref = if(amPm == "오후") "${localTime.hour}:$minute⏳" else "$hour:$minute⏳"
     }
 
 
