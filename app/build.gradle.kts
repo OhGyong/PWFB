@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -17,6 +19,9 @@ android {
         versionName = "1.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        fun key(pKey:String): String = gradleLocalProperties(rootDir).getProperty(pKey) ?: ""
+        manifestPlaceholders["AdMobAPI_KEY"] = key("AdMobAPI_KEY")
     }
 
     buildTypes {
