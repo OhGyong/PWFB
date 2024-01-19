@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.viewModels
+import com.google.android.gms.ads.AdRequest
 import com.pwfb.R
 import com.pwfb.base.BaseFragment
 import com.pwfb.common.DataStoreResult
@@ -31,6 +32,7 @@ class NutritionFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentNutritionBinding.inflate(layoutInflater)
+        binding.adView.loadAd(AdRequest.Builder().build())
 
         viewModelObserve()
         viewModel.getDDay()

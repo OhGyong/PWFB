@@ -28,13 +28,24 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
 
+            <com.google.android.gms.ads.AdView
+                android:id="@+id/adView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="30dp"
+                app:adSize="BANNER"
+                app:adUnitId="ca-app-pub-3940256099942544/6300978111"
+                app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 style="@style/style_function_layout"
                 android:id="@+id/cl_purpose"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:paddingVertical="30dp"
                 android:background="@drawable/shape_function_layout"
-                app:layout_constraintTop_toBottomOf="@id/tv_title"
+                app:layout_constraintTop_toBottomOf="@id/adView"
                 tools:ignore="MissingConstraints" >
 
                 <TextView

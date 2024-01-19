@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.google.android.gms.ads.AdRequest
 import com.pwfb.R
 import com.pwfb.base.BaseFragment
 import com.pwfb.common.NutritionObject.nutritionList
@@ -22,7 +23,6 @@ class HomeFragment : BaseFragment() {
     private lateinit var binding: FragmentHomeBinding
     private val viewModel: MainViewModel by viewModels()
     private var kg = 0.0
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,6 +33,7 @@ class HomeFragment : BaseFragment() {
         viewModelObserve()
         viewModel.getWeight()
 
+        binding.adView.loadAd(AdRequest.Builder().build())
 
         return binding.root
     }
