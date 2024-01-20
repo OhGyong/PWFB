@@ -52,7 +52,6 @@ class NameActivity: BaseActivity() {
          * Next 버튼 클릭
          */
         binding.btNext.setOnClickListener {
-            println(binding.etName.text.toString())
             viewModel.setName(binding.etName.text.toString())
         }
 

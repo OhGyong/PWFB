@@ -52,7 +52,6 @@ class WeightActivity: BaseActivity() {
          * Next 버튼 클릭
          */
         binding.btNext.setOnClickListener {
-            println(binding.etWeight.text.toString())
             viewModel.setWeight(binding.etWeight.text.toString())
         }
 
