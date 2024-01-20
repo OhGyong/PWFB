@@ -191,4 +191,6 @@
     <string name="iv_minus_description">- 아이콘</string>
     <string name="iv_app">App 이미지</string>
 
+    <string name="admob_key">ca-app-pub-4818752422104122/4888923038</string>
+
 </resources>

@@ -36,7 +36,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="30dp"
                 app:adSize="BANNER"
-                app:adUnitId="ca-app-pub-3940256099942544/6300978111"
+                app:adUnitId="@string/admob_key"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
             <androidx.constraintlayout.widget.ConstraintLayout

@@ -27,7 +27,6 @@ class MainActivity : BaseActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         binding.mainBnv.setOnItemSelectedListener {
             when(it.itemId) {
                 R.id.item_navi_home -> {
