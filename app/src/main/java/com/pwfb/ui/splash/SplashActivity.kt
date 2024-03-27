@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -55,35 +56,38 @@ class SplashActivity: BaseActivity() {
         /**
          * 스플래시 끝나고 애니메이션 적용
          */
-        splashScreen.setOnExitAnimationListener { splashScreenView ->
-            ObjectAnimator.ofFloat(
-                splashScreenView,
-                View.TRANSLATION_Y,
-                0f,
-                -splashScreenView.height.toFloat()
-            ).run {
-                interpolator = AnticipateInterpolator()
-                duration = 0L
-                doOnEnd { splashScreenView.remove() }
-                start()
-                addListener(object : Animator.AnimatorListener{
-                    override fun onAnimationStart(p0: Animator) {
-                    }
-                    override fun onAnimationEnd(p0: Animator) {
-                        runBlocking {
-                            delay(2000L)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            splashScreen.setOnExitAnimationListener { splashScreenView ->
+                ObjectAnimator.ofFloat(
+                    splashScreenView,
+                    View.TRANSLATION_Y,
+                    0f,
+                    -splashScreenView.height.toFloat()
+                ).run {
+                    interpolator = AnticipateInterpolator()
+                    duration = 0L
+                    doOnEnd { splashScreenView.remove() }
+                    start()
+                    addListener(object : Animator.AnimatorListener{
+                        override fun onAnimationStart(p0: Animator) {
+                        }
+                        override fun onAnimationEnd(p0: Animator) {
                             viewModel.getFirstInit()
                         }
-                    }
-                    override fun onAnimationCancel(p0: Animator) {
-                    }
-                    override fun onAnimationRepeat(p0: Animator) {
-                    }
-                })
+                        override fun onAnimationCancel(p0: Animator) {
+                        }
+                        override fun onAnimationRepeat(p0: Animator) {
+                        }
+                    })
+                }
             }
+        } else {
+            viewModel.getFirstInit()
         }
 
         viewModel.firstInitObserve.observe(this) {
+            runBlocking { delay(2000) }
+
             // 앱 첫 진입으로 판단 -> 설정 화면 이동
             val intent = if(it == true) {
                 Intent(applicationContext, NameActivity::class.java)

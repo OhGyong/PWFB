@@ -13,7 +13,7 @@ android {
 
     defaultConfig {
         applicationId = "com.pwfb"
-        minSdk = 31
+        minSdk = 29
         targetSdk = 34
         versionCode = 3
         versionName = "1.2"
