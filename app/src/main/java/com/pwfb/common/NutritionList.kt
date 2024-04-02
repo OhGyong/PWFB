@@ -1,6 +1,6 @@
 package com.pwfb.common
 
-import com.pwfb.data.Nutrition
+import com.pwfb.domain.Nutrition
 
 object NutritionObject {
     const val CARBOHYDRATE = "carbohydrate"

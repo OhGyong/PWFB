@@ -3,7 +3,7 @@ package com.pwfb.ui.splash
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.pwfb.repository.PwfbPreferencesRepository
+import com.pwfb.data.PwfbPreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -3,7 +3,7 @@ package com.pwfb.ui.setting
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.pwfb.repository.PwfbPreferencesRepository
+import com.pwfb.data.PwfbPreferencesRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

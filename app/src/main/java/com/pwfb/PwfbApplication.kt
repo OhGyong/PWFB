@@ -5,7 +5,7 @@ import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
-import com.pwfb.repository.PwfbPreferencesRepository
+import com.pwfb.data.PwfbPreferencesRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,4 +1,4 @@
-package com.pwfb.data
+package com.pwfb.domain
 
 data class Nutrition (
     var type: String?,

@@ -1,4 +1,4 @@
-package com.pwfb.repository
+package com.pwfb.data
 
 import android.content.Context
 import androidx.datastore.preferences.core.booleanPreferencesKey
