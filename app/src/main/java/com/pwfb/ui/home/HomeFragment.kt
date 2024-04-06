@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import com.google.android.gms.ads.AdRequest
 import com.pwfb.R
 import com.pwfb.base.BaseFragment
-import com.pwfb.common.NutritionObject.nutritionList
+import com.pwfb.common.NutritionObject.nutritionEntityLists
 import com.pwfb.databinding.FragmentHomeBinding
 import com.pwfb.ui.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -57,7 +57,7 @@ class HomeFragment : BaseFragment() {
             binding.tvDDay.text = "D$dDay"
             binding.tvDate.text = it
 
-            binding.lvNutrition.adapter = ListAdapter(requireContext(), nutritionList, kg, dDay.toInt())
+            binding.lvNutrition.adapter = ListAdapter(requireContext(), nutritionEntityLists, kg, dDay.toInt())
 
             binding.tvTraining.text = when(dDay.toInt()) {
                 -6 -> {

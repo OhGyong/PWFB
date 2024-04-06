@@ -7,37 +7,37 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.pwfb.R
 import com.pwfb.common.NutritionObject
-import com.pwfb.domain.Nutrition
+import com.pwfb.domain.NutritionEntity
 import com.pwfb.databinding.ListNutritionBinding
 import javax.inject.Inject
 
 class ListAdapter @Inject constructor(
     private val context: Context,
-    private val nutritionList: List<Nutrition>,
+    private val nutritionEntityList: List<NutritionEntity>,
     private val kg: Double,
     private val dDay: Int
 ): RecyclerView.Adapter<ListAdapter.ViewHolder>() {
     inner class ViewHolder(
         private val binding: ListNutritionBinding
     ): RecyclerView.ViewHolder(binding.root) {
-        fun bind(nutrition: Nutrition) {
-            binding.tvExplain.text = nutrition.explain
-            binding.tvIntake.text = nutrition.intake
+        fun bind(nutritionEntity: NutritionEntity) {
+            binding.tvExplain.text = nutritionEntity.explain
+            binding.tvIntake.text = nutritionEntity.intake
 
-            if(nutrition.type == NutritionObject.DIETARY_FIBER) {
+            if(nutritionEntity.type == NutritionObject.DIETARY_FIBER) {
                 binding.vDivider.visibility = View.GONE
             }
 
-            setDDayIntake(binding, nutrition)
+            setDDayIntake(binding, nutritionEntity)
 
         }
     }
 
     fun setDDayIntake(
         binding: ListNutritionBinding,
-        nutrition: Nutrition
+        nutritionEntity: NutritionEntity
     ) {
-        binding.tvIntake.text = when(nutrition.type) {
+        binding.tvIntake.text = when(nutritionEntity.type) {
             NutritionObject.CARBOHYDRATE -> {
                 when(dDay) {
                     -6, -5, -4 -> {
@@ -173,10 +173,10 @@ class ListAdapter @Inject constructor(
     }
 
     override fun getItemCount(): Int {
-        return nutritionList.count()
+        return nutritionEntityList.count()
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(nutritionList[position])
+        holder.bind(nutritionEntityList[position])
     }
 }
