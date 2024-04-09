@@ -1,8 +1,20 @@
-package com.pwfb.domain
+package com.pwfb.domain.usecase
 
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.emptyPreferences
+import com.pwfb.common.DataStoreResult
+import com.pwfb.common.DataStoreResult.RESULT_SUCCESS
+import com.pwfb.common.DataStoreResult.SET_WEIGHT
+import com.pwfb.data.PrefRepositoryImpl
+import com.pwfb.domain.entity.PwfbResultEntity
+import com.pwfb.domain.repository.PrefRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.map
+import java.io.IOException
+import javax.inject.Inject
 
-class NutritionUseCase(
+class PrefUseCase @Inject constructor(
     private val repository: PrefRepository
 ) {
 
@@ -138,5 +150,15 @@ class NutritionUseCase(
         return repository.getCreatine()
     }
 
+    /**
+     * 식이 섬유
+     */
+    suspend fun setDietaryFiber(dietaryFiber: String): PwfbResultEntity {
+        return repository.setDietaryFiber(dietaryFiber)
+    }
+
+    suspend fun getDietaryFiber(): Flow<String> {
+        return repository.getDietaryFiber()
+    }
 
 }

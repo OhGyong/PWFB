@@ -11,8 +11,8 @@ import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter
 import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter
 import com.pwfb.R
 import com.pwfb.base.BaseActivity
-import com.pwfb.common.DataStoreResult
 import com.pwfb.databinding.ActivityDayBinding
+import com.pwfb.domain.entity.PwfbResultEntity
 import com.pwfb.ui.MainActivity
 import com.pwfb.util.ClearDecorator
 import com.pwfb.util.DayDisableDecorator
@@ -52,13 +52,13 @@ class DayActivity : BaseActivity() {
         }
 
         viewModel.dDayObserve.observe(this) {
-            if(it == DataStoreResult.SET_D_DAY) {
+            if(it == PwfbResultEntity.Success(RESULT_OK)) {
                 viewModel.setFirstInit()
             }
         }
 
         viewModel.firstInitObserve.observe(this) {
-            if(it == DataStoreResult.SET_FIRST_INIT) {
+            if(it == PwfbResultEntity.Success(RESULT_OK)) {
                 val intent = Intent(applicationContext, MainActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                 startActivity(intent)

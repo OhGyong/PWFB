@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.pwfb.R
 import com.pwfb.common.NutritionObject
-import com.pwfb.domain.NutritionEntity
+import com.pwfb.domain.entity.NutritionEntity
 import com.pwfb.databinding.ListNutritionBinding
 import javax.inject.Inject
 

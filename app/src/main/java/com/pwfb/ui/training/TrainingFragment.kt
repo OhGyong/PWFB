@@ -9,6 +9,9 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.gms.ads.AdRequest
 import com.pwfb.R
 import com.pwfb.base.BaseFragment
@@ -16,6 +19,8 @@ import com.pwfb.common.DataStoreResult
 import com.pwfb.databinding.FragmentTrainingBinding
 import com.pwfb.ui.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
@@ -55,23 +60,36 @@ class TrainingFragment : BaseFragment() {
 
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
     private fun viewModelObserve() {
-        viewModel.dDayObserve.observe(viewLifecycleOwner) {
-            val datePref = it.substring(0..9)
-            val targetDate = SimpleDateFormat("yyyy.MM.dd").parse(datePref)!!.time
-            val today = Calendar.getInstance().time.time
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.dDayObserve.collectLatest {
+                        if(it == DataStoreResult.SET_D_DAY) {
+                            // todo
+                            return@collectLatest
+                        }
+                        val datePref = it.substring(0..9)
+                        val targetDate = SimpleDateFormat("yyyy.MM.dd").parse(datePref)!!.time
+                        val today = Calendar.getInstance().time.time
 
-            val dDay = (today - targetDate) / (60*60*24*1000)
+                        val dDay = (today - targetDate) / (60*60*24*1000)
 
-            binding.tvDDay.text = "D$dDay"
-            binding.tvDate.text = it
-            setTextDDay(dDay.toInt())
-        }
+                        binding.tvDDay.text = "D$dDay"
+                        binding.tvDate.text = it
+                        setTextDDay(dDay.toInt())
+                    }
+                }
 
-        viewModel.trainingProgramObserve.observe(viewLifecycleOwner) {
-            if(it == DataStoreResult.SET_TRAINING_PROGRAM) {
-                return@observe
-            } else {
-                binding.etTrainingProgram.setText(it)
+                launch {
+                    viewModel.trainingProgramObserve.collectLatest {
+                        if(it == DataStoreResult.SET_TRAINING_PROGRAM) {
+                            // todo
+                            return@collectLatest
+                        } else {
+                            binding.etTrainingProgram.setText(it)
+                        }
+                    }
+                }
             }
         }
     }
@@ -79,7 +97,7 @@ class TrainingFragment : BaseFragment() {
     private fun setTextDDay(dDay: Int) {
         when(dDay) {
             -7 -> {
-                binding.tvTraining.text = getString(R.string.nutrition_usually_intake)
+                binding.tvTraining.text = getString(R.string.nutrition_usually_intake, "\uD83C\uDFCB")
             }
             -6 -> {
                 binding.tvTraining.text = getString(R.string.training_day_6)
@@ -97,7 +115,7 @@ class TrainingFragment : BaseFragment() {
                 binding.tvTraining.text = getString(R.string.training_day_1)
             }
             else -> {
-                binding.tvTraining.text = getString(R.string.nutrition_usually_intake)
+                binding.tvTraining.text = getString(R.string.nutrition_usually_intake, "\uD83C\uDFCB")
             }
         }
     }

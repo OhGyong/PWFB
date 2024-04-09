@@ -1,15 +1,16 @@
 package com.pwfb.data
 
-import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.pwfb.common.DataStoreResult
-import com.pwfb.PwfbApplication.DataModule.dataStore
 import com.pwfb.data.PrefRepositoryImpl.PrefKey.carbohydrateKey
 import com.pwfb.data.PrefRepositoryImpl.PrefKey.creatineKey
 import com.pwfb.data.PrefRepositoryImpl.PrefKey.dDayKey
+import com.pwfb.data.PrefRepositoryImpl.PrefKey.dietaryFiberKey
 import com.pwfb.data.PrefRepositoryImpl.PrefKey.fatKey
 import com.pwfb.data.PrefRepositoryImpl.PrefKey.firstInitKey
 import com.pwfb.data.PrefRepositoryImpl.PrefKey.nameKey
@@ -19,15 +20,17 @@ import com.pwfb.data.PrefRepositoryImpl.PrefKey.sodiumKey
 import com.pwfb.data.PrefRepositoryImpl.PrefKey.trainingProgramKey
 import com.pwfb.data.PrefRepositoryImpl.PrefKey.waterKey
 import com.pwfb.data.PrefRepositoryImpl.PrefKey.weightKey
-import com.pwfb.domain.PrefRepository
-import com.pwfb.domain.PwfbResultEntity
+import com.pwfb.domain.repository.PrefRepository
+import com.pwfb.domain.entity.PwfbResultEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import java.io.IOException
 import javax.inject.Inject
 
-class PrefRepositoryImpl@Inject constructor(private val context: Context) : PrefRepository {
+class PrefRepositoryImpl@Inject constructor(
+    private val dataStore: DataStore<Preferences>
+) : PrefRepository {
 
     private object PrefKey {
         val nameKey = stringPreferencesKey("name") // 이름
@@ -50,17 +53,17 @@ class PrefRepositoryImpl@Inject constructor(private val context: Context) : Pref
      */
     override suspend fun setName(name: String): PwfbResultEntity {
         return try {
-            context.dataStore.edit {
+            dataStore.edit {
                 it[nameKey] = name
             }
-            PwfbResultEntity.Success(DataStoreResult.RESULT_OK)
+            PwfbResultEntity.Success(DataStoreResult.RESULT_SUCCESS)
         } catch (error: Exception) {
             PwfbResultEntity.Failure(error)
         }
     }
 
     override suspend fun getName(): Flow<String> {
-        return context.dataStore.data.catch { e ->
+        return dataStore.data.catch { e ->
             if (e is IOException) {
                 emit(emptyPreferences())
             } else {
@@ -76,17 +79,17 @@ class PrefRepositoryImpl@Inject constructor(private val context: Context) : Pref
      */
     override suspend fun setFistInit(): PwfbResultEntity {
         return try {
-            context.dataStore.edit {
+            dataStore.edit {
                 it[firstInitKey] = false
             }
-            PwfbResultEntity.Success(DataStoreResult.RESULT_OK)
+            PwfbResultEntity.Success(DataStoreResult.RESULT_SUCCESS)
         } catch (error: Exception) {
             PwfbResultEntity.Failure(error)
         }
     }
 
     override suspend fun getFirstInit(): Flow<Boolean>  {
-        return context.dataStore.data.catch { e ->
+        return dataStore.data.catch { e ->
             if (e is IOException) {
                 emit(emptyPreferences())
             } else {
@@ -103,17 +106,17 @@ class PrefRepositoryImpl@Inject constructor(private val context: Context) : Pref
      */
     override suspend fun setWeight(weight: String): PwfbResultEntity {
         return try {
-            context.dataStore.edit {
+            dataStore.edit {
                 it[weightKey] = weight
             }
-            PwfbResultEntity.Success(DataStoreResult.RESULT_OK)
+            PwfbResultEntity.Success(DataStoreResult.RESULT_SUCCESS)
         } catch (error: Exception) {
             PwfbResultEntity.Failure(error)
         }
     }
 
     override suspend fun getWeight(): Flow<String>  {
-        return context.dataStore.data.catch { e ->
+        return dataStore.data.catch { e ->
             if (e is IOException) {
                 emit(emptyPreferences())
             } else {
@@ -130,17 +133,17 @@ class PrefRepositoryImpl@Inject constructor(private val context: Context) : Pref
      */
     override suspend fun setDDay(dDay: String): PwfbResultEntity {
         return try {
-            context.dataStore.edit {
+            dataStore.edit {
                 it[dDayKey] = dDay
             }
-            PwfbResultEntity.Success(DataStoreResult.RESULT_OK)
+            PwfbResultEntity.Success(DataStoreResult.RESULT_SUCCESS)
         } catch (error: Exception) {
             PwfbResultEntity.Failure(error)
         }
     }
 
     override suspend fun getDDay(): Flow<String> {
-        return context.dataStore.data.catch { e ->
+        return dataStore.data.catch { e ->
             if (e is IOException) {
                 emit(emptyPreferences())
             } else {
@@ -156,17 +159,17 @@ class PrefRepositoryImpl@Inject constructor(private val context: Context) : Pref
      */
     override suspend fun setTrainingProgram(trainingProgram: String): PwfbResultEntity {
         return try {
-            context.dataStore.edit {
+            dataStore.edit {
                 it[trainingProgramKey] = trainingProgram
             }
-            PwfbResultEntity.Success(DataStoreResult.RESULT_OK)
+            PwfbResultEntity.Success(DataStoreResult.RESULT_SUCCESS)
         } catch (error: Exception) {
             PwfbResultEntity.Failure(error)
         }
     }
 
     override suspend fun getTrainingProgram(): Flow<String> {
-        return context.dataStore.data.catch { e ->
+        return dataStore.data.catch { e ->
             if (e is IOException) {
                 emit(emptyPreferences())
             } else {
@@ -182,17 +185,17 @@ class PrefRepositoryImpl@Inject constructor(private val context: Context) : Pref
      */
     override suspend fun setCarbohydrate(carbohydrate: String): PwfbResultEntity {
         return try {
-            context.dataStore.edit {
+            dataStore.edit {
                 it[carbohydrateKey] = carbohydrate
             }
-            PwfbResultEntity.Success(DataStoreResult.RESULT_OK)
+            PwfbResultEntity.Success(DataStoreResult.RESULT_SUCCESS)
         } catch (error: Exception) {
             PwfbResultEntity.Failure(error)
         }
     }
 
     override suspend fun getCarbohydrate(): Flow<String> {
-        return context.dataStore.data.catch { e ->
+        return dataStore.data.catch { e ->
             if (e is IOException) {
                 emit(emptyPreferences())
             } else {
@@ -208,17 +211,17 @@ class PrefRepositoryImpl@Inject constructor(private val context: Context) : Pref
      */
     override suspend fun setProtein(protein: String): PwfbResultEntity {
         return try {
-            context.dataStore.edit {
+            dataStore.edit {
                 it[proteinKey] = protein
             }
-            PwfbResultEntity.Success(DataStoreResult.RESULT_OK)
+            PwfbResultEntity.Success(DataStoreResult.RESULT_SUCCESS)
         } catch (error: Exception) {
             PwfbResultEntity.Failure(error)
         }
     }
 
     override suspend fun getProtein(): Flow<String> {
-        return context.dataStore.data.catch { e ->
+        return dataStore.data.catch { e ->
             if (e is IOException) {
                 emit(emptyPreferences())
             } else {
@@ -234,17 +237,17 @@ class PrefRepositoryImpl@Inject constructor(private val context: Context) : Pref
      */
     override suspend fun setFat(fat: String): PwfbResultEntity {
         return try {
-            context.dataStore.edit {
+            dataStore.edit {
                 it[fatKey] = fat
             }
-            PwfbResultEntity.Success(DataStoreResult.RESULT_OK)
+            PwfbResultEntity.Success(DataStoreResult.RESULT_SUCCESS)
         } catch (error: Exception) {
             PwfbResultEntity.Failure(error)
         }
     }
 
     override suspend fun getFat(): Flow<String> {
-        return context.dataStore.data.catch { e ->
+        return dataStore.data.catch { e ->
             if (e is IOException) {
                 emit(emptyPreferences())
             } else {
@@ -260,17 +263,17 @@ class PrefRepositoryImpl@Inject constructor(private val context: Context) : Pref
      */
     override suspend fun setWater(water: String): PwfbResultEntity {
         return try {
-            context.dataStore.edit {
+            dataStore.edit {
                 it[waterKey] = water
             }
-            PwfbResultEntity.Success(DataStoreResult.RESULT_OK)
+            PwfbResultEntity.Success(DataStoreResult.RESULT_SUCCESS)
         } catch (error: Exception) {
             PwfbResultEntity.Failure(error)
         }
     }
 
     override suspend fun getWater(): Flow<String> {
-        return context.dataStore.data.catch { e ->
+        return dataStore.data.catch { e ->
             if (e is IOException) {
                 emit(emptyPreferences())
             } else {
@@ -286,17 +289,17 @@ class PrefRepositoryImpl@Inject constructor(private val context: Context) : Pref
      */
     override suspend fun setSodium(sodium: String): PwfbResultEntity {
         return try {
-            context.dataStore.edit {
+            dataStore.edit {
                 it[sodiumKey] = sodium
             }
-            PwfbResultEntity.Success(DataStoreResult.RESULT_OK)
+            PwfbResultEntity.Success(DataStoreResult.RESULT_SUCCESS)
         } catch (error: Exception) {
             PwfbResultEntity.Failure(error)
         }
     }
 
     override suspend fun getSodium(): Flow<String> {
-        return context.dataStore.data.catch { e ->
+        return dataStore.data.catch { e ->
             if (e is IOException) {
                 emit(emptyPreferences())
             } else {
@@ -312,17 +315,17 @@ class PrefRepositoryImpl@Inject constructor(private val context: Context) : Pref
      */
     override suspend fun setPotassium(potassium: String): PwfbResultEntity {
         return try {
-            context.dataStore.edit {
+            dataStore.edit {
                 it[potassiumKey] = potassium
             }
-            PwfbResultEntity.Success(DataStoreResult.RESULT_OK)
+            PwfbResultEntity.Success(DataStoreResult.RESULT_SUCCESS)
         } catch (error: Exception) {
             PwfbResultEntity.Failure(error)
         }
     }
 
     override suspend fun getPotassium(): Flow<String> {
-        return context.dataStore.data.catch { e ->
+        return dataStore.data.catch { e ->
             if (e is IOException) {
                 emit(emptyPreferences())
             } else {
@@ -338,17 +341,17 @@ class PrefRepositoryImpl@Inject constructor(private val context: Context) : Pref
      */
     override suspend fun setCreatine(creatine: String): PwfbResultEntity {
         return try {
-            context.dataStore.edit {
+            dataStore.edit {
                 it[creatineKey] = creatine
             }
-            PwfbResultEntity.Success(DataStoreResult.RESULT_OK)
+            PwfbResultEntity.Success(DataStoreResult.RESULT_SUCCESS)
         } catch (error: Exception) {
             PwfbResultEntity.Failure(error)
         }
     }
 
     override suspend fun getCreatine(): Flow<String> {
-        return context.dataStore.data.catch { e ->
+        return dataStore.data.catch { e ->
             if (e is IOException) {
                 emit(emptyPreferences())
             } else {
@@ -356,6 +359,32 @@ class PrefRepositoryImpl@Inject constructor(private val context: Context) : Pref
             }
         }.map {
             it[creatineKey] ?: ""
+        }
+    }
+
+    /**
+     * 식이 섬유
+     */
+    override suspend fun setDietaryFiber(dietaryFiber: String): PwfbResultEntity {
+        return try {
+            dataStore.edit {
+                it[dietaryFiberKey] = dietaryFiber
+            }
+            PwfbResultEntity.Success(DataStoreResult.RESULT_SUCCESS)
+        } catch (error: Exception) {
+            PwfbResultEntity.Failure(error)
+        }
+    }
+
+    override suspend fun getDietaryFiber(): Flow<String> {
+        return dataStore.data.catch { e ->
+            if (e is IOException) {
+                emit(emptyPreferences())
+            } else {
+                throw e
+            }
+        }.map {
+            it[dietaryFiberKey] ?: ""
         }
     }
 }

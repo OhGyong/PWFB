@@ -1,57 +1,71 @@
 package com.pwfb.ui
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.pwfb.data.PwfbPreferencesRepository
+import com.pwfb.common.DataStoreResult
+import com.pwfb.domain.entity.PwfbResultEntity
+import com.pwfb.domain.usecase.NameUseCase
+import com.pwfb.domain.usecase.PrefUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    private val pwfbPreferencesRepository: PwfbPreferencesRepository
+    private val prefUseCase: PrefUseCase,
+    private val nameUseCase: NameUseCase
 ): ViewModel() {
 
-    private val _nameObserve: MutableLiveData<String> = MutableLiveData()
-    val nameObserve = _nameObserve
+    private val _nameObserve: MutableStateFlow<String> = MutableStateFlow("")
+    val nameObserve = _nameObserve.asStateFlow()
 
-    private val _weightObserve: MutableLiveData<String> = MutableLiveData()
+    private val _weightObserve: MutableStateFlow<String> = MutableStateFlow("")
     val weightObserve = _weightObserve
 
-    private val _dDayObserve: MutableLiveData<String> = MutableLiveData()
+    private val _dDayObserve: MutableStateFlow<String> = MutableStateFlow("")
     val dDayObserve = _dDayObserve
 
-    private val _trainingProgramObserve: MutableLiveData<String> = MutableLiveData()
+    private val _trainingProgramObserve: MutableStateFlow<String> = MutableStateFlow("")
     val trainingProgramObserve = _trainingProgramObserve
 
-    private val _carbohydrateObserve: MutableLiveData<String> = MutableLiveData()
+    private val _carbohydrateObserve: MutableStateFlow<String> = MutableStateFlow("")
     val carbohydrateObserve = _carbohydrateObserve
 
-    private val _fatObserve: MutableLiveData<String> = MutableLiveData()
+    private val _fatObserve: MutableStateFlow<String> = MutableStateFlow("")
     val fatObserve = _fatObserve
 
-    private val _proteinObserve: MutableLiveData<String> = MutableLiveData()
+    private val _proteinObserve: MutableStateFlow<String> = MutableStateFlow("")
     val proteinObserve = _proteinObserve
 
-    private val _waterObserve: MutableLiveData<String> = MutableLiveData()
+    private val _waterObserve: MutableStateFlow<String> = MutableStateFlow("")
     val waterObserve = _waterObserve
 
-    private val _sodiumObserve: MutableLiveData<String> = MutableLiveData()
+    private val _sodiumObserve: MutableStateFlow<String> = MutableStateFlow("")
     val sodiumObserve = _sodiumObserve
 
-    private val _potassiumObserve: MutableLiveData<String> = MutableLiveData()
+    private val _potassiumObserve: MutableStateFlow<String> = MutableStateFlow("")
     val potassiumObserve = _potassiumObserve
 
-    private val _creatineObserve: MutableLiveData<String> = MutableLiveData()
+    private val _creatineObserve: MutableStateFlow<String> = MutableStateFlow("")
     val creatineObserve = _creatineObserve
 
-
+    private val _dietaryFiber: MutableStateFlow<String> = MutableStateFlow("")
+    val dietaryFiber = _dietaryFiber
 
     fun getName() {
         viewModelScope.launch {
-            nameObserve.value = pwfbPreferencesRepository.getName().first()
+            nameUseCase().stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.Lazily,
+                initialValue = ""
+            ).collectLatest {
+                _nameObserve.emit(it)
+            }
         }
     }
 
@@ -60,13 +74,26 @@ class MainViewModel @Inject constructor(
      */
     fun getWeight() {
         viewModelScope.launch {
-            weightObserve.value = pwfbPreferencesRepository.getWeight().first()
+            prefUseCase.getWeight().stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.Lazily,
+                initialValue = ""
+            ).collectLatest {
+                _weightObserve.emit(it)
+            }
         }
     }
 
     fun setWeight(weight: String) {
         viewModelScope.launch {
-            weightObserve.value = pwfbPreferencesRepository.setWeight(weight)
+            when(prefUseCase.setWeight(weight)) {
+                is PwfbResultEntity.Success -> {
+                    _weightObserve.emit(DataStoreResult.SET_WEIGHT)
+                }
+                else -> {
+                    // todo Failure
+                }
+            }
         }
     }
 
@@ -75,13 +102,26 @@ class MainViewModel @Inject constructor(
      */
     fun getDDay() {
         viewModelScope.launch {
-            dDayObserve.value = pwfbPreferencesRepository.getDDay().first()
+            prefUseCase.getDDay().stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.Lazily,
+                initialValue = ""
+            ).collectLatest {
+                _dDayObserve.emit(it)
+            }
         }
     }
 
     fun setDDay(dDay: String) {
         viewModelScope.launch {
-            dDayObserve.value = pwfbPreferencesRepository.setDDay(dDay)
+            when(prefUseCase.setDDay(dDay)) {
+                is PwfbResultEntity.Success -> {
+                    _dDayObserve.emit(DataStoreResult.SET_D_DAY)
+                }
+                else -> {
+                    // todo Failure
+                }
+            }
         }
     }
 
@@ -90,12 +130,25 @@ class MainViewModel @Inject constructor(
      */
     fun getTrainingProgram() {
         viewModelScope.launch {
-            trainingProgramObserve.value = pwfbPreferencesRepository.getTrainingProgram().first()
+            prefUseCase.getTrainingProgram().stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.Lazily,
+                initialValue = ""
+            ).collectLatest {
+                _trainingProgramObserve.emit(it)
+            }
         }
     }
     fun setTrainingProgram(trainingProgram: String) {
         viewModelScope.launch {
-            trainingProgramObserve.value = pwfbPreferencesRepository.setTrainingProgram(trainingProgram)
+            when(prefUseCase.setTrainingProgram(trainingProgram)) {
+                is PwfbResultEntity.Success -> {
+                    _trainingProgramObserve.emit(DataStoreResult.SET_TRAINING_PROGRAM)
+                }
+                else -> {
+                    // todo Failure
+                }
+            }
         }
     }
 
@@ -104,13 +157,26 @@ class MainViewModel @Inject constructor(
      */
     fun getCarbohydrate() {
         viewModelScope.launch {
-            carbohydrateObserve.value = pwfbPreferencesRepository.getCarbohydrate().first()
+            prefUseCase.getCarbohydrate().stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.Lazily,
+                initialValue = ""
+            ).collectLatest {
+                _carbohydrateObserve.emit(it)
+            }
         }
     }
 
     fun setCarbohydrate(carbohydrate: String) {
         viewModelScope.launch {
-            carbohydrateObserve.value = pwfbPreferencesRepository.setCarbohydrate(carbohydrate)
+            when(prefUseCase.setCarbohydrate(carbohydrate)) {
+                is PwfbResultEntity.Success -> {
+                    _carbohydrateObserve.emit(DataStoreResult.SET_CARBOHYDRATE)
+                }
+                else -> {
+                    // todo Failure
+                }
+            }
         }
     }
 
@@ -119,13 +185,26 @@ class MainViewModel @Inject constructor(
      */
     fun getProtein() {
         viewModelScope.launch {
-            proteinObserve.value = pwfbPreferencesRepository.getProtein().first()
+            prefUseCase.getProtein().stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.Lazily,
+                initialValue = ""
+            ).collectLatest {
+                _proteinObserve.emit(it)
+            }
         }
     }
 
     fun setProtein(protein: String) {
         viewModelScope.launch {
-            proteinObserve.value = pwfbPreferencesRepository.setProtein(protein)
+            when(prefUseCase.setProtein(protein)) {
+                is PwfbResultEntity.Success -> {
+                    _proteinObserve.emit(DataStoreResult.SET_PROTEIN)
+                }
+                else -> {
+                    // todo Failure
+                }
+            }
         }
     }
 
@@ -134,13 +213,26 @@ class MainViewModel @Inject constructor(
      */
     fun getFat() {
         viewModelScope.launch {
-            fatObserve.value = pwfbPreferencesRepository.getFat().first()
+            prefUseCase.getFat().stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.Lazily,
+                initialValue = ""
+            ).collectLatest {
+                _fatObserve.emit(it)
+            }
         }
     }
 
     fun setFat(fat: String) {
         viewModelScope.launch {
-            fatObserve.value = pwfbPreferencesRepository.setFat(fat)
+            when(prefUseCase.setFat(fat)) {
+                is PwfbResultEntity.Success -> {
+                    _fatObserve.emit(DataStoreResult.SET_FAT)
+                }
+                else -> {
+                    // todo Failure
+                }
+            }
         }
     }
 
@@ -149,13 +241,26 @@ class MainViewModel @Inject constructor(
      */
     fun getWater() {
         viewModelScope.launch {
-            waterObserve.value = pwfbPreferencesRepository.getWater().first()
+            prefUseCase.getWater().stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.Lazily,
+                initialValue = ""
+            ).collectLatest {
+                _waterObserve.emit(it)
+            }
         }
     }
 
     fun setWater(water: String) {
         viewModelScope.launch {
-            waterObserve.value = pwfbPreferencesRepository.setWater(water)
+            when(prefUseCase.setWater(water)) {
+                is PwfbResultEntity.Success -> {
+                    _waterObserve.emit(DataStoreResult.SET_WATER)
+                }
+                else -> {
+                    // todo Failure
+                }
+            }
         }
     }
 
@@ -164,13 +269,26 @@ class MainViewModel @Inject constructor(
      */
     fun getSodium() {
         viewModelScope.launch {
-            sodiumObserve.value = pwfbPreferencesRepository.getSodium().first()
+            prefUseCase.getSodium().stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.Lazily,
+                initialValue = ""
+            ).collectLatest {
+                _sodiumObserve.emit(it)
+            }
         }
     }
 
     fun setSodium(sodium: String) {
         viewModelScope.launch {
-            sodiumObserve.value = pwfbPreferencesRepository.setSodium(sodium)
+            when(prefUseCase.setSodium(sodium)) {
+                is PwfbResultEntity.Success -> {
+                    _sodiumObserve.emit(DataStoreResult.SET_SODIUM)
+                }
+                else -> {
+                    // todo Failure
+                }
+            }
         }
     }
 
@@ -179,13 +297,26 @@ class MainViewModel @Inject constructor(
      */
     fun getPotassium() {
         viewModelScope.launch {
-            potassiumObserve.value = pwfbPreferencesRepository.getPotassium().first()
+            prefUseCase.getPotassium().stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.Lazily,
+                initialValue = ""
+            ).collectLatest {
+                _potassiumObserve.emit(it)
+            }
         }
     }
 
     fun setPotassium(potassium: String) {
         viewModelScope.launch {
-            potassiumObserve.value = pwfbPreferencesRepository.setPotassium(potassium)
+            when(prefUseCase.setPotassium(potassium)) {
+                is PwfbResultEntity.Success -> {
+                    _potassiumObserve.emit(DataStoreResult.SET_POTASSIUM)
+                }
+                else -> {
+                    // todo Failure
+                }
+            }
         }
     }
 
@@ -194,13 +325,54 @@ class MainViewModel @Inject constructor(
      */
     fun getCreatine() {
         viewModelScope.launch {
-            creatineObserve.value = pwfbPreferencesRepository.getCreatine().first()
+            prefUseCase.getCreatine().stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.Lazily,
+                initialValue = ""
+            ).collectLatest {
+                _creatineObserve.emit(it)
+            }
         }
     }
 
     fun setCreatine(creatine: String) {
         viewModelScope.launch {
-            creatineObserve.value = pwfbPreferencesRepository.setCreatine(creatine)
+            when(prefUseCase.setCreatine(creatine)) {
+                is PwfbResultEntity.Success -> {
+                    _creatineObserve.emit(DataStoreResult.SET_CREATINE)
+                }
+                else -> {
+                    // todo Failure
+                }
+            }
+        }
+    }
+
+    /**
+     * 식이 섬유
+     */
+    fun getDietaryFiber() {
+        viewModelScope.launch {
+            prefUseCase.getDietaryFiber().stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.Lazily,
+                initialValue = ""
+            ).collectLatest {
+                _dietaryFiber.emit(it)
+            }
+        }
+    }
+
+    fun setDietaryFiber(dietaryFiber: String) {
+        viewModelScope.launch {
+            when(prefUseCase.setDietaryFiber(dietaryFiber)) {
+                is PwfbResultEntity.Success -> {
+                    _dietaryFiber.emit(DataStoreResult.SET_DIETARY_FIBER)
+                }
+                else -> {
+                    // todo Failure
+                }
+            }
         }
     }
 }

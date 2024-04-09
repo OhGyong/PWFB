@@ -10,7 +10,9 @@ import androidx.core.widget.addTextChangedListener
 import com.pwfb.R
 import com.pwfb.base.BaseActivity
 import com.pwfb.common.DataStoreResult
+import com.pwfb.common.DataStoreResult.RESULT_SUCCESS
 import com.pwfb.databinding.ActivityWeightBinding
+import com.pwfb.domain.entity.PwfbResultEntity
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -56,7 +58,7 @@ class WeightActivity: BaseActivity() {
         }
 
         viewModel.weightObserve.observe(this) {
-            if(it == DataStoreResult.SET_WEIGHT) {
+            if(it == PwfbResultEntity.Success(RESULT_SUCCESS)) {
                 val intent = Intent(applicationContext, DayActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                 startActivity(intent)

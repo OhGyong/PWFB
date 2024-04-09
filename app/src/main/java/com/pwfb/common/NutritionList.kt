@@ -1,6 +1,6 @@
 package com.pwfb.common
 
-import com.pwfb.domain.NutritionEntity
+import com.pwfb.domain.entity.NutritionEntity
 
 object NutritionObject {
     const val CARBOHYDRATE = "carbohydrate"

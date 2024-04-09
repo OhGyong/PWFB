@@ -1,5 +1,6 @@
-package com.pwfb.domain
+package com.pwfb.domain.repository
 
+import com.pwfb.domain.entity.PwfbResultEntity
 import kotlinx.coroutines.flow.Flow
 
 interface PrefRepository {
@@ -75,4 +76,11 @@ interface PrefRepository {
      */
     suspend fun setCreatine(creatine: String): PwfbResultEntity
     suspend fun getCreatine(): Flow<String>
+
+    /**
+     * 식이 섬유 설정
+     */
+    suspend fun setDietaryFiber(dietaryFiber: String): PwfbResultEntity
+    suspend fun getDietaryFiber(): Flow<String>
+
 }
