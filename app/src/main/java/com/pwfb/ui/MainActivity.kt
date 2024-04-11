@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.activity.compose.setContent
 import com.pwfb.R
 import com.pwfb.base.BaseActivity
 import com.pwfb.databinding.ActivityMainBinding
@@ -21,7 +22,6 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(PWFB, "MainActivity onCreate")
-
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
