@@ -89,13 +89,9 @@ class SplashActivity: BaseActivity() {
             runBlocking { delay(2000) }
 
             // 앱 첫 진입으로 판단 -> 설정 화면 이동
-            val intent = if(it == true) {
-                Intent(applicationContext, NameActivity::class.java)
-            }
-            else {
-                Intent(applicationContext, MainActivity::class.java)
-            }
+            val intent = Intent(applicationContext, MainActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            intent.putExtra("isFirstInit", it)
             startActivity(intent)
             finish()
         }
