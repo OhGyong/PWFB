@@ -17,7 +17,6 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.pwfb.R
 import com.pwfb.base.BaseActivity
 import com.pwfb.ui.MainActivity
-import com.pwfb.ui.setting.NameActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking

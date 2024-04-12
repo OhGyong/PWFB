@@ -33,7 +33,7 @@ import com.pwfb.theme.Gray
 import com.pwfb.theme.SettingTextFieldTypography
 import com.pwfb.theme.SettingTitleTypography
 import com.pwfb.theme.White
-import com.pwfb.ui.setting.NameViewModel
+import com.pwfb.ui.viewmodel.NameViewModel
 
 @Composable
 fun NameScreen(

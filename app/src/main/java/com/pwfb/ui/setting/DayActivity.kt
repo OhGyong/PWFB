@@ -14,6 +14,7 @@ import com.pwfb.base.BaseActivity
 import com.pwfb.databinding.ActivityDayBinding
 import com.pwfb.domain.entity.PwfbResultEntity
 import com.pwfb.ui.MainActivity
+import com.pwfb.ui.viewmodel.DayViewModel
 import com.pwfb.util.ClearDecorator
 import com.pwfb.util.DayDisableDecorator
 import com.pwfb.util.SelectDecorator

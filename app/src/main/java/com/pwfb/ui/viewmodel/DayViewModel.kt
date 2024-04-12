@@ -1,4 +1,4 @@
-package com.pwfb.ui.setting
+package com.pwfb.ui.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

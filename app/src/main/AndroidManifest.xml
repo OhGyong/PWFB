@@ -27,12 +27,6 @@
             android:name=".ui.MainActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".ui.setting.NameActivity"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".ui.setting.WeightActivity"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
             android:name=".ui.setting.DayActivity" />
 
         <meta-data
