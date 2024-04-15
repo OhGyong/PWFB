@@ -20,6 +20,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -89,7 +90,7 @@ fun SetNameView(name: String, onNameChange:(String)->Unit) {
             .wrapContentWidth()
             .background(Black),
         value = name,
-        textStyle = SettingTextFieldTypography.bodyLarge,
+        textStyle = SettingTextFieldTypography.bodyLarge.copy(textAlign = TextAlign.Center),
         colors = TextFieldDefaults.textFieldColors(
             cursorColor = White,
             backgroundColor = Color.Transparent, // 밑줄을 제거하려면 배경색을 투명으로 지정
