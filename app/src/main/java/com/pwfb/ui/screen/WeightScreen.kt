@@ -1,5 +1,6 @@
 package com.pwfb.ui.screen
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -27,11 +28,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.pwfb.ui.viewmodel.WeightViewModel
 import com.pwfb.R
 import com.pwfb.common.DataStoreResult.SET_WEIGHT
+import com.pwfb.common.ScreenName.SCREEN_DAY
 import com.pwfb.theme.Black
 import com.pwfb.theme.DataStoreTheme
 import com.pwfb.theme.SettingTextFieldTypography
@@ -42,9 +44,16 @@ import com.pwfb.theme.Yellow40
 
 @Composable
 fun WeightScreen(
-    navController: NavController,
+    navController: NavHostController,
     weightViewModel: WeightViewModel = hiltViewModel()
 ) {
+
+    BackHandler(enabled = true) {
+        navController.navigate("name") {
+            popUpTo("name") { inclusive = true }
+        }
+    }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -80,7 +89,7 @@ fun WeightScreen(
 
         LaunchedEffect(weightViewModel.weightObserve) {
             if(weightViewModel.weightObserve == SET_WEIGHT) {
-                navController.navigate("home")
+                navController.navigate(SCREEN_DAY)
             }
         }
     }

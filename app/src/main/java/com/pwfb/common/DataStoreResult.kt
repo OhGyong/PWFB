@@ -16,3 +16,10 @@ object DataStoreResult {
     const val SET_CREATINE = "Set Creatine"
     const val SET_DIETARY_FIBER = "Set Dietary Fiber"
 }
+
+object ScreenName {
+    const val SCREEN_NAME = "name"
+    const val SCREEN_WEIGHT = "weight"
+    const val SCREEN_DAY = "day"
+    const val SCREEN_HOME = "home"
+}

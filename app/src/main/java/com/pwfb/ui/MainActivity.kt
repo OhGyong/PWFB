@@ -15,7 +15,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.pwfb.base.BaseActivity
+import com.pwfb.common.ScreenName.SCREEN_DAY
+import com.pwfb.common.ScreenName.SCREEN_NAME
+import com.pwfb.common.ScreenName.SCREEN_WEIGHT
 import com.pwfb.theme.DataStoreTheme
+import com.pwfb.ui.screen.DayScreen
 import com.pwfb.ui.screen.NameScreen
 import com.pwfb.ui.screen.WeightScreen
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,8 +43,9 @@ class MainActivity : BaseActivity() {
                         navController = navController,
                         startDestination = if(isFirstInit) "name" else "home"
                     ) {
-                        composable(route = "name") { NameScreen(navController)}
-                        composable(route = "weight") { WeightScreen(navController) }
+                        composable(route = SCREEN_NAME) { NameScreen(navController) }
+                        composable(route = SCREEN_WEIGHT) { WeightScreen(navController) }
+                        composable(route = SCREEN_DAY) { DayScreen(navController) }
                     }
                 }
             }

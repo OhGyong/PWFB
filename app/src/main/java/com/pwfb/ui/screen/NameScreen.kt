@@ -27,6 +27,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.pwfb.R
 import com.pwfb.common.DataStoreResult.SET_NAME
+import com.pwfb.common.ScreenName.SCREEN_WEIGHT
 import com.pwfb.theme.Black
 import com.pwfb.theme.DataStoreTheme
 import com.pwfb.theme.Gray
@@ -55,7 +56,7 @@ fun NameScreen(
 
         LaunchedEffect(nameViewModel.nameObserve) {->
             if(nameViewModel.nameObserve == SET_NAME) {
-                navController.navigate("weight")
+                navController.navigate(SCREEN_WEIGHT)
             }
         }
 
