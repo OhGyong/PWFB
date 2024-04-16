@@ -41,7 +41,7 @@ class DayActivity : BaseActivity() {
         binding = ActivityDayBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setCalendarView()
+//        setCalendarView()
         getLocalTime()
 
         binding.btTime.setOnClickListener {
@@ -68,53 +68,53 @@ class DayActivity : BaseActivity() {
         }
     }
 
-    private fun setCalendarView() {
-        // 연, 월 헤더 스타일
-        binding.cvCalendar.setHeaderTextAppearance(R.style.CalendarWidgetHeader)
-
-        // 1~12월, 월간 표시
-        binding.cvCalendar.setTitleFormatter(MonthArrayTitleFormatter(resources.getTextArray(R.array.calendar_month)))
-
-        // 일~토, 주간 표시
-        binding.cvCalendar.setWeekDayFormatter(ArrayWeekDayFormatter(resources.getTextArray(R.array.calendar_week)))
-
-        // 헤더 년 월로 표시
-        binding.cvCalendar.setTitleFormatter { day ->
-            val inputText = day.date
-            val calendarHeaderElements = inputText.toString().split("-")
-            val calendarHeaderBuilder = StringBuilder()
-
-            calendarHeaderBuilder.append(calendarHeaderElements[0]).append("년 ")
-                .append(calendarHeaderElements[1]).append("월")
-
-            calendarHeaderBuilder.toString()
-        }
-
-        val today = CalendarDay.today()
-        val disabledDates = hashSetOf<CalendarDay>()
-
-        val dayDisableDecorator = DayDisableDecorator(disabledDates, today, getColor(R.color.c_949292))
-        val todayDecorator = TodayDecorator(getColor(R.color.c_caab3f))
-
-        binding.cvCalendar.addDecorators(dayDisableDecorator, todayDecorator)
-
-        // 날짜 선택 시 처리
-        binding.cvCalendar.setOnDateChangedListener { _, date, _ ->
-            binding.cvCalendar.addDecorators(
-                ClearDecorator(getColor(R.color.white), date),
-                dayDisableDecorator, todayDecorator,
-                SelectDecorator(getColor(R.color.c_caab3f), date)
-            )
-
-            binding.btGo.isEnabled = true
-            binding.btGo.setTextColor(getColor(R.color.white))
-
-            val month = if(date.month<10) "0${date.month}" else "${date.month}"
-            val day = if(date.day<10) "0${date.day}" else "${date.day}"
-
-            datePref = "${date.year}.$month.$day${getWeek(date)}"
-        }
-    }
+//    private fun setCalendarView() {
+//        // 연, 월 헤더 스타일
+//        binding.cvCalendar.setHeaderTextAppearance(R.style.CalendarWidgetHeader)
+//
+//        // 1~12월, 월간 표시
+//        binding.cvCalendar.setTitleFormatter(MonthArrayTitleFormatter(resources.getTextArray(R.array.calendar_month)))
+//
+//        // 일~토, 주간 표시
+//        binding.cvCalendar.setWeekDayFormatter(ArrayWeekDayFormatter(resources.getTextArray(R.array.calendar_week)))
+//
+//        // 헤더 년 월로 표시
+//        binding.cvCalendar.setTitleFormatter { day ->
+//            val inputText = day.date
+//            val calendarHeaderElements = inputText.toString().split("-")
+//            val calendarHeaderBuilder = StringBuilder()
+//
+//            calendarHeaderBuilder.append(calendarHeaderElements[0]).append("년 ")
+//                .append(calendarHeaderElements[1]).append("월")
+//
+//            calendarHeaderBuilder.toString()
+//        }
+//
+//        val today = CalendarDay.today()
+//        val disabledDates = hashSetOf<CalendarDay>()
+//
+//        val dayDisableDecorator = DayDisableDecorator(disabledDates, today, getColor(R.color.c_949292))
+//        val todayDecorator = TodayDecorator(getColor(R.color.c_caab3f))
+//
+//        binding.cvCalendar.addDecorators(dayDisableDecorator, todayDecorator)
+//
+//        // 날짜 선택 시 처리
+//        binding.cvCalendar.setOnDateChangedListener { _, date, _ ->
+//            binding.cvCalendar.addDecorators(
+//                ClearDecorator(getColor(R.color.white), date),
+//                dayDisableDecorator, todayDecorator,
+////                SelectDecorator(getColor(R.color.c_caab3f), date)
+//            )
+//
+//            binding.btGo.isEnabled = true
+//            binding.btGo.setTextColor(getColor(R.color.white))
+//
+//            val month = if(date.month<10) "0${date.month}" else "${date.month}"
+//            val day = if(date.day<10) "0${date.day}" else "${date.day}"
+//
+//            datePref = "${date.year}.$month.$day${getWeek(date)}"
+//        }
+//    }
 
     private fun getLocalTime() {
         val localTime = LocalDateTime.now().toLocalTime()

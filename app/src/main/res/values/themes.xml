@@ -81,24 +81,27 @@
 
     <!-- CalenderView-->
     <style name="CalenderViewCustom" parent="Theme.AppCompat">
-        <item name="colorAccent">@color/c_31caab3f</item>
+        <item name="colorAccent">@color/c_48caab3f</item>
         <item name="android:textStyle">bold</item>
     </style>
     <!-- CalenderView 요일-->
     <style name="CalenderViewWeekCustomText">
         <item name="android:textColor">@color/c_949292</item>
         <item name="android:textSize">17sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
     <!-- CalenderView 날짜-->
     <style name="CalenderViewDateCustomText">
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
     <!-- CalenderView 헤더-->
     <style name="CalendarWidgetHeader">
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">17sp</item>
         <item name="android:gravity">start</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="AppBottomSheetDialogTheme"
