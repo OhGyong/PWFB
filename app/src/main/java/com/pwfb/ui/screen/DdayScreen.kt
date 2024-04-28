@@ -2,9 +2,14 @@ package com.pwfb.ui.screen
 
 import android.graphics.drawable.Drawable
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,6 +24,8 @@ import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import com.pwfb.R
 import com.pwfb.common.ScreenName.SCREEN_DAY
 import com.pwfb.common.ScreenName.SCREEN_WEIGHT
+import com.pwfb.theme.DarkGray
+import com.pwfb.theme.FiledTypography
 import com.pwfb.theme.Gray
 import com.pwfb.theme.SettingTitleTypography
 import com.pwfb.theme.White
@@ -40,8 +47,6 @@ fun DdayScreen(
             popUpTo(SCREEN_DAY) { inclusive = true }
         }
     }
-    
-
 
     Column(
         modifier = Modifier
@@ -53,7 +58,10 @@ fun DdayScreen(
             text = stringResource(id = R.string.d_day),
             style = SettingTitleTypography.bodyLarge
         )
+
         CalendarView(calendarDrawable)
+
+        TimeView()
     }
 }
 
@@ -94,4 +102,29 @@ fun CalendarView(calendarDrawable: List<Drawable?>) {
                 )
             }
         })
+}
+
+@Composable
+fun TimeView() {
+    Row(
+        modifier = Modifier,
+    ) {
+        Text(
+            modifier = Modifier.padding(top = 10.dp),
+            text = stringResource(id = R.string.time),
+            style = FiledTypography.bodyMedium
+       )
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.End
+        ) {
+            Button(
+                colors = ButtonDefaults.buttonColors(DarkGray),
+                shape = RoundedCornerShape(10.dp),
+                onClick = {}
+            ) {
+            }
+        }
+    }
 }

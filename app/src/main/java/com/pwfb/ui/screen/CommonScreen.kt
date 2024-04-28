@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.pwfb.R
 import com.pwfb.theme.Black
 import com.pwfb.theme.Gray
-import com.pwfb.theme.SettingButtonTypography
+import com.pwfb.theme.NextButtonTypography
 import com.pwfb.theme.White
 import com.pwfb.theme.Yellow40
 
@@ -37,7 +37,7 @@ fun ButtonView(
     ) {
         Text(
             text = stringResource(id = R.string.next),
-            style = SettingButtonTypography.bodyLarge,
+            style = NextButtonTypography.bodyLarge,
             color = if(textValue == "") {
                 Gray
             } else {

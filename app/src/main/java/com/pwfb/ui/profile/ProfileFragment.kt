@@ -61,7 +61,7 @@ class ProfileFragment : BaseFragment() {
         binding.adView.loadAd(AdRequest.Builder().build())
 
         setOnClickListener()
-        setCalendarView()
+//        setCalendarView()
         viewModelObserve()
         viewModel.getName()
         viewModel.getWeight()
@@ -142,86 +142,86 @@ class ProfileFragment : BaseFragment() {
                 }
 
                 launch {
-                    viewModel.dDayObserve.collectLatest {
-                        if(it == DataStoreResult.SET_D_DAY) {
-                            binding.btModify.isEnabled = false
-                            binding.btModify.setTextColor(requireContext().getColor(R.color.c_949292))
-                            return@collectLatest
-                        } else {
-                            dDayPref = it
-                            datePref = it.substring(0..9)
-                            setDDay()
-
-                            setTime(it.substring(14..18))
-
-                            val targetCalendarDay = CalendarDay.from(org.threeten.bp.LocalDate.parse(
-                                datePref,
-                                DateTimeFormatter.ofPattern("yyyy.MM.dd"))
-                            )
-                            val targetDecorator = SelectDecorator(
-                                requireContext().getColor(R.color.c_caab3f),
-                                targetCalendarDay
-                            )
-                            binding.cvCalendar.selectedDate = targetCalendarDay
-                            binding.cvCalendar.addDecorator(targetDecorator)
-                        }
-                    }
+//                    viewModel.dDayObserve.collectLatest {
+//                        if(it == DataStoreResult.SET_D_DAY) {
+//                            binding.btModify.isEnabled = false
+//                            binding.btModify.setTextColor(requireContext().getColor(R.color.c_949292))
+//                            return@collectLatest
+//                        } else {
+//                            dDayPref = it
+//                            datePref = it.substring(0..9)
+//                            setDDay()
+//
+//                            setTime(it.substring(14..18))
+//
+//                            val targetCalendarDay = CalendarDay.from(org.threeten.bp.LocalDate.parse(
+//                                datePref,
+//                                DateTimeFormatter.ofPattern("yyyy.MM.dd"))
+//                            )
+//                            val targetDecorator = SelectDecorator(
+//                                requireContext().getColor(R.color.c_caab3f),
+//                                targetCalendarDay
+//                            )
+//                            binding.cvCalendar.selectedDate = targetCalendarDay
+//                            binding.cvCalendar.addDecorator(targetDecorator)
+//                        }
+//                    }
                 }
             }
 
         }
     }
 
-    private fun setCalendarView() {
-        // 연, 월 헤더 스타일
-        binding.cvCalendar.setHeaderTextAppearance(R.style.CalendarWidgetHeader)
-
-        // 1~12월, 월간 표시
-        binding.cvCalendar.setTitleFormatter(MonthArrayTitleFormatter(resources.getTextArray(R.array.calendar_month)))
-
-        // 일~토, 주간 표시
-        binding.cvCalendar.setWeekDayFormatter(ArrayWeekDayFormatter(resources.getTextArray(R.array.calendar_week)))
-
-        // 헤더 년 월로 표시
-        binding.cvCalendar.setTitleFormatter { day ->
-            val inputText = day.date
-            val calendarHeaderElements = inputText.toString().split("-")
-            val calendarHeaderBuilder = StringBuilder()
-
-            calendarHeaderBuilder
-                .append(calendarHeaderElements[0]).append("년 ")
-                .append(calendarHeaderElements[1]).append("월")
-
-            calendarHeaderBuilder.toString()
-        }
-
-        val today = CalendarDay.today()
-        val disabledDates = hashSetOf<CalendarDay>()
-
-        val dayDisableDecorator = DayDisableDecorator(disabledDates, today, requireContext().getColor(R.color.c_949292))
-        val todayDecorator = TodayDecorator(requireContext().getColor(R.color.c_caab3f))
-
-        binding.cvCalendar.addDecorators(dayDisableDecorator, todayDecorator)
-
-        // 날짜 선택 시 처리
-        binding.cvCalendar.setOnDateChangedListener { _, date, _ ->
-            binding.cvCalendar.addDecorators(
-                ClearDecorator(requireContext().getColor(R.color.white), date),
-                dayDisableDecorator, todayDecorator,
-                SelectDecorator(requireContext().getColor(R.color.c_caab3f), date)
-            )
-
-            binding.btModify.isEnabled = true
-            binding.btModify.setTextColor(requireContext().getColor(R.color.white))
-
-            val month = if(date.month<10) "0${date.month}" else "${date.month}"
-            val day = if(date.day<10) "0${date.day}" else "${date.day}"
-
-            dDayPref = "${date.year}.$month.$day${getWeek(date)}"
-
-            setDDay()
-        }
-    }
+//    private fun setCalendarView() {
+//        // 연, 월 헤더 스타일
+//        binding.cvCalendar.setHeaderTextAppearance(R.style.CalendarWidgetHeader)
+//
+//        // 1~12월, 월간 표시
+//        binding.cvCalendar.setTitleFormatter(MonthArrayTitleFormatter(resources.getTextArray(R.array.calendar_month)))
+//
+//        // 일~토, 주간 표시
+//        binding.cvCalendar.setWeekDayFormatter(ArrayWeekDayFormatter(resources.getTextArray(R.array.calendar_week)))
+//
+//        // 헤더 년 월로 표시
+//        binding.cvCalendar.setTitleFormatter { day ->
+//            val inputText = day.date
+//            val calendarHeaderElements = inputText.toString().split("-")
+//            val calendarHeaderBuilder = StringBuilder()
+//
+//            calendarHeaderBuilder
+//                .append(calendarHeaderElements[0]).append("년 ")
+//                .append(calendarHeaderElements[1]).append("월")
+//
+//            calendarHeaderBuilder.toString()
+//        }
+//
+//        val today = CalendarDay.today()
+//        val disabledDates = hashSetOf<CalendarDay>()
+//
+//        val dayDisableDecorator = DayDisableDecorator(disabledDates, today, requireContext().getColor(R.color.c_949292))
+//        val todayDecorator = TodayDecorator(requireContext().getColor(R.color.c_caab3f))
+//
+//        binding.cvCalendar.addDecorators(dayDisableDecorator, todayDecorator)
+//
+//        // 날짜 선택 시 처리
+//        binding.cvCalendar.setOnDateChangedListener { _, date, _ ->
+//            binding.cvCalendar.addDecorators(
+//                ClearDecorator(requireContext().getColor(R.color.white), date),
+//                dayDisableDecorator, todayDecorator,
+//                SelectDecorator(requireContext().getColor(R.color.c_caab3f), date)
+//            )
+//
+//            binding.btModify.isEnabled = true
+//            binding.btModify.setTextColor(requireContext().getColor(R.color.white))
+//
+//            val month = if(date.month<10) "0${date.month}" else "${date.month}"
+//            val day = if(date.day<10) "0${date.day}" else "${date.day}"
+//
+//            dDayPref = "${date.year}.$month.$day${getWeek(date)}"
+//
+//            setDDay()
+//        }
+//    }
 
     private fun getWeek(date: CalendarDay):String {
         return when(LocalDate.of(date.year, date.month, date.day).dayOfWeek.value) {

@@ -40,11 +40,18 @@ val SettingTitleTypography = Typography(
     )
 )
 
-val SettingButtonTypography = Typography(
+val NextButtonTypography = Typography(
     bodyLarge = TextStyle(
         fontSize = 20.sp,
         color = Gray,
         fontWeight = FontWeight.Bold
+    )
+)
+
+val FiledTypography = Typography(
+    bodyMedium = TextStyle(
+        fontSize = 17.sp,
+        color = White
     )
 )
 
