@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -41,6 +42,9 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.commandiron.wheel_picker_compose.WheelDatePicker
+import com.commandiron.wheel_picker_compose.WheelTimePicker
+import com.commandiron.wheel_picker_compose.core.TimeFormat
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import com.pwfb.R
@@ -158,20 +162,10 @@ fun TimeView() {
             ) {
                 if(showTimePicker) {
                     TimePickerDialog(
-                        onDismissRequest = { /*TODO*/ },
-                        confirmButton = { /*TODO*/ }
-                    ) {
-                        TimePicker(
-                            state = timePickerState,
-                            colors = TimePickerDefaults.colors(
-                                clockDialColor = Purple40,
-                                selectorColor = Pink80,
-                                containerColor = PurpleGrey80,
-                                clockDialUnselectedContentColor = Purple80,
-                            )
-                        )
-                    }
-
+                        showTimePickerChange = {
+                            showTimePicker = false
+                        }
+                    )
                 }
             }
         }
@@ -179,52 +173,62 @@ fun TimeView() {
 }
 
 @Composable
-fun TimePickerDialog(
-    title: String = "Select Time",
-    onDismissRequest: () -> Unit,
-    confirmButton: @Composable (() -> Unit),
-    dismissButton: @Composable (() -> Unit)? = null,
-    containerColor: Color = MaterialTheme.colorScheme.surface,
-    content: @Composable () -> Unit,
-) {
+fun TimePickerDialog(showTimePickerChange: () -> Unit) {
     Dialog(
-        onDismissRequest = onDismissRequest,
+        onDismissRequest = {
+            showTimePickerChange()
+        },
         properties = DialogProperties(
             usePlatformDefaultWidth = false
-        ),
+        )
     ) {
         Surface(
-            shape = MaterialTheme.shapes.extraLarge,
-            tonalElevation = 6.dp,
             modifier = Modifier
-                .width(IntrinsicSize.Min)
-                .height(IntrinsicSize.Min)
+                .fillMaxWidth(0.7f)
                 .background(
                     shape = MaterialTheme.shapes.extraLarge,
-                    color = containerColor
+                    color = PurpleGrey80
                 ),
-            color = containerColor
+            shape = RoundedCornerShape(10.dp),
+            tonalElevation = 6.dp,
+            color = PurpleGrey80
         ) {
-            Column(
-                modifier = Modifier.padding(24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
+            Column(modifier = Modifier.fillMaxWidth()) {
+
+                WheelTimePicker(
+                    modifier = Modifier.padding(15.dp).align(Alignment.CenterHorizontally),
+                    timeFormat = TimeFormat.AM_PM
+                ) { snappedTime ->
+                    println(snappedTime)
+                }
+
+                /**
+                 * 취소, 확인 버튼
+                 */
+                Row(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 20.dp),
-                    text = title,
-                    style = MaterialTheme.typography.labelMedium
-                )
-                content()
-                Row(
-                    modifier = Modifier
-                        .height(40.dp)
-                        .fillMaxWidth()
+                    horizontalArrangement = Arrangement.Center
                 ) {
-                    Spacer(modifier = Modifier.weight(1f))
-                    dismissButton?.invoke()
-                    confirmButton()
+                    Button(
+                        modifier = Modifier.padding(end = 10.dp),
+                        shape = RoundedCornerShape(0.dp),
+                        onClick = {}
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.cancel)
+                        )
+                    }
+
+                    Button(
+                        shape = RoundedCornerShape(0.dp),
+                        onClick = {}
+                    ) {
+                        Text(
+                            text = stringResource(id = R.string.confirm)
+                        )
+                    }
                 }
             }
         }
