@@ -18,7 +18,7 @@ import com.pwfb.theme.White
 import com.pwfb.theme.Yellow40
 
 @Composable
-fun ButtonView(
+fun NextButtonView(
     textValue: String,
     saveValue: ()->Unit
 ) {

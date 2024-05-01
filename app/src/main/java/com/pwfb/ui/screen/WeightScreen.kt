@@ -82,7 +82,7 @@ fun WeightScreen(
             )
         }
 
-        ButtonView(
+        NextButtonView(
             textValue = weight,
             saveValue = {weightViewModel.setWeight(weight)}
         )

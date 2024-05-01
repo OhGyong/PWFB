@@ -76,7 +76,7 @@ fun NameScreen(
             )
         }
 
-        ButtonView(
+        NextButtonView(
             textValue = name,
             saveValue = {nameViewModel.setName(name)}
         )
