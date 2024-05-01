@@ -7,18 +7,12 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import com.prolificinteractive.materialcalendarview.CalendarDay
-import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter
-import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter
 import com.pwfb.R
 import com.pwfb.base.BaseActivity
 import com.pwfb.databinding.ActivityDayBinding
 import com.pwfb.domain.entity.PwfbResultEntity
 import com.pwfb.ui.MainActivity
-import com.pwfb.ui.viewmodel.DayViewModel
-import com.pwfb.util.ClearDecorator
-import com.pwfb.util.DayDisableDecorator
-import com.pwfb.util.SelectDecorator
-import com.pwfb.util.TodayDecorator
+import com.pwfb.ui.viewmodel.DdayViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -29,7 +23,7 @@ import java.util.Calendar
 class DayActivity : BaseActivity() {
 
     private lateinit var binding: ActivityDayBinding
-    private val viewModel: DayViewModel by viewModels()
+    private val viewModel: DdayViewModel by viewModels()
 
     private var datePref = ""
     private var timePref = ""
