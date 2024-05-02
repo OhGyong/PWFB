@@ -97,7 +97,6 @@ fun DdayScreen(
             isDday = true,
             textValue = datePrefState.value,
             onClick = {
-                println("${datePrefState.value} $timePrefState")
                 dDayViewModel.setDDay("${datePrefState.value} $timePrefState")
             }
         )
@@ -180,7 +179,6 @@ fun TimeView(dDayViewModel: DdayViewModel, timePrefState: String, setNewTime: (S
 
                 if(isShowTimePicker) {
                     TimePickerDialog(
-                        timePrefState,
                         setNewTime,
                         dDayViewModel,
                         showTimePickerChange = {
@@ -195,7 +193,6 @@ fun TimeView(dDayViewModel: DdayViewModel, timePrefState: String, setNewTime: (S
 
 @Composable
 fun TimePickerDialog(
-    timePrefState: String,
     setNewTime: (String)->Unit,
     dDayViewModel: DdayViewModel,
     showTimePickerChange: () -> Unit
@@ -258,7 +255,6 @@ fun TimePickerDialog(
                         colors =  ButtonDefaults.buttonColors(DarkGray),
                         onClick = {
                             setNewTime(updateTime)
-                            println("timePrefState: $timePrefState   updateTime: $updateTime")
                             showTimePickerChange()
 
                         }
