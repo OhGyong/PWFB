@@ -46,11 +46,11 @@ class DayActivity : BaseActivity() {
             viewModel.setDDay("$datePref $timePref")
         }
 
-        viewModel.dDayObserve.observe(this) {
-            if(it == PwfbResultEntity.Success(RESULT_OK)) {
-                viewModel.setFirstInit()
-            }
-        }
+//        viewModel.dDayObserve.observe(this) {
+//            if(it == PwfbResultEntity.Success(RESULT_OK)) {
+//                viewModel.setFirstInit()
+//            }
+//        }
 
         viewModel.firstInitObserve.observe(this) {
             if(it == PwfbResultEntity.Success(RESULT_OK)) {

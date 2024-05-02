@@ -19,6 +19,7 @@ import androidx.navigation.compose.rememberNavController
 import com.pwfb.R
 import com.pwfb.base.BaseActivity
 import com.pwfb.common.ScreenName.SCREEN_DAY
+import com.pwfb.common.ScreenName.SCREEN_HOME
 import com.pwfb.common.ScreenName.SCREEN_NAME
 import com.pwfb.common.ScreenName.SCREEN_WEIGHT
 import com.pwfb.theme.DataStoreTheme
@@ -57,7 +58,7 @@ class MainActivity : BaseActivity() {
 
                     NavHost(
                         navController = navController,
-                        startDestination = if(isFirstInit) "name" else "home"
+                        startDestination = if(isFirstInit) SCREEN_DAY else SCREEN_HOME
                     ) {
                         composable(route = SCREEN_NAME) { NameScreen(navController) }
                         composable(route = SCREEN_WEIGHT) { WeightScreen(navController) }

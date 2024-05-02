@@ -83,8 +83,9 @@ fun WeightScreen(
         }
 
         NextButtonView(
+            isDday = false,
             textValue = weight,
-            saveValue = {weightViewModel.setWeight(weight)}
+            onClick = {weightViewModel.setWeight(weight)}
         )
 
         LaunchedEffect(weightViewModel.weightObserve) {

@@ -1,23 +1,29 @@
 package com.pwfb.ui.viewmodel
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.prolificinteractive.materialcalendarview.CalendarDay
+import com.pwfb.common.DataStoreResult
 import com.pwfb.domain.entity.PwfbResultEntity
-import com.pwfb.domain.usecase.PrefUseCase
+import com.pwfb.domain.usecase.DdayUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import javax.inject.Inject
 
 @HiltViewModel
 class DdayViewModel @Inject constructor(
-    private val prefUseCase: PrefUseCase
+    private val dDayUseCase: DdayUseCase
 ): ViewModel() {
 
-    private val _dDayObserve: MutableLiveData<PwfbResultEntity> = MutableLiveData()
-    val dDayObserve = _dDayObserve
+    var dDayState by mutableStateOf("")
+        private set
 
     private val _firstInitObserve: MutableLiveData<PwfbResultEntity> = MutableLiveData()
     val firstInitObserve = _firstInitObserve
@@ -29,22 +35,44 @@ class DdayViewModel @Inject constructor(
         setCurrentTime()
     }
 
-
-    fun setDDay(weight: String) {
+    fun setDDay(dDay: String) {
         viewModelScope.launch {
-            _dDayObserve.value = prefUseCase.setDDay(weight)
+            when(dDayUseCase.setDday(dDay)) {
+                is PwfbResultEntity.Success -> {
+                    dDayState = DataStoreResult.SET_D_DAY
+                }
+                else -> {
+                    // todo Failure
+                }
+            }
         }
     }
 
     fun setFirstInit() {
         viewModelScope.launch {
-            _firstInitObserve.value = prefUseCase.setFistInit()
+            _firstInitObserve.value = dDayUseCase.setFistInit()
         }
     }
 
-    private fun setCurrentTime() {
+    fun setDate(date: CalendarDay): String {
+        val month = if(date.month<10) "0${date.month}" else "${date.month}"
+        val day = if(date.day<10) "0${date.day}" else "${date.day}"
+        val week = when(LocalDate.of(date.year, date.month, date.day).dayOfWeek.value) {
+            1 -> "(월)"
+            2 -> "(화)"
+            3 -> "(수)"
+            4 -> "(목)"
+            5 -> "(금)"
+            6 -> "(토)"
+            7 -> "(일)"
+            else -> ""
+        }
+        return "${date.year}.$month.$day$week"
+    }
+
+    fun setCurrentTime(): String {
         val localTime = LocalDateTime.now().toLocalTime()
-        dDayTimeLiveData.value = updateTime(localTime)
+        return updateTime(localTime)
     }
 
     fun updateTime(snappedTime: LocalTime): String {

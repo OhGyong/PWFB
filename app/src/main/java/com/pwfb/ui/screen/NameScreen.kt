@@ -77,8 +77,9 @@ fun NameScreen(
         }
 
         NextButtonView(
+            isDday = false,
             textValue = name,
-            saveValue = {nameViewModel.setName(name)}
+            onClick = {nameViewModel.setName(name)}
         )
     }
 }

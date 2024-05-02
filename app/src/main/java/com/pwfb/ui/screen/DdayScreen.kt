@@ -61,6 +61,9 @@ fun DdayScreen(
         }
     }
 
+    val datePrefState = remember { mutableStateOf("") }
+    var timePrefState by remember { mutableStateOf(dDayViewModel.setCurrentTime()) }
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -72,14 +75,41 @@ fun DdayScreen(
             style = SettingTitleTypography.bodyLarge
         )
 
-        CalendarView(calendarDrawable)
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
+            Arrangement.Center,
+            Alignment.CenterHorizontally
+        ) {
+            CalendarView(calendarDrawable, dDayViewModel, datePrefState)
 
-        TimeView(dDayViewModel)
+            TimeView(
+                dDayViewModel,
+                timePrefState,
+                setNewTime = { newTime ->
+                    timePrefState = newTime
+                }
+            )
+        }
+
+        NextButtonView(
+            isDday = true,
+            textValue = datePrefState.value,
+            onClick = {
+                println("${datePrefState.value} $timePrefState")
+                dDayViewModel.setDDay("${datePrefState.value} $timePrefState")
+            }
+        )
     }
 }
 
 @Composable
-fun CalendarView(calendarDrawable: List<Drawable?>) {
+fun CalendarView(
+    calendarDrawable: List<Drawable?>,
+    dDayViewModel: DdayViewModel,
+    datePrefState: MutableState<String>
+) {
     val today = CalendarDay.today()
     val disabledDates = hashSetOf<CalendarDay>()
 
@@ -113,12 +143,14 @@ fun CalendarView(calendarDrawable: List<Drawable?>) {
                     todayDecorator,
                     calendarDrawable[1]?.let { SelectDecorator(Yellow40.toArgb(), it, date) }
                 )
+
+                datePrefState.value = dDayViewModel.setDate(date)
             }
         })
 }
 
 @Composable
-fun TimeView(dDayViewModel: DdayViewModel) {
+fun TimeView(dDayViewModel: DdayViewModel, timePrefState: String, setNewTime: (String)->Unit) {
     Row(
         modifier = Modifier,
     ) {
@@ -142,17 +174,14 @@ fun TimeView(dDayViewModel: DdayViewModel) {
                 }
             ) {
 
-                val currentTimeState = remember {
-                    mutableStateOf(dDayViewModel.dDayTimeLiveData.value!!)
-                }
-
                 Text(
-                    text = currentTimeState.value,
+                    text = timePrefState,
                 )
 
                 if(isShowTimePicker) {
                     TimePickerDialog(
-                        currentTimeState,
+                        timePrefState,
+                        setNewTime,
                         dDayViewModel,
                         showTimePickerChange = {
                             isShowTimePicker = false
@@ -166,7 +195,8 @@ fun TimeView(dDayViewModel: DdayViewModel) {
 
 @Composable
 fun TimePickerDialog(
-    currentTimeState: MutableState<String>,
+    timePrefState: String,
+    setNewTime: (String)->Unit,
     dDayViewModel: DdayViewModel,
     showTimePickerChange: () -> Unit
 ) {
@@ -227,8 +257,10 @@ fun TimePickerDialog(
                         shape = RoundedCornerShape(0.dp),
                         colors =  ButtonDefaults.buttonColors(DarkGray),
                         onClick = {
-                            currentTimeState.value = updateTime
+                            setNewTime(updateTime)
+                            println("timePrefState: $timePrefState   updateTime: $updateTime")
                             showTimePickerChange()
+
                         }
                     ) {
                         Text(

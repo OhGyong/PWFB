@@ -19,8 +19,9 @@ import com.pwfb.theme.Yellow40
 
 @Composable
 fun NextButtonView(
+    isDday: Boolean,
     textValue: String,
-    saveValue: ()->Unit
+    onClick: ()->Unit
 ) {
     Button(
         modifier = Modifier
@@ -33,10 +34,10 @@ fun NextButtonView(
         },
         enabled = textValue != "",
         shape = RoundedCornerShape(0.dp),
-        onClick = saveValue
+        onClick = onClick
     ) {
         Text(
-            text = stringResource(id = R.string.next),
+            text = if(isDday) stringResource(id = R.string.go) else stringResource(id = R.string.next),
             style = NextButtonTypography.bodyLarge,
             color = if(textValue == "") {
                 Gray
