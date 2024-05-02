@@ -52,14 +52,14 @@ class DayActivity : BaseActivity() {
 //            }
 //        }
 
-        viewModel.firstInitObserve.observe(this) {
-            if(it == PwfbResultEntity.Success(RESULT_OK)) {
-                val intent = Intent(applicationContext, MainActivity::class.java)
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-                startActivity(intent)
-                finish()
-            }
-        }
+//        viewModel.firstInitObserve.observe(this) {
+//            if(it == PwfbResultEntity.Success(RESULT_OK)) {
+//                val intent = Intent(applicationContext, MainActivity::class.java)
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+//                startActivity(intent)
+//                finish()
+//            }
+//        }
     }
 
 //    private fun setCalendarView() {

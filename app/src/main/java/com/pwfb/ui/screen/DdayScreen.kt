@@ -14,6 +14,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,7 +36,9 @@ import com.commandiron.wheel_picker_compose.core.WheelPickerDefaults
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import com.pwfb.R
+import com.pwfb.common.DataStoreResult
 import com.pwfb.common.ScreenName.SCREEN_DAY
+import com.pwfb.common.ScreenName.SCREEN_HOME
 import com.pwfb.common.ScreenName.SCREEN_WEIGHT
 import com.pwfb.theme.DarkGray
 import com.pwfb.theme.FiledTypography
@@ -100,6 +103,19 @@ fun DdayScreen(
                 dDayViewModel.setDDay("${datePrefState.value} $timePrefState")
             }
         )
+
+        LaunchedEffect(dDayViewModel.dDayState) {->
+            if(dDayViewModel.dDayState == DataStoreResult.SET_D_DAY) {
+                dDayViewModel.setFirstInit()
+            }
+        }
+
+        LaunchedEffect(dDayViewModel.firstInitState) {->
+            if(dDayViewModel.firstInitState == DataStoreResult.SET_FIRST_INIT) {
+                navController.navigate(SCREEN_HOME)
+            }
+        }
+
     }
 }
 

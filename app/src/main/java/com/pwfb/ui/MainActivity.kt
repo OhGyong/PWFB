@@ -24,6 +24,7 @@ import com.pwfb.common.ScreenName.SCREEN_NAME
 import com.pwfb.common.ScreenName.SCREEN_WEIGHT
 import com.pwfb.theme.DataStoreTheme
 import com.pwfb.ui.screen.DdayScreen
+import com.pwfb.ui.screen.HomeScreen
 import com.pwfb.ui.screen.NameScreen
 import com.pwfb.ui.screen.WeightScreen
 import dagger.hilt.android.AndroidEntryPoint
@@ -58,11 +59,12 @@ class MainActivity : BaseActivity() {
 
                     NavHost(
                         navController = navController,
-                        startDestination = if(isFirstInit) SCREEN_DAY else SCREEN_HOME
+                        startDestination = if(isFirstInit) SCREEN_NAME else SCREEN_HOME
                     ) {
                         composable(route = SCREEN_NAME) { NameScreen(navController) }
                         composable(route = SCREEN_WEIGHT) { WeightScreen(navController) }
                         composable(route = SCREEN_DAY) { DdayScreen(navController, drawableList) }
+                        composable(route = SCREEN_HOME) { HomeScreen(navController) }
                     }
                 }
             }

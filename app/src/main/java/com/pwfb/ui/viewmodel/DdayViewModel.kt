@@ -3,7 +3,6 @@ package com.pwfb.ui.viewmodel
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.prolificinteractive.materialcalendarview.CalendarDay
@@ -25,15 +24,8 @@ class DdayViewModel @Inject constructor(
     var dDayState by mutableStateOf("")
         private set
 
-    private val _firstInitObserve: MutableLiveData<PwfbResultEntity> = MutableLiveData()
-    val firstInitObserve = _firstInitObserve
-
-    var dDayTimeLiveData : MutableLiveData<String> = MutableLiveData("")
+    var firstInitState by mutableStateOf(true)
         private set
-
-    init {
-        setCurrentTime()
-    }
 
     fun setDDay(dDay: String) {
         viewModelScope.launch {
@@ -50,7 +42,14 @@ class DdayViewModel @Inject constructor(
 
     fun setFirstInit() {
         viewModelScope.launch {
-            _firstInitObserve.value = dDayUseCase.setFistInit()
+            when(dDayUseCase.setFistInit()) {
+                is PwfbResultEntity.Success -> {
+                    firstInitState = DataStoreResult.SET_FIRST_INIT
+                }
+                else -> {
+                    // todo Failure
+                }
+            }
         }
     }
 
