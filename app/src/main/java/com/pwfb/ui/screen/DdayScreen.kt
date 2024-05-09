@@ -161,7 +161,8 @@ fun CalendarView(
 
                 datePrefState.value = dDayViewModel.setDate(date)
             }
-        })
+        }
+    )
 }
 
 @Composable
