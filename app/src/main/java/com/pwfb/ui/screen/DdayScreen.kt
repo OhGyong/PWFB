@@ -85,7 +85,7 @@ fun DdayScreen(
             Arrangement.Center,
             Alignment.CenterHorizontally
         ) {
-            CalendarView(calendarDrawable, dDayViewModel, datePrefState)
+            CalendarView(dDayViewModel, datePrefState, calendarDrawable)
 
             TimeView(
                 dDayViewModel,
@@ -104,13 +104,13 @@ fun DdayScreen(
             }
         )
 
-        LaunchedEffect(dDayViewModel.dDayState) {->
+        LaunchedEffect(dDayViewModel.dDayState) {
             if(dDayViewModel.dDayState == DataStoreResult.SET_D_DAY) {
                 dDayViewModel.setFirstInit()
             }
         }
 
-        LaunchedEffect(dDayViewModel.firstInitState) {->
+        LaunchedEffect(dDayViewModel.firstInitState) {
             if(dDayViewModel.firstInitState == DataStoreResult.SET_FIRST_INIT) {
                 navController.navigate(SCREEN_HOME)
             }
@@ -121,9 +121,9 @@ fun DdayScreen(
 
 @Composable
 fun CalendarView(
-    calendarDrawable: List<Drawable?>,
     dDayViewModel: DdayViewModel,
-    datePrefState: MutableState<String>
+    datePrefState: MutableState<String>,
+    calendarDrawable: List<Drawable?>
 ) {
     val today = CalendarDay.today()
     val disabledDates = hashSetOf<CalendarDay>()
