@@ -130,6 +130,7 @@ fun CalendarView(
 
     AndroidView(
         factory = { MaterialCalendarView(it) },
+        modifier = Modifier,
         update = { calendarView ->
             calendarView.setHeaderTextAppearance(R.style.CalendarWidgetHeader)
             calendarView.setWeekDayTextAppearance(R.style.CalenderViewWeekCustomText)
