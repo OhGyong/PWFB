@@ -55,7 +55,7 @@ import com.pwfb.util.TodayDecorator
 @Composable
 fun DdayScreen(
     navController: NavHostController,
-    calendarDrawable: List<Drawable?>,
+    drawableList: List<Drawable?>,
     dDayViewModel: DdayViewModel = hiltViewModel()
 ) {
     BackHandler(enabled = true) {
@@ -85,7 +85,7 @@ fun DdayScreen(
             Arrangement.Center,
             Alignment.CenterHorizontally
         ) {
-            CalendarView(dDayViewModel, datePrefState, calendarDrawable)
+            CalendarView(dDayViewModel, datePrefState, drawableList)
 
             TimeView(
                 dDayViewModel,
@@ -123,7 +123,7 @@ fun DdayScreen(
 fun CalendarView(
     dDayViewModel: DdayViewModel,
     datePrefState: MutableState<String>,
-    calendarDrawable: List<Drawable?>
+    drawableList: List<Drawable?>
 ) {
     val today = CalendarDay.today()
     val disabledDates = hashSetOf<CalendarDay>()
@@ -148,7 +148,7 @@ fun CalendarView(
             }
 
             val dayDisableDecorator = DayDisableDecorator(disabledDates, today, Gray.toArgb())
-            val todayDecorator = calendarDrawable[0]?.let { TodayDecorator(Yellow40.toArgb(), it) }
+            val todayDecorator = drawableList[0]?.let { TodayDecorator(Yellow40.toArgb(), it) }
 
             calendarView.addDecorators(dayDisableDecorator, todayDecorator)
 
@@ -157,7 +157,7 @@ fun CalendarView(
                     ClearDecorator(White.toArgb(), date),
                     dayDisableDecorator,
                     todayDecorator,
-                    calendarDrawable[1]?.let { SelectDecorator(Yellow40.toArgb(), it, date) }
+                    drawableList[1]?.let { SelectDecorator(Yellow40.toArgb(), it, date) }
                 )
 
                 datePrefState.value = dDayViewModel.setDate(date)
