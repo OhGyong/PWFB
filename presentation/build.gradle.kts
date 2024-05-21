@@ -1,32 +1,23 @@
-import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
-
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
     id("dagger.hilt.android.plugin")
     id("kotlin-kapt")
 }
 
 android {
-    namespace = "com.pwfb"
+    namespace = "com.pwfb.presentation"
     compileSdk = AppConfig.COMPILE_SDK
 
     defaultConfig {
-        applicationId = "com.pwfb"
         minSdk = AppConfig.MIN_SDK
-        targetSdk = AppConfig.TARGET_SDK
-        versionCode = AppConfig.VERSION_CODE
-        versionName = AppConfig.VERSION_NAME
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        fun key(pKey:String): String = gradleLocalProperties(rootDir).getProperty(pKey) ?: ""
-        manifestPlaceholders["AdMobAPI_KEY"] = key("AdMobAPI_KEY")
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -48,9 +39,8 @@ android {
 dependencies {
 
     // Module
-    implementation(project(":presentation"))
-    implementation(project(":domain"))
     implementation(project(":data"))
+    implementation(project(":domain"))
 
     // KTX
     implementation(Libraries.KTX.CORE)

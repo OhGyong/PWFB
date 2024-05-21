@@ -16,4 +16,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "pwfb"
 include(":app")
- 
+include(":presentation")
+include(":domain")
+include(":data")
