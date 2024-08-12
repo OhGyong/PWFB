@@ -1,4 +1,6 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import java.util.Properties
+import java.io.FileInputStream
 
 plugins {
     id("com.android.application")
@@ -7,11 +9,24 @@ plugins {
     id("kotlin-kapt")
 }
 
+val localPropertiesFile = rootProject.file("local.properties")
+val localProperties = Properties()
+localProperties.load(FileInputStream(localPropertiesFile))
+
 android {
+    signingConfigs {
+        create("release") {
+            keyAlias = localProperties["keyAlias"] as String
+            keyPassword = localProperties["keyPassword"] as String
+            storePassword = localProperties["storePassword"] as String
+            storeFile = file(localProperties["storeFile"] as String)
+        }
+    }
     namespace = "com.pwfb"
     compileSdk = 34
 
     defaultConfig {
+        manifestPlaceholders += mapOf()
         applicationId = "com.pwfb"
         minSdk = 29
         targetSdk = 34
@@ -19,8 +34,9 @@ android {
         versionName = "1.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig = signingConfigs.getByName("release")
 
-        fun key(pKey:String): String = gradleLocalProperties(rootDir).getProperty(pKey) ?: ""
+        fun key(pKey: String): String = gradleLocalProperties(rootDir).getProperty(pKey) ?: ""
         manifestPlaceholders["AdMobAPI_KEY"] = key("AdMobAPI_KEY")
     }
 
@@ -54,12 +70,12 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
     // Splash Screen
-    implementation ("androidx.core:core-splashscreen:1.0.1")
+    implementation("androidx.core:core-splashscreen:1.0.1")
 
     // ViewModel
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-    implementation ("androidx.activity:activity-ktx:1.8.1")
-    implementation ("androidx.fragment:fragment-ktx:1.6.2")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
+    implementation("androidx.activity:activity-ktx:1.8.1")
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
 
     // Navigation
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
@@ -70,17 +86,17 @@ dependencies {
     implementation("androidx.datastore:datastore-preferences-core:1.0.0")
 
     // Hilt
-    implementation ("com.google.dagger:hilt-android:$hiltVersion")
-    kapt ("com.google.dagger:hilt-android-compiler:$hiltVersion")
+    implementation("com.google.dagger:hilt-android:$hiltVersion")
+    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
 
     // CalendarView
-    implementation ("com.github.prolificinteractive:material-calendarview:2.0.1")
+    implementation("com.github.prolificinteractive:material-calendarview:2.0.1")
 
     // CalendarView 년 월 표시
-    implementation ("com.jakewharton.threetenabp:threetenabp:1.2.0")
+    implementation("com.jakewharton.threetenabp:threetenabp:1.2.0")
 
     // 애드몹
-    implementation ("com.google.android.gms:play-services-ads:22.6.0")
+    implementation("com.google.android.gms:play-services-ads:22.6.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
