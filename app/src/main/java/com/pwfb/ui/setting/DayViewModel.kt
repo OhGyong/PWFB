@@ -3,32 +3,32 @@ package com.pwfb.ui.setting
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.pwfb.repository.PwfbPreferencesRepository
+import com.pwfb.domain.entity.PwfbResultEntity
+import com.pwfb.domain.usecase.PrefUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DayViewModel @Inject constructor(
-    private val pwfbPreferencesRepository: PwfbPreferencesRepository
+    private val prefUseCase: PrefUseCase
 ): ViewModel() {
 
-    private val _dDayObserve: MutableLiveData<String> = MutableLiveData()
+    private val _dDayObserve: MutableLiveData<PwfbResultEntity> = MutableLiveData()
     val dDayObserve = _dDayObserve
 
-    private val _firstInitObserve: MutableLiveData<Boolean> = MutableLiveData()
+    private val _firstInitObserve: MutableLiveData<PwfbResultEntity> = MutableLiveData()
     val firstInitObserve = _firstInitObserve
 
     fun setDDay(weight: String) {
         viewModelScope.launch {
-            dDayObserve.value = pwfbPreferencesRepository.setDDay(weight)
+            _dDayObserve.value = prefUseCase.setDDay(weight)
         }
     }
 
     fun setFirstInit() {
         viewModelScope.launch {
-            firstInitObserve.value = pwfbPreferencesRepository.setFistInit()
+            _firstInitObserve.value = prefUseCase.setFistInit()
         }
     }
 }

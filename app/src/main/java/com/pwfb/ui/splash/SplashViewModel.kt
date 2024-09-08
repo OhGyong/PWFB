@@ -3,7 +3,7 @@ package com.pwfb.ui.splash
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.pwfb.repository.PwfbPreferencesRepository
+import com.pwfb.domain.usecase.PrefUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
-    private val pwfbPreferencesRepository: PwfbPreferencesRepository
+    private val prefUseCase: PrefUseCase
 ): ViewModel() {
     private var _isLoading = MutableStateFlow(true)
     val isLoading = _isLoading
@@ -30,7 +30,7 @@ class SplashViewModel @Inject constructor(
 
      fun getFirstInit() {
         viewModelScope.launch {
-            firstInitObserve.value = pwfbPreferencesRepository.getFirstInit().first()
+            _firstInitObserve.value = prefUseCase.getFirstInit().first()
         }
     }
 }
