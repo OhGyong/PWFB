@@ -3,16 +3,21 @@ package com.pwfb.ui.profile
 import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.gms.ads.AdRequest
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter
 import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter
 import com.pwfb.R
+import com.pwfb.base.BaseActivity
 import com.pwfb.base.BaseFragment
 import com.pwfb.common.DataStoreResult
 import com.pwfb.databinding.FragmentProfileBinding
@@ -22,6 +27,8 @@ import com.pwfb.util.DayDisableDecorator
 import com.pwfb.util.SelectDecorator
 import com.pwfb.util.TodayDecorator
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.threeten.bp.format.DateTimeFormatter
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -99,53 +106,69 @@ class ProfileFragment : BaseFragment() {
     }
 
     private fun viewModelObserve() {
-        viewModel.nameObserve.observe(viewLifecycleOwner) {
-            binding.tvName.text = it
-        }
 
-        viewModel.weightObserve.observe(viewLifecycleOwner) {
-            if(it == DataStoreResult.SET_WEIGHT) {
-                binding.btModify.isEnabled = false
-                binding.btModify.setTextColor(requireContext().getColor(R.color.c_949292))
-                viewModel.getWeight()
-                return@observe
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.nameObserve.collectLatest {
+                        if(it == DataStoreResult.SET_NAME) {
+                            // todo
+                            return@collectLatest
+                        }
+                        binding.tvName.text = it
+                    }
+                }
+
+                launch {
+                    viewModel.weightObserve.collectLatest {
+                        if(it == DataStoreResult.SET_WEIGHT) {
+                            binding.btModify.isEnabled = false
+                            binding.btModify.setTextColor(requireContext().getColor(R.color.c_949292))
+                            viewModel.getWeight()
+                            return@collectLatest
+                        }
+
+                        weightPref = it.toDouble()
+                        weight = it.toDouble()
+
+                        binding.tvIdealWeight.text = getString(
+                            R.string.profile_weight,
+                            (weight*0.99).toString(),
+                            weight.toString()
+                        )
+
+                        binding.tvWeight.text = weight.toString()+"Kg"
+                    }
+                }
+
+                launch {
+                    viewModel.dDayObserve.collectLatest {
+                        if(it == DataStoreResult.SET_D_DAY) {
+                            binding.btModify.isEnabled = false
+                            binding.btModify.setTextColor(requireContext().getColor(R.color.c_949292))
+                            return@collectLatest
+                        } else {
+                            dDayPref = it
+                            datePref = it.substring(0..9)
+                            setDDay()
+
+                            setTime(it.substring(14..18))
+
+                            val targetCalendarDay = CalendarDay.from(org.threeten.bp.LocalDate.parse(
+                                datePref,
+                                DateTimeFormatter.ofPattern("yyyy.MM.dd"))
+                            )
+                            val targetDecorator = SelectDecorator(
+                                requireContext().getColor(R.color.c_caab3f),
+                                targetCalendarDay
+                            )
+                            binding.cvCalendar.selectedDate = targetCalendarDay
+                            binding.cvCalendar.addDecorator(targetDecorator)
+                        }
+                    }
+                }
             }
 
-            weightPref = it.toDouble()
-            weight = it.toDouble()
-
-            binding.tvIdealWeight.text = getString(
-                R.string.profile_weight,
-                (weight*0.99).toString(),
-                weight.toString()
-            )
-
-            binding.tvWeight.text = weight.toString()+"Kg"
-        }
-
-        viewModel.dDayObserve.observe(viewLifecycleOwner) {
-            if(it == DataStoreResult.SET_D_DAY) {
-                binding.btModify.isEnabled = false
-                binding.btModify.setTextColor(requireContext().getColor(R.color.c_949292))
-                return@observe
-            } else {
-                dDayPref = it
-                datePref = it.substring(0..9)
-                setDDay()
-
-                setTime(it.substring(14..18))
-
-                val targetCalendarDay = CalendarDay.from(org.threeten.bp.LocalDate.parse(
-                    datePref,
-                    DateTimeFormatter.ofPattern("yyyy.MM.dd"))
-                )
-                val targetDecorator = SelectDecorator(
-                    requireContext().getColor(R.color.c_caab3f),
-                    targetCalendarDay
-                )
-                binding.cvCalendar.selectedDate = targetCalendarDay
-                binding.cvCalendar.addDecorator(targetDecorator)
-            }
         }
     }
 

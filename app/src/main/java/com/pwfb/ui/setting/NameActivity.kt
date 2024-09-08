@@ -9,8 +9,9 @@ import androidx.activity.viewModels
 import androidx.core.widget.addTextChangedListener
 import com.pwfb.R
 import com.pwfb.base.BaseActivity
-import com.pwfb.common.DataStoreResult
+import com.pwfb.common.DataStoreResult.RESULT_SUCCESS
 import com.pwfb.databinding.ActivityNameBinding
+import com.pwfb.domain.entity.PwfbResultEntity
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -56,7 +57,7 @@ class NameActivity: BaseActivity() {
         }
 
         viewModel.nameObserve.observe(this) {
-            if(it == DataStoreResult.SET_NAME) {
+            if(it == PwfbResultEntity.Success(RESULT_SUCCESS)) {
                 val intent = Intent(applicationContext, WeightActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                 startActivity(intent)

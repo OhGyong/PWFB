@@ -9,6 +9,9 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.gms.ads.AdRequest
 import com.pwfb.R
 import com.pwfb.base.BaseFragment
@@ -16,6 +19,8 @@ import com.pwfb.common.DataStoreResult
 import com.pwfb.databinding.FragmentNutritionBinding
 import com.pwfb.ui.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
@@ -43,6 +48,7 @@ class NutritionFragment : BaseFragment() {
         viewModel.getSodium()
         viewModel.getPotassium()
         viewModel.getCreatine()
+        viewModel.getDietaryFiber()
 
         setPref()
 
@@ -51,72 +57,107 @@ class NutritionFragment : BaseFragment() {
 
     @SuppressLint("SimpleDateFormat", "SetTextI18n")
     private fun viewModelObserve() {
-        viewModel.dDayObserve.observe(viewLifecycleOwner) {
-            val datePref = it.substring(0..9)
-            val targetDate = SimpleDateFormat("yyyy.MM.dd").parse(datePref)!!.time
-            val today = Calendar.getInstance().time.time
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.dDayObserve.collectLatest {
+                        if(it == DataStoreResult.SET_D_DAY) {
+                            // todo
+                            return@collectLatest
+                        }
+                        val datePref = it.substring(0..9)
+                        val targetDate = SimpleDateFormat("yyyy.MM.dd").parse(datePref)!!.time
+                        val today = Calendar.getInstance().time.time
 
-            val dDay = (today - targetDate) / (60*60*24*1000)
+                        val dDay = (today - targetDate) / (60*60*24*1000)
 
-            binding.tvDDay.text = "D$dDay"
-            binding.tvDate.text = it
+                        binding.tvDDay.text = "D$dDay"
+                        binding.tvDate.text = it
 
-            setTextDDay(dDay.toInt())
-        }
+                        setTextDDay(dDay.toInt())
+                    }
+                }
 
-        viewModel.carbohydrateObserve.observe(viewLifecycleOwner) {
-            if(it == DataStoreResult.SET_CARBOHYDRATE) {
-                return@observe
-            } else {
-                binding.etCarbohydrate.setText(it)
-            }
-        }
+                launch {
+                    viewModel.carbohydrateObserve.collectLatest {
+                        if(it == DataStoreResult.SET_CARBOHYDRATE) {
+                            return@collectLatest
+                        } else {
+                            binding.etCarbohydrate.setText(it)
+                        }
+                    }
+                }
 
-        viewModel.proteinObserve.observe(viewLifecycleOwner) {
-            if(it == DataStoreResult.SET_PROTEIN) {
-                return@observe
-            } else {
-                binding.etProtein.setText(it)
-            }
-        }
+                launch {
+                    viewModel.proteinObserve.collectLatest {
+                        if(it == DataStoreResult.SET_PROTEIN) {
+                            return@collectLatest
+                        } else {
+                            binding.etProtein.setText(it)
+                        }
+                    }
+                }
 
-        viewModel.fatObserve.observe(viewLifecycleOwner) {
-            if(it == DataStoreResult.SET_FAT) {
-                return@observe
-            } else {
-                binding.etFat.setText(it)
-            }
-        }
+                launch {
+                    viewModel.fatObserve.collectLatest {
+                        if (it == DataStoreResult.SET_FAT) {
+                            return@collectLatest
+                        } else {
+                            binding.etFat.setText(it)
+                        }
 
-        viewModel.waterObserve.observe(viewLifecycleOwner) {
-            if(it == DataStoreResult.SET_WATER) {
-                return@observe
-            } else {
-                binding.etWater.setText(it)
-            }
-        }
+                    }
+                }
 
-        viewModel.sodiumObserve.observe(viewLifecycleOwner) {
-            if(it == DataStoreResult.SET_SODIUM) {
-                return@observe
-            } else {
-                binding.etSodium.setText(it)
-            }
-        }
+                launch {
+                    viewModel.waterObserve.collectLatest {
+                        if(it == DataStoreResult.SET_WATER) {
+                            return@collectLatest
+                        } else {
+                            binding.etWater.setText(it)
+                        }
+                    }
+                }
 
-        viewModel.potassiumObserve.observe(viewLifecycleOwner) {
-            if(it == DataStoreResult.SET_POTASSIUM) {
-                return@observe
-            } else {
-                binding.etPotassium.setText(it)
-            }
-        }
+                launch {
+                    viewModel.sodiumObserve.collectLatest {
+                        if(it == DataStoreResult.SET_SODIUM) {
+                            return@collectLatest
+                        } else {
+                            binding.etSodium.setText(it)
+                        }
+                    }
+                }
 
-        viewModel.creatineObserve.observe(viewLifecycleOwner) {
-            if(it == DataStoreResult.SET_CREATINE) {
-                return@observe
-            } else {
-                binding.etCreatine.setText(it)
+                launch {
+                    viewModel.potassiumObserve.collectLatest {
+                        if(it == DataStoreResult.SET_POTASSIUM) {
+                            return@collectLatest
+                        } else {
+                            binding.etPotassium.setText(it)
+                        }
+                    }
+                }
+
+                launch {
+                    viewModel.creatineObserve.collectLatest {
+                        if(it == DataStoreResult.SET_CREATINE) {
+                            return@collectLatest
+                        } else {
+                            binding.etCreatine.setText(it)
+                        }
+                    }
+                }
+
+                launch {
+                    viewModel.dietaryFiber.collectLatest {
+                        if(it == DataStoreResult.SET_DIETARY_FIBER) {
+                            return@collectLatest
+                        } else {
+                            binding.etCreatine.setText(it)
+                        }
+                    }
+                }
             }
         }
     }
@@ -193,6 +234,17 @@ class NutritionFragment : BaseFragment() {
             if(action == EditorInfo.IME_ACTION_DONE) {
                 viewModel.setCreatine(binding.etCreatine.text.toString())
                 binding.etCreatine.setText(binding.etCreatine.text.toString())
+                hideKeyBoard()
+                handled = true
+            }
+            handled
+        }
+
+        binding.etDietaryFiber.setOnEditorActionListener { _, action, _ ->
+            var handled = false
+            if(action == EditorInfo.IME_ACTION_DONE) {
+                viewModel.setDietaryFiber(binding.etDietaryFiber.text.toString())
+                binding.etCreatine.setText(binding.etDietaryFiber.text.toString())
                 hideKeyBoard()
                 handled = true
             }

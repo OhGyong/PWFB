@@ -1,6 +1,6 @@
 package com.pwfb.common
 
-import com.pwfb.data.Nutrition
+import com.pwfb.domain.entity.NutritionEntity
 
 object NutritionObject {
     const val CARBOHYDRATE = "carbohydrate"
@@ -12,43 +12,43 @@ object NutritionObject {
     const val CREATINE = "creatine"
     const val DIETARY_FIBER = "dietaryFiber"
 
-    var nutritionList = listOf(
-        Nutrition(
+    var nutritionEntityLists = listOf(
+        NutritionEntity(
             CARBOHYDRATE,
             "권장 탄수화물 섭취량(g)",
             ""
         ),
-        Nutrition(
+        NutritionEntity(
             PROTEIN,
             "권장 단백질 섭취량(g)",
             ""
         ),
-        Nutrition(
+        NutritionEntity(
             FAT,
             "권장 지방 섭취량(g)",
             ""
         ),
-        Nutrition(
+        NutritionEntity(
             WATER,
             "권장 수분 섭취량(ml)",
             ""
         ),
-        Nutrition(
+        NutritionEntity(
             SODIUM,
             "권장 나트륨 섭취량(mg)",
             ""
         ),
-        Nutrition(
+        NutritionEntity(
             POTASSIUM,
             "권장 칼륨 섭취량(mg)",
             ""
         ),
-        Nutrition(
+        NutritionEntity(
             CREATINE,
             "권장 크레아틴 섭취량(g)",
             ""
         ),
-        Nutrition(
+        NutritionEntity(
             DIETARY_FIBER,
             "권장 식이섬유 섭취량(g)",
             ""

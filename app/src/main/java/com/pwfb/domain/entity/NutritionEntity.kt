@@ -1,6 +1,6 @@
-package com.pwfb.data
+package com.pwfb.domain.entity
 
-data class Nutrition (
+data class NutritionEntity (
     var type: String?,
     var explain: String?,
     var intake: String?
