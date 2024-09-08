@@ -28,7 +28,6 @@ class SplashViewModel @Inject constructor(
         }
     }
 
-    @Suppress("NullSafeMutableLiveData")
      fun getFirstInit() {
         viewModelScope.launch {
             _firstInitObserve.value = prefUseCase.getFirstInit().first()
