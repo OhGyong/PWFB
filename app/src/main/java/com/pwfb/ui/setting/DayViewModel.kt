@@ -20,9 +20,9 @@ class DayViewModel @Inject constructor(
     private val _firstInitObserve: MutableLiveData<PwfbResultEntity> = MutableLiveData()
     val firstInitObserve = _firstInitObserve
 
-    fun setDDay(weight: String) {
+    fun setDDay(dDay: String) {
         viewModelScope.launch {
-            _dDayObserve.value = prefUseCase.setDDay(weight)
+            _dDayObserve.value = prefUseCase.setDDay(dDay)
         }
     }
 
