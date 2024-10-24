@@ -44,7 +44,12 @@ class PrefUseCase @Inject constructor(
      * 몸무게 설정
      */
     suspend fun setWeight(weight: String): PwfbResultEntity {
-        return repository.setWeight(weight)
+        return try {
+            throw Exception("에러 테스트")
+            repository.setWeight(weight)
+        } catch (e: Exception) {
+            PwfbResultEntity.Failure(e)
+        }
     }
 
     suspend fun getWeight(): Flow<String> {

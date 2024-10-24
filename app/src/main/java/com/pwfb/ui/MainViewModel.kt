@@ -1,11 +1,14 @@
 package com.pwfb.ui
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.pwfb.common.DataStoreResult
 import com.pwfb.domain.entity.PwfbResultEntity
 import com.pwfb.domain.usecase.NameUseCase
 import com.pwfb.domain.usecase.PrefUseCase
+import com.pwfb.domain.usecase.file.CreateLogFileUseCase
+import com.pwfb.domain.usecase.file.GetLogFileUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -13,12 +16,15 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val prefUseCase: PrefUseCase,
-    private val nameUseCase: NameUseCase
+    private val nameUseCase: NameUseCase,
+    private val createLogFileUseCase: CreateLogFileUseCase,
+    private val getLogFileUseCase: GetLogFileUseCase
 ): ViewModel() {
 
     private val _nameObserve: MutableStateFlow<String> = MutableStateFlow("")
@@ -57,6 +63,13 @@ class MainViewModel @Inject constructor(
     private val _dietaryFiber: MutableStateFlow<String> = MutableStateFlow("")
     val dietaryFiber = _dietaryFiber
 
+    var logFile: MutableLiveData<File?> = MutableLiveData()
+        private set
+
+    fun setUploadFile() {
+        logFile.value = getLogFileUseCase()
+    }
+
     fun getName() {
         viewModelScope.launch {
             nameUseCase().stateIn(
@@ -86,12 +99,12 @@ class MainViewModel @Inject constructor(
 
     fun setWeight(weight: String) {
         viewModelScope.launch {
-            when(prefUseCase.setWeight(weight)) {
+            when(val setWeightResult = prefUseCase.setWeight(weight)) {
                 is PwfbResultEntity.Success -> {
                     _weightObserve.emit(DataStoreResult.SET_WEIGHT)
                 }
                 else -> {
-                    // todo Failure
+                    createLogFileUseCase.invoke("[몸무게 설정 실패]: $setWeightResult")
                 }
             }
         }
