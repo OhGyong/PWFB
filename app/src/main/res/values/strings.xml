@@ -38,6 +38,7 @@
 
     <string name="custom_training_program_upper">CUSTOM TRAINING PROGRAM</string>
     <string name="pwfb_information">PWFB 정보</string>
+    <string name="log_send">로그 전송</string>
     <string name="the_day_strategy_1">당일 전략 💥</string>
     <string name="the_day_strategy_2">✨ 당일 전략 ✨</string>
 

@@ -2,10 +2,12 @@ package com.pwfb.ui.profile
 
 import android.annotation.SuppressLint
 import android.app.TimePickerDialog
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -17,16 +19,19 @@ import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormat
 import com.pwfb.R
 import com.pwfb.base.BaseFragment
 import com.pwfb.common.DataStoreResult
+import com.pwfb.common.Firebase
 import com.pwfb.databinding.FragmentProfileBinding
 import com.pwfb.ui.MainViewModel
 import com.pwfb.util.ClearDecorator
 import com.pwfb.util.DayDisableDecorator
 import com.pwfb.util.SelectDecorator
 import com.pwfb.util.TodayDecorator
+import com.pwfb.util.getCurrentToday
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.threeten.bp.format.DateTimeFormatter
+import java.io.File
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.Calendar
@@ -49,6 +54,9 @@ class ProfileFragment : BaseFragment() {
     private lateinit var infoDialog: BottomSheetDialog
     private val strategyDialog = StrategyDialogFragment()
 
+    private var file: File? = null
+    private var filePath: String = ""
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -59,6 +67,12 @@ class ProfileFragment : BaseFragment() {
         setOnClickListener()
         setCalendarView()
         viewModelObserve()
+
+        init()
+        return binding.root
+    }
+
+    private fun init() {
         viewModel.getName()
         viewModel.getWeight()
         viewModel.getDDay()
@@ -66,8 +80,6 @@ class ProfileFragment : BaseFragment() {
         infoDialogView = layoutInflater.inflate(R.layout.dialog_info, null)
         infoDialog = BottomSheetDialog(requireContext())
         infoDialog.setContentView(infoDialogView!!)
-
-        return binding.root
     }
 
     private fun setOnClickListener() {
@@ -99,9 +111,42 @@ class ProfileFragment : BaseFragment() {
         binding.clTheDayStrategy.setOnClickListener {
             strategyDialog.show(activity?.supportFragmentManager!!, strategyDialog.tag)
         }
+
+        binding.clLogSend.setOnClickListener {
+            viewModel.setUploadFile()
+        }
     }
 
     private fun viewModelObserve() {
+        viewModel.logFile.observe(viewLifecycleOwner) {
+            if(it == null) return@observe
+
+            try {
+                file = it
+                filePath = "logs/${getCurrentToday()}/${file?.name}"
+
+                Firebase.firebaseReference
+                    .child(filePath)
+                    .putFile(Uri.fromFile(file))
+                    .addOnProgressListener {
+                        Toast.makeText(requireContext(), "로그 전송 중...", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnCompleteListener {
+                        Toast.makeText(requireContext(), "로그 전송 완료", Toast.LENGTH_SHORT).show()
+                    }
+                    .addOnFailureListener {
+                        Toast.makeText(requireContext(), "로그 전송 실패", Toast.LENGTH_SHORT).show()
+                    }
+            } catch (e: Exception) {
+                // 전송할 파일이 없는 경우
+                if (e.cause == null && e.message == "file") {
+                    Toast.makeText(requireContext(), "전송할 로그가 없음.", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(requireContext(), "로그 전송 실패", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
