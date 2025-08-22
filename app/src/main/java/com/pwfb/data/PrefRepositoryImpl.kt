@@ -136,8 +136,10 @@ class PrefRepositoryImpl@Inject constructor(
             dataStore.edit {
                 it[dDayKey] = dDay
             }
+            println("LOG_TAG success $dDay")
             PwfbResultEntity.Success(DataStoreResult.RESULT_SUCCESS)
         } catch (error: Exception) {
+            println("LOG_TAG error $error")
             PwfbResultEntity.Failure(error)
         }
     }

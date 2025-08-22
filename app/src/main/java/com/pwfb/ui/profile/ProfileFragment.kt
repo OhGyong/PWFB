@@ -3,7 +3,6 @@ package com.pwfb.ui.profile
 import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,13 +10,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.google.android.gms.ads.AdRequest
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.format.ArrayWeekDayFormatter
 import com.prolificinteractive.materialcalendarview.format.MonthArrayTitleFormatter
 import com.pwfb.R
-import com.pwfb.base.BaseActivity
 import com.pwfb.base.BaseFragment
 import com.pwfb.common.DataStoreResult
 import com.pwfb.databinding.FragmentProfileBinding
@@ -58,7 +55,6 @@ class ProfileFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProfileBinding.inflate(layoutInflater)
-        binding.adView.loadAd(AdRequest.Builder().build())
 
         setOnClickListener()
         setCalendarView()

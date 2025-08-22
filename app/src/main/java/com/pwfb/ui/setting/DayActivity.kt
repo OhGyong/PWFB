@@ -52,6 +52,7 @@ class DayActivity : BaseActivity() {
         }
 
         viewModel.dDayObserve.observe(this) {
+            println("LOG_TAG ACtivity :$it")
             if(it == PwfbResultEntity.Success(RESULT_OK)) {
                 viewModel.setFirstInit()
             }

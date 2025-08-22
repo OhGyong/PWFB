@@ -12,7 +12,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.google.android.gms.ads.AdRequest
 import com.pwfb.R
 import com.pwfb.base.BaseFragment
 import com.pwfb.common.DataStoreResult
@@ -37,7 +36,6 @@ class NutritionFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentNutritionBinding.inflate(layoutInflater)
-        binding.adView.loadAd(AdRequest.Builder().build())
 
         viewModelObserve()
         viewModel.getDDay()

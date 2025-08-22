@@ -22,12 +22,15 @@ class DayViewModel @Inject constructor(
 
     fun setDDay(weight: String) {
         viewModelScope.launch {
+            println("LOG_TAG setDday $weight")
             _dDayObserve.value = prefUseCase.setDDay(weight)
         }
     }
 
     fun setFirstInit() {
         viewModelScope.launch {
+            val k  =prefUseCase.setFistInit()
+            println("LOG_TAG k $k")
             _firstInitObserve.value = prefUseCase.setFistInit()
         }
     }
