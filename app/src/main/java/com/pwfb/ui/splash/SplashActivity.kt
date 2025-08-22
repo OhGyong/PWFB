@@ -10,10 +10,16 @@ import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
 import android.view.animation.AnticipateInterpolator
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.google.android.play.core.appupdate.AppUpdateManager
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory
+import com.google.android.play.core.appupdate.AppUpdateOptions
+import com.google.android.play.core.install.model.AppUpdateType
+import com.google.android.play.core.install.model.UpdateAvailability
 import com.pwfb.R
 import com.pwfb.base.BaseActivity
 import com.pwfb.ui.MainActivity
@@ -26,6 +32,10 @@ import kotlinx.coroutines.runBlocking
 @AndroidEntryPoint
 class SplashActivity: BaseActivity() {
     private val viewModel: SplashViewModel by viewModels()
+    private val appUpdateManager: AppUpdateManager by lazy {
+        AppUpdateManagerFactory.create(applicationContext)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(PWFB, "SplashActivity onCreate")
 
@@ -88,16 +98,59 @@ class SplashActivity: BaseActivity() {
         viewModel.firstInitObserve.observe(this) {
             runBlocking { delay(2000) }
 
-            // 앱 첫 진입으로 판단 -> 설정 화면 이동
-            val intent = if(it == true) {
-                Intent(applicationContext, NameActivity::class.java)
-            }
-            else {
-                Intent(applicationContext, MainActivity::class.java)
-            }
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
-            startActivity(intent)
-            finish()
+            checkAppUpdate(it)
         }
+    }
+
+    @Suppress("DEPRECATION")
+    private fun checkAppUpdate(intentType: Boolean) {
+        val isRegisteredPlayStore = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) { // Android 11 기준
+            val info = packageManager.getInstallSourceInfo(packageName)
+            info.installingPackageName == "com.android.vending"
+        } else {
+            packageManager.getInstallerPackageName(packageName) == "com.android.vending"
+        }
+
+        // PlayStore에 등록된 앱 아닌 경우 앱 체크 안 하도록 처리
+        // 로컬 빌드는 앱 등록이 무조건 안 된 것으로 체크하여 addOnFailureListener를 타게 됨
+        if (!isRegisteredPlayStore) {
+            intentLogin(intentType)
+            return
+        }
+
+        appUpdateManager.appUpdateInfo
+            // PlayStore 통신 성공
+            .addOnSuccessListener { appUpdateInfo ->
+                if ((appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE &&
+                            appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) ||
+                    appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS
+                ) { // 즉시 업데이트 가능한 경우
+                    appUpdateManager.startUpdateFlowForResult(
+                        appUpdateInfo,
+                        this@SplashActivity,
+                        AppUpdateOptions.newBuilder(AppUpdateType.IMMEDIATE).build(),
+                        100
+                    )
+                } else {
+                    intentLogin(intentType)
+                }
+            }
+            // PlayStore 통신 실패 (Ex- PlayStore에 앱 등록이 안 된 경우)
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "앱 업데이트 실패", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+    fun intentLogin(intentType: Boolean) {
+        val intent = if(intentType) {
+            Intent(applicationContext, NameActivity::class.java)
+        }
+        else {
+            Intent(applicationContext, MainActivity::class.java)
+        }
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+        startActivity(intent)
+        finish()
+
     }
 }
