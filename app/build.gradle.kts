@@ -25,14 +25,14 @@ android {
         }
     }
     namespace = "com.pwfb"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         manifestPlaceholders += mapOf()
         applicationId = "com.pwfb"
         minSdk = 29
-        targetSdk = 34
-        versionCode = 4
+        targetSdk = 36
+        versionCode = 15
         versionName = "1.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -111,6 +111,8 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-crashlytics")
     implementation("com.google.firebase:firebase-storage-ktx")
+
+    implementation("com.google.android.play:app-update-ktx:2.1.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
