@@ -107,10 +107,11 @@ dependencies {
     implementation("com.google.android.gms:play-services-ads:22.6.0")
 
     // Firebase
-    implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
+    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-crashlytics")
     implementation("com.google.firebase:firebase-storage-ktx")
+    implementation("com.google.firebase:firebase-messaging")
 
     implementation("com.google.android.play:app-update-ktx:2.1.0")
 

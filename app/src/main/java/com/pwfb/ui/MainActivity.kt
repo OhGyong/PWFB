@@ -2,6 +2,7 @@ package com.pwfb.ui
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
@@ -58,7 +59,11 @@ class MainActivity : BaseActivity() {
     }
 
     private fun requestPermission() {
-        val permissionArray = arrayOf(Manifest.permission.INTERNET)
+        val permissionArray = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            arrayOf(Manifest.permission.INTERNET, Manifest.permission.POST_NOTIFICATIONS)
+        } else {
+            arrayOf(Manifest.permission.INTERNET)
+        }
         if(permissionArray.all { ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_DENIED }) {
             requestPermissions(permissionArray, 1000)
         }
