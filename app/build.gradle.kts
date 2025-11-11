@@ -13,7 +13,9 @@ plugins {
 
 val localPropertiesFile = rootProject.file("local.properties")
 val localProperties = Properties()
-localProperties.load(FileInputStream(localPropertiesFile))
+if (localPropertiesFile.exists()) {
+    localProperties.load(FileInputStream(localPropertiesFile))
+}
 
 android {
     signingConfigs {
