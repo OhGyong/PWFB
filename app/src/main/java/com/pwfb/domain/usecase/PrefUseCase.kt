@@ -1,17 +1,8 @@
 package com.pwfb.domain.usecase
 
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.emptyPreferences
-import com.pwfb.common.DataStoreResult
-import com.pwfb.common.DataStoreResult.RESULT_SUCCESS
-import com.pwfb.common.DataStoreResult.SET_WEIGHT
-import com.pwfb.data.PrefRepositoryImpl
 import com.pwfb.domain.entity.PwfbResultEntity
 import com.pwfb.domain.repository.PrefRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.map
-import java.io.IOException
 import javax.inject.Inject
 
 class PrefUseCase @Inject constructor(
@@ -45,7 +36,6 @@ class PrefUseCase @Inject constructor(
      */
     suspend fun setWeight(weight: String): PwfbResultEntity {
         return try {
-            throw Exception("에러 테스트")
             repository.setWeight(weight)
         } catch (e: Exception) {
             PwfbResultEntity.Failure(e)

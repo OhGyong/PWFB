@@ -15,6 +15,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
 import com.google.android.play.core.appupdate.AppUpdateOptions
@@ -25,8 +28,7 @@ import com.pwfb.base.BaseActivity
 import com.pwfb.ui.MainActivity
 import com.pwfb.ui.setting.NameActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.launch
 
 @SuppressLint("CustomSplashScreen")
 @AndroidEntryPoint
@@ -95,15 +97,20 @@ class SplashActivity: BaseActivity() {
             viewModel.getFirstInit()
         }
 
-        viewModel.firstInitObserve.observe(this) {
-            runBlocking { delay(2000) }
-
-            checkAppUpdate(it)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.firstInitObserve.collect {
+                    if(it != null) {
+                        checkAppUpdate(it)
+                    }
+                }
+            }
         }
     }
 
     @Suppress("DEPRECATION")
     private fun checkAppUpdate(intentType: Boolean) {
+        // PlayStore에서 설치된 경우 설치 경로가 "com.android.vending"으로 됨
         val isRegisteredPlayStore = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) { // Android 11 기준
             val info = packageManager.getInstallSourceInfo(packageName)
             info.installingPackageName == "com.android.vending"
@@ -121,9 +128,8 @@ class SplashActivity: BaseActivity() {
         appUpdateManager.appUpdateInfo
             // PlayStore 통신 성공
             .addOnSuccessListener { appUpdateInfo ->
-                if ((appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE &&
-                            appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) ||
-                    appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS
+                if ((appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE))
+                    || appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS
                 ) { // 즉시 업데이트 가능한 경우
                     appUpdateManager.startUpdateFlowForResult(
                         appUpdateInfo,
