@@ -1,0 +1,76 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Create local.properties
+        if: github.event_name == 'push'
+        shell: bash
+        run: |
+          cat > local.properties <<EOF
+          sdk.dir=$ANDROID_SDK_ROOT
+          storeFile=${{ github.workspace }}/release.keystore
+          keyAlias=${{ secrets.SIGNING_KEY_ALIAS }}
+          keyPassword=${{ secrets.SIGNING_KEY_PASSWORD }}
+          storePassword=${{ secrets.SIGNING_STORE_PASSWORD }}
+          AdMobAPI_KEY=${{ secrets.ADMOB_API_KEY }}
+          EOF    
+
+      - name: Create google-services.json
+        shell: bash
+        run: echo "$GOOGLE_SERVICES_JSON" > app/google-services.json
+        env:
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }} # Repository Secret을 읽어옴
+
+      # --- 린트 / 테스트 (PR과 Push 모두 실행) ---
+      - name: Test & Lint
+        run: ./gradlew lint testDebugUnitTest
+
+      - name: Assemble Debug (Test)
+        run: ./gradlew assembleDebug
+
+      # --- 릴리즈 빌드 () ---
+      # Push일 때만 실행 / PR일 때는 스킵
+      - name: Restore keystore from secret
+        if: github.event_name == 'push'
+        shell: bash
+        run: |
+          echo "$SIGNING_KEYSTORE_BASE64" | base64 -d > release.keystore
+        env:
+          SIGNING_KEYSTORE_BASE64: ${{ secrets.SIGNING_KEYSTORE_BASE64 }}
+
+      - name: Assemble Release
+        if: github.event_name == 'push'
+        run: ./gradlew assembleRelease
+
+      - name: Rename Release APK to pwfb.apk
+        if: github.event_name == 'push'
+        run: mv app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/pwfb.apk
+
+      - name: Upload Release APK
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@v4
+        with:
+          name: pwfb_release
+          path: app/build/outputs/apk/release/pwfb.apk
