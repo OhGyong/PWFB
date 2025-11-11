@@ -1,4 +1,3 @@
-import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 import java.util.Properties
 import java.io.FileInputStream
 
@@ -39,9 +38,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         signingConfig = signingConfigs.getByName("release")
-
-        fun key(pKey: String): String = gradleLocalProperties(rootDir).getProperty(pKey) ?: ""
-        manifestPlaceholders["AdMobAPI_KEY"] = key("AdMobAPI_KEY")
+        manifestPlaceholders["AdMobAPI_KEY"] = localProperties.getProperty("AdMobAPI_KEY") ?: ""
     }
 
     buildTypes {
