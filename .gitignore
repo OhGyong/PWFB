@@ -19,5 +19,4 @@ google-services.json
 gen-external-apklibs
 /app/release/
 /app/google-services.json
-/app/lint-baseline.xml
 /pwfb-keystore.jks.b64
